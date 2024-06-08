@@ -1,0 +1,407 @@
+[
+    {
+        "id": 140,
+        "description": "UNIDADE",
+        "abbreviation": "UN",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:00.882-03:00",
+        "updated_at": "2024-02-26T16:53:00.882-03:00"
+    },
+    {
+        "id": 141,
+        "description": "KILO",
+        "abbreviation": "KG",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.062-03:00",
+        "updated_at": "2024-02-26T16:53:01.062-03:00"
+    },
+    {
+        "id": 142,
+        "description": "METRO",
+        "abbreviation": "MT",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.239-03:00",
+        "updated_at": "2024-02-26T16:53:01.239-03:00"
+    },
+    {
+        "id": 143,
+        "description": "METRO CÚBICO",
+        "abbreviation": "M3",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.417-03:00",
+        "updated_at": "2024-02-26T16:53:01.417-03:00"
+    },
+    {
+        "id": 144,
+        "description": "METRO QUADRADO",
+        "abbreviation": "M2",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.594-03:00",
+        "updated_at": "2024-02-26T16:53:01.594-03:00"
+    },
+    {
+        "id": 145,
+        "description": "LATA",
+        "abbreviation": "LT",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.771-03:00",
+        "updated_at": "2024-02-26T16:53:01.771-03:00"
+    },
+    {
+        "id": 146,
+        "description": "LITRO",
+        "abbreviation": "LI",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:01.949-03:00",
+        "updated_at": "2024-02-26T16:53:01.949-03:00"
+    },
+    {
+        "id": 147,
+        "description": "MILHEIRO",
+        "abbreviation": "MIL",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:02.126-03:00",
+        "updated_at": "2024-02-26T16:53:02.126-03:00"
+    },
+    {
+        "id": 148,
+        "description": "PARES",
+        "abbreviation": "PRS",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:02.305-03:00",
+        "updated_at": "2024-02-26T16:53:02.305-03:00"
+    },
+    {
+        "id": 149,
+        "description": "SERVIÇO",
+        "abbreviation": "SER",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:02.482-03:00",
+        "updated_at": "2024-02-26T16:53:02.482-03:00"
+    },
+    {
+        "id": 150,
+        "description": "00",
+        "abbreviation": "00",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:02.663-03:00",
+        "updated_at": "2024-02-26T16:53:02.663-03:00"
+    },
+    {
+        "id": 151,
+        "description": "CX",
+        "abbreviation": "CX",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:02.845-03:00",
+        "updated_at": "2024-02-26T16:53:02.845-03:00"
+    },
+    {
+        "id": 152,
+        "description": "JG",
+        "abbreviation": "JG",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.022-03:00",
+        "updated_at": "2024-02-26T16:53:03.022-03:00"
+    },
+    {
+        "id": 153,
+        "description": "KT",
+        "abbreviation": "KT",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.198-03:00",
+        "updated_at": "2024-02-26T16:53:03.198-03:00"
+    },
+    {
+        "id": 154,
+        "description": "PC",
+        "abbreviation": "PC",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.378-03:00",
+        "updated_at": "2024-02-26T16:53:03.378-03:00"
+    },
+    {
+        "id": 155,
+        "description": "U",
+        "abbreviation": "U",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.560-03:00",
+        "updated_at": "2024-02-26T16:53:03.560-03:00"
+    },
+    {
+        "id": 156,
+        "description": "UND",
+        "abbreviation": "UND",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.743-03:00",
+        "updated_at": "2024-02-26T16:53:03.743-03:00"
+    },
+    {
+        "id": 157,
+        "description": "PECA",
+        "abbreviation": "PECA",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:03.922-03:00",
+        "updated_at": "2024-02-26T16:53:03.922-03:00"
+    },
+    {
+        "id": 158,
+        "description": "PAC",
+        "abbreviation": "PAC",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:04.098-03:00",
+        "updated_at": "2024-02-26T16:53:04.098-03:00"
+    },
+    {
+        "id": 159,
+        "description": "UNID",
+        "abbreviation": "UNID",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:04.276-03:00",
+        "updated_at": "2024-02-26T16:53:04.276-03:00"
+    },
+    {
+        "id": 160,
+        "description": "UM",
+        "abbreviation": "UM",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:04.467-03:00",
+        "updated_at": "2024-02-26T16:53:04.467-03:00"
+    },
+    {
+        "id": 161,
+        "description": "0",
+        "abbreviation": "0",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:04.645-03:00",
+        "updated_at": "2024-02-26T16:53:04.645-03:00"
+    },
+    {
+        "id": 162,
+        "description": "ERDR",
+        "abbreviation": "ERDR",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:04.822-03:00",
+        "updated_at": "2024-02-26T16:53:04.822-03:00"
+    },
+    {
+        "id": 163,
+        "description": "EX",
+        "abbreviation": "EX",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.001-03:00",
+        "updated_at": "2024-02-26T16:53:05.001-03:00"
+    },
+    {
+        "id": 164,
+        "description": "00",
+        "abbreviation": "00",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.178-03:00",
+        "updated_at": "2024-02-26T16:53:05.178-03:00"
+    },
+    {
+        "id": 165,
+        "description": "3",
+        "abbreviation": "3",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.356-03:00",
+        "updated_at": "2024-02-26T16:53:05.356-03:00"
+    },
+    {
+        "id": 166,
+        "description": "CX",
+        "abbreviation": "CX",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.534-03:00",
+        "updated_at": "2024-02-26T16:53:05.534-03:00"
+    },
+    {
+        "id": 167,
+        "description": "JG",
+        "abbreviation": "JG",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.712-03:00",
+        "updated_at": "2024-02-26T16:53:05.712-03:00"
+    },
+    {
+        "id": 168,
+        "description": "KI",
+        "abbreviation": "KI",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:05.890-03:00",
+        "updated_at": "2024-02-26T16:53:05.890-03:00"
+    },
+    {
+        "id": 169,
+        "description": "KT",
+        "abbreviation": "KT",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.069-03:00",
+        "updated_at": "2024-02-26T16:53:06.069-03:00"
+    },
+    {
+        "id": 170,
+        "description": "PC",
+        "abbreviation": "PC",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.247-03:00",
+        "updated_at": "2024-02-26T16:53:06.247-03:00"
+    },
+    {
+        "id": 171,
+        "description": "PR",
+        "abbreviation": "PR",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.425-03:00",
+        "updated_at": "2024-02-26T16:53:06.425-03:00"
+    },
+    {
+        "id": 172,
+        "description": "U",
+        "abbreviation": "U",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.602-03:00",
+        "updated_at": "2024-02-26T16:53:06.602-03:00"
+    },
+    {
+        "id": 173,
+        "description": "30",
+        "abbreviation": "30",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.780-03:00",
+        "updated_at": "2024-02-26T16:53:06.780-03:00"
+    },
+    {
+        "id": 174,
+        "description": "UA",
+        "abbreviation": "UA",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:06.961-03:00",
+        "updated_at": "2024-02-26T16:53:06.961-03:00"
+    },
+    {
+        "id": 175,
+        "description": "1",
+        "abbreviation": "1",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:07.139-03:00",
+        "updated_at": "2024-02-26T16:53:07.139-03:00"
+    },
+    {
+        "id": 176,
+        "description": "UND",
+        "abbreviation": "UND",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:07.316-03:00",
+        "updated_at": "2024-02-26T16:53:07.316-03:00"
+    },
+    {
+        "id": 177,
+        "description": "PECA",
+        "abbreviation": "PECA",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:07.494-03:00",
+        "updated_at": "2024-02-26T16:53:07.494-03:00"
+    },
+    {
+        "id": 178,
+        "description": "PAC",
+        "abbreviation": "PAC",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:07.671-03:00",
+        "updated_at": "2024-02-26T16:53:07.671-03:00"
+    },
+    {
+        "id": 179,
+        "description": "UNID",
+        "abbreviation": "UNID",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:07.849-03:00",
+        "updated_at": "2024-02-26T16:53:07.849-03:00"
+    },
+    {
+        "id": 180,
+        "description": "UM",
+        "abbreviation": "UM",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.026-03:00",
+        "updated_at": "2024-02-26T16:53:08.026-03:00"
+    },
+    {
+        "id": 181,
+        "description": "0",
+        "abbreviation": "0",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.204-03:00",
+        "updated_at": "2024-02-26T16:53:08.204-03:00"
+    },
+    {
+        "id": 182,
+        "description": "PAR",
+        "abbreviation": "PAR",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.382-03:00",
+        "updated_at": "2024-02-26T16:53:08.382-03:00"
+    },
+    {
+        "id": 183,
+        "description": "ERDR",
+        "abbreviation": "ERDR",
+        "weigh": null,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.560-03:00",
+        "updated_at": "2024-02-26T16:53:08.560-03:00"
+    },
+    {
+        "id": 184,
+        "description": "EX",
+        "abbreviation": "EX",
+        "weigh": false,
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.739-03:00",
+        "updated_at": "2024-02-26T16:53:08.739-03:00"
+    }
+]

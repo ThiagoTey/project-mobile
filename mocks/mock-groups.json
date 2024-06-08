@@ -1,0 +1,128 @@
+[
+    {
+        "id": 178,
+        "description": "CONFECÇÃO",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:08.918-03:00",
+        "updated_at": "2024-02-26T16:53:08.918-03:00"
+    },
+    {
+        "id": 179,
+        "description": "SONECA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.096-03:00",
+        "updated_at": "2024-02-26T16:53:09.096-03:00"
+    },
+    {
+        "id": 180,
+        "description": "PEÇA ÍNTIMA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.276-03:00",
+        "updated_at": "2024-02-26T16:53:09.276-03:00"
+    },
+    {
+        "id": 181,
+        "description": "MEIA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.454-03:00",
+        "updated_at": "2024-02-26T16:53:09.454-03:00"
+    },
+    {
+        "id": 182,
+        "description": "ARTIGO",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.631-03:00",
+        "updated_at": "2024-02-26T16:53:09.631-03:00"
+    },
+    {
+        "id": 183,
+        "description": "CALÇADO",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.811-03:00",
+        "updated_at": "2024-02-26T16:53:09.811-03:00"
+    },
+    {
+        "id": 184,
+        "description": "MALAS",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:09.990-03:00",
+        "updated_at": "2024-02-26T16:53:09.990-03:00"
+    },
+    {
+        "id": 185,
+        "description": "ACESSÓRIOS",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:10.169-03:00",
+        "updated_at": "2024-02-26T16:53:10.169-03:00"
+    },
+    {
+        "id": 186,
+        "description": "TEMPESTADE",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:10.348-03:00",
+        "updated_at": "2024-02-26T16:53:10.348-03:00"
+    },
+    {
+        "id": 187,
+        "description": "CAMA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:10.526-03:00",
+        "updated_at": "2024-02-26T16:53:10.526-03:00"
+    },
+    {
+        "id": 188,
+        "description": "MESA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:10.703-03:00",
+        "updated_at": "2024-02-26T16:53:10.703-03:00"
+    },
+    {
+        "id": 189,
+        "description": "BANHO",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:10.881-03:00",
+        "updated_at": "2024-02-26T16:53:10.881-03:00"
+    },
+    {
+        "id": 190,
+        "description": "SALA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:11.060-03:00",
+        "updated_at": "2024-02-26T16:53:11.060-03:00"
+    },
+    {
+        "id": 191,
+        "description": "PELÚCIA",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:11.247-03:00",
+        "updated_at": "2024-02-26T16:53:11.247-03:00"
+    },
+    {
+        "id": 192,
+        "description": "PLASTICO A METRO",
+        "company_id": 40,
+        "created_at": "2024-02-26T16:53:11.425-03:00",
+        "updated_at": "2024-02-26T16:53:11.425-03:00"
+    },
+    {
+        "id": 219,
+        "description": "ARTIGO",
+        "company_id": 40,
+        "created_at": "2024-05-02T09:42:53.351-03:00",
+        "updated_at": "2024-05-02T09:42:53.351-03:00"
+    },
+    {
+        "id": 220,
+        "description": "MALAS",
+        "company_id": 40,
+        "created_at": "2024-05-02T09:42:53.714-03:00",
+        "updated_at": "2024-05-02T09:42:53.714-03:00"
+    },
+    {
+        "id": 221,
+        "description": "SALAS",
+        "company_id": 40,
+        "created_at": "2024-05-02T09:43:01.677-03:00",
+        "updated_at": "2024-05-02T09:43:01.677-03:00"
+    }
+]

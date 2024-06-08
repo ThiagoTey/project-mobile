@@ -1,0 +1,393 @@
+[
+    {
+        "id": 20502,
+        "description": "Sobretudo Ana",
+        "barcode": null,
+        "reference": null,
+        "price_cost": "40.0",
+        "price_cash": "99.7",
+        "price_forward": "99.7",
+        "type_product": "04",
+        "quantity": "0.0",
+        "ncm": "61043900",
+        "origin": "0",
+        "cst": "101",
+        "cfop": "5101",
+        "pis_cst": "49",
+        "pis_percent": null,
+        "cofins_cst": "49",
+        "cofins_percent": null,
+        "icms_percent": null,
+        "inactive": false,
+        "size": true,
+        "group_id": 215,
+        "measure_id": 185,
+        "company_id": 41,
+        "created_at": "2024-04-22T15:38:39.091-03:00",
+        "updated_at": "2024-04-22T15:38:39.091-03:00",
+        "code_internal": 654,
+        "product_sizes": [
+            {
+                "id": 823,
+                "size": "PP",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.093-03:00",
+                "updated_at": "2024-04-22T15:38:39.093-03:00"
+            },
+            {
+                "id": 824,
+                "size": "P",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.094-03:00",
+                "updated_at": "2024-04-22T15:38:39.094-03:00"
+            },
+            {
+                "id": 825,
+                "size": "M",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.095-03:00",
+                "updated_at": "2024-04-22T15:38:39.095-03:00"
+            },
+            {
+                "id": 826,
+                "size": "G",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.096-03:00",
+                "updated_at": "2024-04-22T15:38:39.096-03:00"
+            },
+            {
+                "id": 827,
+                "size": "GG",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.096-03:00",
+                "updated_at": "2024-04-22T15:38:39.096-03:00"
+            },
+            {
+                "id": 828,
+                "size": "EG",
+                "quantity": "0.0",
+                "product_id": 20502,
+                "created_at": "2024-04-22T15:38:39.097-03:00",
+                "updated_at": "2024-04-22T15:38:39.097-03:00"
+            }
+        ]
+    },
+    {
+        "id": 20428,
+        "description": "Cropped aragolita",
+        "barcode": null,
+        "reference": null,
+        "price_cost": "19.0",
+        "price_cash": "59.7",
+        "price_forward": "59.7",
+        "type_product": "04",
+        "quantity": "12.0",
+        "ncm": "62069000",
+        "origin": "0",
+        "cst": "101",
+        "cfop": "5101",
+        "pis_cst": "49",
+        "pis_percent": null,
+        "cofins_cst": "49",
+        "cofins_percent": null,
+        "icms_percent": null,
+        "inactive": false,
+        "size": true,
+        "group_id": 215,
+        "measure_id": 185,
+        "company_id": 41,
+        "created_at": "2024-04-22T15:38:02.553-03:00",
+        "updated_at": "2024-04-22T15:38:02.553-03:00",
+        "code_internal": 580,
+        "product_sizes": [
+            {
+                "id": 379,
+                "size": "PP",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.555-03:00",
+                "updated_at": "2024-04-22T15:38:02.555-03:00"
+            },
+            {
+                "id": 380,
+                "size": "P",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.556-03:00",
+                "updated_at": "2024-04-22T15:38:02.556-03:00"
+            },
+            {
+                "id": 381,
+                "size": "M",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.557-03:00",
+                "updated_at": "2024-04-22T15:38:02.557-03:00"
+            },
+            {
+                "id": 382,
+                "size": "G",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.558-03:00",
+                "updated_at": "2024-04-22T15:38:02.558-03:00"
+            },
+            {
+                "id": 383,
+                "size": "GG",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.562-03:00",
+                "updated_at": "2024-04-22T15:38:02.562-03:00"
+            },
+            {
+                "id": 384,
+                "size": "EG",
+                "quantity": "0.0",
+                "product_id": 20428,
+                "created_at": "2024-04-22T15:38:02.563-03:00",
+                "updated_at": "2024-04-22T15:38:02.563-03:00"
+            }
+        ]
+    },
+    {
+        "id": 20430,
+        "description": "Regata Estampada",
+        "barcode": null,
+        "reference": null,
+        "price_cost": "18.0",
+        "price_cash": "69.7",
+        "price_forward": "69.7",
+        "type_product": "04",
+        "quantity": "10.0",
+        "ncm": "62069000",
+        "origin": "0",
+        "cst": "101",
+        "cfop": "5101",
+        "pis_cst": "49",
+        "pis_percent": null,
+        "cofins_cst": "49",
+        "cofins_percent": null,
+        "icms_percent": null,
+        "inactive": false,
+        "size": true,
+        "group_id": 215,
+        "measure_id": 185,
+        "company_id": 41,
+        "created_at": "2024-04-22T15:38:03.558-03:00",
+        "updated_at": "2024-04-22T15:38:03.558-03:00",
+        "code_internal": 582,
+        "product_sizes": [
+            {
+                "id": 391,
+                "size": "PP",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.560-03:00",
+                "updated_at": "2024-04-22T15:38:03.560-03:00"
+            },
+            {
+                "id": 392,
+                "size": "P",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.562-03:00",
+                "updated_at": "2024-04-22T15:38:03.562-03:00"
+            },
+            {
+                "id": 393,
+                "size": "M",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.563-03:00",
+                "updated_at": "2024-04-22T15:38:03.563-03:00"
+            },
+            {
+                "id": 394,
+                "size": "G",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.564-03:00",
+                "updated_at": "2024-04-22T15:38:03.564-03:00"
+            },
+            {
+                "id": 395,
+                "size": "GG",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.565-03:00",
+                "updated_at": "2024-04-22T15:38:03.565-03:00"
+            },
+            {
+                "id": 396,
+                "size": "EG",
+                "quantity": "0.0",
+                "product_id": 20430,
+                "created_at": "2024-04-22T15:38:03.566-03:00",
+                "updated_at": "2024-04-22T15:38:03.566-03:00"
+            }
+        ]
+    },
+    {
+        "id": 20587,
+        "description": "CAMISETE MANUELE BRANCA",
+        "barcode": null,
+        "reference": null,
+        "price_cost": "49.97",
+        "price_cash": "99.97",
+        "price_forward": "109.97",
+        "type_product": "00",
+        "quantity": "43.0",
+        "ncm": null,
+        "origin": "0",
+        "cst": "00",
+        "cfop": "5101",
+        "pis_cst": null,
+        "pis_percent": null,
+        "cofins_cst": null,
+        "cofins_percent": null,
+        "icms_percent": null,
+        "inactive": false,
+        "size": true,
+        "group_id": 215,
+        "measure_id": 185,
+        "company_id": 41,
+        "created_at": "2024-04-22T15:39:23.827-03:00",
+        "updated_at": "2024-04-22T15:39:23.827-03:00",
+        "code_internal": 742,
+        "product_sizes": [
+            {
+                "id": 1333,
+                "size": "PP",
+                "quantity": "0.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.828-03:00",
+                "updated_at": "2024-04-22T15:39:23.828-03:00"
+            },
+            {
+                "id": 1334,
+                "size": "P",
+                "quantity": "9.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.829-03:00",
+                "updated_at": "2024-04-22T15:39:23.829-03:00"
+            },
+            {
+                "id": 1335,
+                "size": "M",
+                "quantity": "9.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.830-03:00",
+                "updated_at": "2024-04-22T15:39:23.830-03:00"
+            },
+            {
+                "id": 1336,
+                "size": "G",
+                "quantity": "9.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.831-03:00",
+                "updated_at": "2024-04-22T15:39:23.831-03:00"
+            },
+            {
+                "id": 1337,
+                "size": "GG",
+                "quantity": "9.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.832-03:00",
+                "updated_at": "2024-04-22T15:39:23.832-03:00"
+            },
+            {
+                "id": 1338,
+                "size": "EG",
+                "quantity": "0.0",
+                "product_id": 20587,
+                "created_at": "2024-04-22T15:39:23.832-03:00",
+                "updated_at": "2024-04-22T15:39:23.832-03:00"
+            }
+        ]
+    },
+    {
+        "id": 20588,
+        "description": "CALÇA EDUARDA BRANCA",
+        "barcode": null,
+        "reference": null,
+        "price_cost": "111.97",
+        "price_cash": "159.97",
+        "price_forward": "169.97",
+        "type_product": "00",
+        "quantity": "75.0",
+        "ncm": null,
+        "origin": "0",
+        "cst": "00",
+        "cfop": "5101",
+        "pis_cst": null,
+        "pis_percent": null,
+        "cofins_cst": null,
+        "cofins_percent": null,
+        "icms_percent": null,
+        "inactive": false,
+        "size": true,
+        "group_id": 215,
+        "measure_id": 185,
+        "company_id": 41,
+        "created_at": "2024-04-22T15:39:24.332-03:00",
+        "updated_at": "2024-04-22T15:39:24.332-03:00",
+        "code_internal": 743,
+        "product_sizes": [
+            {
+                "id": 1339,
+                "size": "PP",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.333-03:00",
+                "updated_at": "2024-04-22T15:39:24.333-03:00"
+            },
+            {
+                "id": 1340,
+                "size": "P",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.334-03:00",
+                "updated_at": "2024-04-22T15:39:24.334-03:00"
+            },
+            {
+                "id": 1341,
+                "size": "M",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.337-03:00",
+                "updated_at": "2024-04-22T15:39:24.337-03:00"
+            },
+            {
+                "id": 1342,
+                "size": "G",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.338-03:00",
+                "updated_at": "2024-04-22T15:39:24.338-03:00"
+            },
+            {
+                "id": 1343,
+                "size": "GG",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.338-03:00",
+                "updated_at": "2024-04-22T15:39:24.338-03:00"
+            },
+            {
+                "id": 1344,
+                "size": "EG",
+                "quantity": null,
+                "product_id": 20588,
+                "created_at": "2024-04-22T15:39:24.339-03:00",
+                "updated_at": "2024-04-22T15:39:24.339-03:00"
+            }
+        ]
+    }
+
+]
