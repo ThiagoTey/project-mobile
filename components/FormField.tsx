@@ -2,8 +2,13 @@ import {
   View,
   Text,
   TextInput,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { Dispatch, useState } from "react";
+import Checkbox from "expo-checkbox";
+import colors from "@/constants/colors";
+import { icons } from "@/constants";
 
 interface FormFieldProps {
   title: string;
@@ -35,6 +40,15 @@ const FormField = ({
           onChangeText={handleChangeText}
           secureTextEntry={title === "Senha" && !showPassword}
         />
+                {title === 'Senha' && (
+                  <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                      <Image 
+                          source={!showPassword ? icons.eye : icons.eye_hide}
+                          className="w-4 h-4"
+                          resizeMode="contain"
+                      />
+                  </TouchableOpacity>
+        )}
       </View>
     </View>
   );
