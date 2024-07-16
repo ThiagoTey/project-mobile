@@ -4,6 +4,11 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import CustomDrawerContent from "@/components/CustomDrawerContent";
+
 
 const GradientHeader = () => (
   <LinearGradient
@@ -17,9 +22,12 @@ const GradientHeader = () => (
 export default function TabLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer initialRouteName="Home"
+      <Drawer
+        drawerContent={CustomDrawerContent}
+        initialRouteName="Home"
         screenOptions={{
           headerBackground: () => <GradientHeader />,
+          drawerLabelStyle: { marginLeft: -20 },
         }}
       >
         <Drawer.Screen
@@ -27,6 +35,9 @@ export default function TabLayout() {
           options={{
             drawerLabel: "Home",
             title: "Home",
+            drawerIcon: ({ size, color }) => (
+              <AntDesign name="home" size={size} color={color} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -34,7 +45,9 @@ export default function TabLayout() {
           options={{
             drawerLabel: "Produtos",
             title: "Produtos",
-            headerBackground: () => <GradientHeader />,
+            drawerIcon: ({ size, color }) => (
+              <AntDesign name="inbox" size={size} color={color} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -43,6 +56,9 @@ export default function TabLayout() {
             drawerLabel: "Unidades",
             title: "Unidades",
             headerBackground: () => <GradientHeader />,
+            drawerIcon: ({ size, color }) => (
+              <AntDesign name="inbox" size={size} color={color} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -51,6 +67,9 @@ export default function TabLayout() {
             drawerLabel: "Grupos",
             title: "Grupos",
             headerBackground: () => <GradientHeader />,
+            drawerIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="account-group-outline" size={size} color={color} />
+            ),
           }}
         />
       </Drawer>
@@ -60,6 +79,6 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   HeaderStyles: {
-    color: 'white'
-  }
-})
+    color: "white",
+  },
+});
