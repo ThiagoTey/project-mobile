@@ -6,7 +6,7 @@ import FormField from "@/components/FormField";
 import CustomButtom from "@/components/CustomButtom";
 import Checkbox from "expo-checkbox";
 import colors from "@/constants/colors";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -14,6 +14,10 @@ const SignIn = () => {
     password: "",
   });
   const [rememberMe, setRememberMe] = useState(false);
+
+  const singUp = () => {
+    router.replace("home")
+  }
 
   return (
     <SafeAreaView className="flex-1">
@@ -65,7 +69,7 @@ const SignIn = () => {
 
             <CustomButtom
               title="Acessar"
-              handlePress={() => {}}
+              handlePress={singUp}
               containerStyles="w-full mt-10"
             />
           </View>
