@@ -27,6 +27,10 @@ export default function TabLayout() {
         initialRouteName="Home"
         screenOptions={{
           headerBackground: () => <GradientHeader />,
+          headerTitleStyle: {
+            color: 'white'
+          },      
+          headerTintColor: 'white',
           drawerLabelStyle: { marginLeft: -20 },
         }}
       >
