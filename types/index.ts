@@ -36,3 +36,13 @@ export interface ProductInterface {
   code_internal: number;
   product_sizes: ProductSizeInterface[] | [];
 }
+
+export interface Unitsinterface {
+  id: number;
+  description: string;
+  abbreviation: string;
+  weigh: boolean | null;
+  company_id: number;
+  created_at: string;
+  updated_at: string;
+}

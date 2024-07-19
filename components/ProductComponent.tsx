@@ -24,7 +24,7 @@ const ProductComponent = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="pb-2 mb-2 border-b-2 border-gray-200 flex-row gap-2 px-4"
+      className="border-b-2 border-gray-200 items-center flex-row gap-2 px-4 pb-2 my-2"
     >
         <ProductImage
           description={description}
@@ -34,11 +34,11 @@ const ProductComponent = ({
 
       <View className="w-[220px]">
         <Text>{codeInternal}</Text>
-        <Text className="mt-1">{description}</Text>
+        <Text className="mt-1 font-ibold">{description}</Text>
       </View>
       <View>
         <Text>Qtde {qtde}</Text>
-        <Text className="mt-1">{price}</Text>
+        <Text className="mt-1 text-emerald-600">R$ {price}</Text>
       </View>
     </TouchableOpacity>
   );

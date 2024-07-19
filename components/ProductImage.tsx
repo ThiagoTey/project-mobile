@@ -8,9 +8,12 @@ type ProductimageProps = {
 }
 
 const ProductImage = ({description, url, customStyles,textStyles}:ProductimageProps) => {
+
+  const firstTwoLetters = description.substring(0, 2);
+
   return (
     <View className={`justify-center items-center ${customStyles}`}>
-      <Text className={textStyles}>Ab</Text>
+      <Text className={textStyles}>{firstTwoLetters}</Text>
     </View>
   )
 }
