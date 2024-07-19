@@ -34,5 +34,5 @@ export interface ProductInterface {
   created_at: string;
   updated_at: string;
   code_internal: number;
-  product_sizes: ProductSizeInterface[];
+  product_sizes: ProductSizeInterface[] | [];
 }
