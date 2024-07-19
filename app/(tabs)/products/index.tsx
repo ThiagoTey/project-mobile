@@ -5,7 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { ProductInterface } from "@/types";
 import ProductComponent from "@/components/ProductComponent";
 
-import productsJson from "../../mocks/mock-mat2.json";
+import productsJson from "../../../mocks/mock-mat2.json";
 import { Text, View } from "react-native";
 
 const Products = () => {
@@ -26,7 +26,8 @@ const Products = () => {
         renderItem={({ item }) => (
           <ProductComponent
             description={item.description}
-            id={item.code_internal}
+            codeInternal={item.code_internal}
+            id={item.id}
             price={item.price_cash}
             qtde={item.quantity}
           />

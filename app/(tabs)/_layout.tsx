@@ -24,7 +24,7 @@ export default function TabLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         drawerContent={CustomDrawerContent}
-        initialRouteName="Home"
+        initialRouteName="home/index"
         screenOptions={{
           headerBackground: () => <GradientHeader />,
           headerTitleStyle: {
@@ -35,7 +35,7 @@ export default function TabLayout() {
         }}
       >
         <Drawer.Screen
-          name="home"
+          name="home/index"
           options={{
             drawerLabel: "Home",
             title: "Home",
@@ -45,7 +45,7 @@ export default function TabLayout() {
           }}
         />
         <Drawer.Screen
-          name="products"
+          name="products/index"
           options={{
             drawerLabel: "Produtos",
             title: "Produtos",
@@ -55,7 +55,7 @@ export default function TabLayout() {
           }}
         />
         <Drawer.Screen
-          name="units"
+          name="units/index"
           options={{
             drawerLabel: "Unidades",
             title: "Unidades",
@@ -66,7 +66,7 @@ export default function TabLayout() {
           }}
         />
         <Drawer.Screen
-          name="groups"
+          name="groups/index"
           options={{
             drawerLabel: "Grupos",
             title: "Grupos",
@@ -76,6 +76,7 @@ export default function TabLayout() {
             ),
           }}
         />
+
       </Drawer>
     </GestureHandlerRootView>
   );
