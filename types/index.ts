@@ -46,3 +46,7 @@ export interface Unitsinterface {
   created_at: string;
   updated_at: string;
 }
+
+export interface GroupsInterface{
+  
+}

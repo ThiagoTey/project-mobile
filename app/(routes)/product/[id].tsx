@@ -40,7 +40,6 @@ const Product = () => {
         const productId = Number(id);
         let data = await getProductFromStorage(productId)
         setProductData(data);
-        console.log(data)
       } catch (error) {
         console.error("Error loading product:", error);
       } finally {
