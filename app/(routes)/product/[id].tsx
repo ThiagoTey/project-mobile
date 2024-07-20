@@ -11,8 +11,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import productsJson from "../../../mocks/mock-mat.json";
+// import productsJson from "../../../mocks/mock-mat.json";
 import ProductImage from "@/components/ProductImage";
+import { getProductFromStorage } from "@/lib/api";
 
 const CustomText = ({
   customStyles,
@@ -34,11 +35,12 @@ const Product = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const loadProduct = () => {
+    const loadProduct = async () => {
       try {
         const productId = Number(id);
-        const data = productsJson.find((item) => item.id === productId);
+        let data = await getProductFromStorage(productId)
         setProductData(data);
+        console.log(data)
       } catch (error) {
         console.error("Error loading product:", error);
       } finally {
@@ -110,7 +112,7 @@ const Product = () => {
             </View>
 
             {/* Grade */}
-            {productData.product_sizes ? (
+            {productData.product_sizes.length ? (
               <View>
                 <CustomText customStyles="text-xl text-gray-400 pt-4 pb-2">
                   Grade
@@ -125,7 +127,7 @@ const Product = () => {
                 </View>
               </View>
             ) : (
-              <Text>Produto sem Grade</Text>
+              <CustomText customStyles="text-xl text-gray-400 pt-4 pb-2">Produto sem Grade</CustomText>
             )}
           </>
         }

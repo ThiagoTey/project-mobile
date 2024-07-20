@@ -1,4 +1,5 @@
 import { images } from "@/constants";
+import { fetchAndStoreAllData } from "@/lib/api";
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -9,6 +10,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomDrawerContent = (props: any) => {
   const { top, bottom } = useSafeAreaInsets();
+
+  const synchronizeData = () => {
+    fetchAndStoreAllData();
+  }
 
   return (
     <View style={{ flex: 1, height: "100%" }}>
@@ -33,6 +38,7 @@ const CustomDrawerContent = (props: any) => {
         <DrawerItem label="Configurações" onPress={() => {}} />
         <DrawerItem label="Entre em contato" onPress={() => {}} />
         <DrawerItem label="Deslogar" onPress={() => {}} />
+        <DrawerItem label="Sincronizar" onPress={synchronizeData} />
       </View>
     </View>
   );

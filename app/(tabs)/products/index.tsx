@@ -5,15 +5,17 @@ import { FlatList } from "react-native-gesture-handler";
 import { ProductInterface } from "@/types";
 import ProductComponent from "@/components/ProductComponent";
 
-import productsJson from "../../../mocks/mock-mat.json";
+// import productsJson from "../../../mocks/mock-mat.json";
 import { Text, View } from "react-native";
+import { getStorageData } from "@/lib/api";
 
 const Products = () => {
   const [productData, setProductData] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
     const loadProducts = async () => {
-      setProductData(productsJson)
+      const data = await getStorageData('products')
+      setProductData(data)
     }
     loadProducts();
   }, [])

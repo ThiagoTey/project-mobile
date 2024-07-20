@@ -1,9 +1,22 @@
 import { View, Text, FlatList, SafeAreaView } from 'react-native'
 
-import units from "../../../mocks/mock-units.json";
+import { useEffect, useState } from 'react';
+
+import { Unitsinterface } from '@/types';
 import UnitComponent from '@/components/UnitComponent';
+import { getStorageData } from '@/lib/api';
 
 const Units = () => {
+  const [units, setUnits] = useState<Unitsinterface[]>([]);
+
+  useEffect(() => {
+    const loadunits = async () => {
+      const data = await getStorageData('units')
+      setUnits(data)
+    }
+    loadunits();
+  },[])
+
   return (
     <SafeAreaView>
     <FlatList
