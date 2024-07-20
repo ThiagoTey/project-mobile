@@ -1,22 +1,43 @@
 import { images } from "@/constants";
+import colors from "@/constants/colors";
 import { fetchAndStoreAllData } from "@/lib/api";
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Image, Text, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, Image, Modal, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomDrawerContent = (props: any) => {
   const { top, bottom } = useSafeAreaInsets();
+  const [isSyncing, setIsSyncing] = useState(false);
 
-  const synchronizeData = () => {
-    fetchAndStoreAllData();
-  }
+  const synchronizeData = async () => {
+    setIsSyncing(true);
+    await fetchAndStoreAllData();
+    setIsSyncing(false);
+  };
 
   return (
     <View style={{ flex: 1, height: "100%" }}>
+      {/* Modal que só aparece se estiver sincronizando */}
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isSyncing}
+        onRequestClose={() => {}}
+        style={{width: 500, height: 500}}
+      >
+        <View className="flex-1 justify-center items-center bg-black/20">
+          <View className="bg-white w-[200px] h-[100px] items-center justify-center rounded-lg">
+            <ActivityIndicator size="large" color={colors.blue} />
+            <Text>Sincronizando...</Text>
+          </View>
+        </View>
+      </Modal>
+      {/* Custom Drawer */}
       <DrawerContentScrollView {...props}>
         <View className="border-b-slate-100 pl-4 pt-6 border-b-2">
           <Image

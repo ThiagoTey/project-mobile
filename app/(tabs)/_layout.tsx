@@ -7,6 +7,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { Modal, Text, View } from "react-native";
+
 
 import CustomDrawerContent from "@/components/CustomDrawerContent";
 
@@ -77,7 +79,6 @@ export default function TabLayout() {
             ),
           }}
         />
-
       </Drawer>
     </GestureHandlerRootView>
   );
