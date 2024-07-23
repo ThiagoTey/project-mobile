@@ -1,6 +1,8 @@
 // import { ThemeProvider } from '@react-navigation/native';
+import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
 import { Stack, SplashScreen } from "expo-router";
+import { SQLiteProvider } from "expo-sqlite";
 import { useEffect } from "react";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
@@ -32,14 +34,16 @@ export default function RootLayout() {
 
   return (
     // <ThemeProvider value={}>
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="(routes)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
+    <SQLiteProvider databaseName="ability" onInit={initializedatabase}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(routes)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </SQLiteProvider>
 
-    </Stack>
     // </ThemeProvider>
   );
 }
