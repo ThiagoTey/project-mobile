@@ -1,8 +1,8 @@
-import { Link, Redirect, router } from "expo-router";
+import { router } from "expo-router";
 import { View, Text, TouchableOpacity } from "react-native";
 import ProductImage from "./ProductImage";
 
-interface ProductComponentProps {
+interface Props {
   id: number;
   codeInternal: number;
   description: string;
@@ -16,7 +16,7 @@ const ProductComponent = ({
   qtde,
   price,
   codeInternal,
-}: ProductComponentProps) => {
+}: Props) => {
   const onPress = () => {
     router.navigate({ pathname: "/product/[id]", params: { id: id } });
   };

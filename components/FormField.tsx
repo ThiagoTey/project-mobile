@@ -6,11 +6,9 @@ import {
   Image,
 } from "react-native";
 import React, { Dispatch, useState } from "react";
-import Checkbox from "expo-checkbox";
-import colors from "@/constants/colors";
 import { icons } from "@/constants";
 
-interface FormFieldProps {
+interface Props {
   title: string;
   value: string;
   placeHolder?: string;
@@ -26,7 +24,7 @@ const FormField = ({
   otherStyles,
   keyboardType,
   placeHolder = "",
-}: FormFieldProps) => {
+}: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

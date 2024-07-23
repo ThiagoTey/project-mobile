@@ -2,16 +2,6 @@ import { type SQLiteDatabase } from "expo-sqlite";
 
 export async function initializedatabase(database: SQLiteDatabase) {
   await database.execAsync(`
-        CREATE TABLE IF NOT EXISTS productGrid (
-            id INTEGER PRIMARY KEY,
-            size TEXT,
-            quantity TEXT,
-            product_id INTEGER,
-            created_at DATE,
-            updated_at DATE,
-        )
-        `);
-  await database.execAsync(`
             CREATE TABLE IF NOT EXISTS products (
                 id INTEGER PRIMARY KEY,
                 description TEXT NOT NULL,
@@ -39,8 +29,17 @@ export async function initializedatabase(database: SQLiteDatabase) {
                 created_at DATE,
                 updated_at DATE,
                 code_internal INTEGER,
-                product_grid_id,
-                FOREIGN KEY (product_grid_id) REFERENCES id(productGrid)
-            )
+            );
             `);
+  await database.execAsync(`
+                CREATE TABLE IF NOT EXISTS productGrid (
+                    id INTEGER PRIMARY KEY,
+                    size TEXT,
+                    quantity TEXT,
+                    product_id INTEGER,
+                    created_at DATE,
+                    updated_at DATE,
+                    FOREIGN KEY (product_id) REFERENCES products(id)
+                );
+                `);
 }

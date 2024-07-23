@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import ProductImage from "./ProductImage";
 
-type UnitComponentProps = {
+type Props = {
   description: string;
   id: number;
   weigh?: boolean | null;
@@ -14,7 +14,7 @@ const UnitComponent = ({
   abbreviation,
   id,
   weigh,
-}: UnitComponentProps) => {
+}: Props) => {
   return (
     <View className="border-b-2 border-gray-200 items-center flex-row gap-2 px-4 pb-2 my-2 justify-between">
       <View className="flex-row items-center">

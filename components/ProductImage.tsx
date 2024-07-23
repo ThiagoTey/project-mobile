@@ -1,13 +1,13 @@
 import { View, Text } from 'react-native'
 
-type ProductimageProps = {
+type Props = {
     description: string;
     url?: string;
     customStyles?: string;
     textStyles?: string;
 }
 
-const ProductImage = ({description, url, customStyles,textStyles}:ProductimageProps) => {
+const ProductImage = ({description, url, customStyles,textStyles}:Props) => {
 
   const firstTwoLetters = description.substring(0, 2);
 

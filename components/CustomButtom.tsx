@@ -1,7 +1,7 @@
-import { View, Text, GestureResponderEvent, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-interface CustomButtomProps {
+interface Props {
     title: string;
     handlePress: () => void;
     // handlePress: (event: GestureResponderEvent) => void;
@@ -16,7 +16,7 @@ const CustomButtom = ({
     containerStyles,
     isLoading,
     textStyles
-}:CustomButtomProps) => {
+}:Props) => {
   return (
     <TouchableOpacity
         onPress={handlePress}
