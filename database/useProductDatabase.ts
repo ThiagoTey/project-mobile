@@ -1,6 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
 
-import { ProductInterface } from "@/types";
+import { ProductInterface, ProductSizeInterface } from "@/types";
 import { fetchAllData } from "@/api/fetchData";
 
 const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
@@ -8,7 +8,7 @@ const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
 export const useProductDatabase = () => {
   const database = useSQLiteContext();
 
-  const insertProduct = async (product: ProductInterface) => {
+  const insertProduct = async (product: Omit<ProductInterface, "product_sizes"> ) => {
     const statement = await database.prepareAsync(
       `INSERT INTO products (id,description, barcode, reference, 
         price_cost, price_cash, price_forward, type_product, quantity, ncm, 
@@ -57,6 +57,28 @@ export const useProductDatabase = () => {
     }
   };
 
+  const insertGrid = async (grid: ProductSizeInterface) => {
+    const statement = await database.prepareAsync(`
+        INSERT INTO productGrid (id, size, quantity, product_id, created_at, updated_at)
+        VALUES ($id, $size, $quantity, $product_id, $created_at, $updated_at)
+      `);
+
+      try {
+        await statement.executeAsync({
+          $id: grid.id,
+          $size: grid.created_at,
+          $quantity: grid.quantity,
+          $product_id: grid.product_id,
+          $created_at: grid.created_at,
+          $updated_at: grid.updated_at
+        })
+      } catch (error) {
+        throw error
+      }finally{
+        await statement.finalizeAsync();
+      }
+  }
+
   const synchronizeAllProducts = async () => {
     const jsonData = await fetchAllData(prodUrl);
     for (let i = 0; i < jsonData.length; i++) {
@@ -65,10 +87,13 @@ export const useProductDatabase = () => {
       insertProduct(product);
 
       // Insere a grade se tiver
+      if(product.product_sizes.length > 0) {
+        insertGrid(product.product_sizes)
+      }
     }
   };
 
-  const seatchByDescription = async (description: string) => {
+  const seartchByDescription = async (description: string) => {
     try {
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 
@@ -85,5 +110,9 @@ export const useProductDatabase = () => {
     }
   };
 
-  return { seatchByDescription };
+  const seartchById = async (id: number) => {
+    
+  }
+
+  return { seartchByDescription, synchronizeAllProducts };
 };
