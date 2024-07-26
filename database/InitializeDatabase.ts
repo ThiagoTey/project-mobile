@@ -1,6 +1,7 @@
 import { type SQLiteDatabase } from "expo-sqlite";
 
 export async function initializedatabase(database: SQLiteDatabase) {
+  // Tabela Produtos
   await database.execAsync(`
             CREATE TABLE IF NOT EXISTS products (
                 id INTEGER PRIMARY KEY,
@@ -31,6 +32,7 @@ export async function initializedatabase(database: SQLiteDatabase) {
                 code_internal INTEGER,
             );
             `);
+  // Tabela Grid de Produtos
   await database.execAsync(`
                 CREATE TABLE IF NOT EXISTS productGrid (
                     id INTEGER PRIMARY KEY,
@@ -42,4 +44,26 @@ export async function initializedatabase(database: SQLiteDatabase) {
                     FOREIGN KEY (product_id) REFERENCES products(id)
                 );
                 `);
+  // Tabela Unidades
+  await database.execAsync(`
+            CREATE TABLE IF NOT EXISTS units (
+                id INTEGER PRIMARY KEY,
+                description TEXT,
+                abbreviation TEXT,
+                weigh: BOOLEAN,
+                company_id: INTEGER,
+                created_at: DATE,
+                updated_at: DATE,
+            )
+        `);
+  // Tabela Grupos
+  await database.execAsync(`
+            CREATE DATABSE IF NOT EXISTS groups (
+                id: INTEGER PRIMARY KEY,
+                description: TEXT,
+                company_id: INTEGER,
+                created_at: DATE,
+                updated_at: DATE
+            ) 
+        `);
 }

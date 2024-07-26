@@ -8,7 +8,9 @@ const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
 export const useProductDatabase = () => {
   const database = useSQLiteContext();
 
-  const insertProduct = async (product: Omit<ProductInterface, "product_sizes"> ) => {
+  const insertProduct = async (
+    product: Omit<ProductInterface, "product_sizes">
+  ) => {
     const statement = await database.prepareAsync(
       `INSERT INTO products (id,description, barcode, reference, 
         price_cost, price_cash, price_forward, type_product, quantity, ncm, 
@@ -49,7 +51,6 @@ export const useProductDatabase = () => {
         $updated_at: product.updated_at,
         $code_internal: product.code_internal,
       });
-
     } catch (error) {
       throw error;
     } finally {
@@ -63,21 +64,21 @@ export const useProductDatabase = () => {
         VALUES ($id, $size, $quantity, $product_id, $created_at, $updated_at)
       `);
 
-      try {
-        await statement.executeAsync({
-          $id: grid.id,
-          $size: grid.created_at,
-          $quantity: grid.quantity,
-          $product_id: grid.product_id,
-          $created_at: grid.created_at,
-          $updated_at: grid.updated_at
-        })
-      } catch (error) {
-        throw error
-      }finally{
-        await statement.finalizeAsync();
-      }
-  }
+    try {
+      await statement.executeAsync({
+        $id: grid.id,
+        $size: grid.created_at,
+        $quantity: grid.quantity,
+        $product_id: grid.product_id,
+        $created_at: grid.created_at,
+        $updated_at: grid.updated_at,
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      await statement.finalizeAsync();
+    }
+  };
 
   const synchronizeAllProducts = async () => {
     const jsonData = await fetchAllData(prodUrl);
@@ -87,8 +88,8 @@ export const useProductDatabase = () => {
       insertProduct(product);
 
       // Insere a grade se tiver
-      if(product.product_sizes.length > 0) {
-        insertGrid(product.product_sizes)
+      if (product.product_sizes.length > 0) {
+        insertGrid(product.product_sizes);
       }
     }
   };
@@ -110,9 +111,7 @@ export const useProductDatabase = () => {
     }
   };
 
-  const seartchById = async (id: number) => {
-    
-  }
+  const seartchById = async (id: number) => {};
 
   return { seartchByDescription, synchronizeAllProducts };
 };
