@@ -1,23 +1,33 @@
 import { images } from "@/constants";
 import colors from "@/constants/colors";
-import { fetchAndStoreAllData } from "@/lib/api";
+import { synchronizeAll } from "@/database/dbOperations";
+import { useProductDatabase } from "@/database/useProductDatabase";
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Image, Modal, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Image, Modal, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomDrawerContent = (props: any) => {
   const { top, bottom } = useSafeAreaInsets();
+
   const [isSyncing, setIsSyncing] = useState(false);
+  const productDb = useProductDatabase();
 
   const synchronizeData = async () => {
     setIsSyncing(true);
-    await fetchAndStoreAllData();
-    setIsSyncing(false);
+    try {
+      // await synchronizeAll();
+      await productDb.synchronizeAllProducts()
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSyncing(false);
+    }
   };
 
   return (
@@ -28,7 +38,7 @@ const CustomDrawerContent = (props: any) => {
         animationType="fade"
         visible={isSyncing}
         onRequestClose={() => {}}
-        style={{width: 500, height: 500}}
+        style={{ width: 500, height: 500 }}
       >
         <View className="flex-1 justify-center items-center bg-black/20">
           <View className="bg-white w-[200px] h-[100px] items-center justify-center rounded-lg">
@@ -56,7 +66,10 @@ const CustomDrawerContent = (props: any) => {
         }}
         className="border-t-slate-100 border-t-2"
       >
-        <DrawerItem label="Configurações" onPress={() => {}} />
+        <DrawerItem
+          label="Configurações"
+          onPress={() => router.navigate({ pathname: "/config" })}
+        />
         <DrawerItem label="Entre em contato" onPress={() => {}} />
         <DrawerItem label="Deslogar" onPress={() => {}} />
         <DrawerItem label="Sincronizar" onPress={synchronizeData} />

@@ -67,7 +67,7 @@ export const useProductDatabase = () => {
     try {
       await statement.executeAsync({
         $id: grid.id,
-        $size: grid.created_at,
+        $size: grid.size,
         $quantity: grid.quantity,
         $product_id: grid.product_id,
         $created_at: grid.created_at,
@@ -85,11 +85,11 @@ export const useProductDatabase = () => {
     for (let i = 0; i < jsonData.length; i++) {
       const product = jsonData[i];
       // Inserir Produto no banco
-      insertProduct(product);
+      await insertProduct(product);
 
       // Insere a grade se tiver
       if (product.product_sizes.length > 0) {
-        insertGrid(product.product_sizes);
+        await insertGrid(product.product_sizes);
       }
     }
   };
@@ -113,5 +113,27 @@ export const useProductDatabase = () => {
 
   const searchById = async (id: number) => {};
 
-  return { searchByDescription, synchronizeAllProducts, searchById };
+  const getById = async (id: number) => {
+    try {
+      // Ver a opção de fazer um LEFT JOIN depois
+      const productQuery = "SELECT * FROM products WHERE id = ?";
+      const productResponse = await db.getFirstAsync<ProductInterface>(
+        productQuery,
+        [id]
+      );
+
+      const gridQuery =
+        "SELECT id, size, quantity, product_id FROM productGrid WHERE product_id = ?";
+      const gridResponse = await db.getFirstAsync<ProductSizeInterface[]>(
+        gridQuery,
+        [id]
+      );
+
+      return { productResponse, gridResponse };
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  return { searchByDescription, synchronizeAllProducts, searchById, getById };
 };

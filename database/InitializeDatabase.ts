@@ -7,21 +7,21 @@ export async function initializedatabase(db: SQLiteDatabase) {
         id INTEGER PRIMARY KEY,
         description TEXT,
         abbreviation TEXT,
-        weigh: BOOLEAN,
-        company_id: INTEGER,
-        created_at: DATE,
-        updated_at: DATE
-    )
+        weigh BOOLEAN,
+        company_id INTEGER,
+        created_at DATE,
+        updated_at DATE
+    );
 `);
   // Tabela Grupos
   await db.execAsync(`
-    CREATE DATABSE IF NOT EXISTS groups (
-        id: INTEGER PRIMARY KEY,
-        description: TEXT,
-        company_id: INTEGER,
-        created_at: DATE,
-        updated_at: DATE
-    ) 
+    CREATE TABLE IF NOT EXISTS groups (
+        id INTEGER PRIMARY KEY,
+        description TEXT,
+        company_id INTEGER,
+        created_at DATE,
+        updated_at DATE
+    );
 `);
   // Tabela Produtos
   await db.execAsync(`

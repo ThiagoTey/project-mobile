@@ -7,14 +7,16 @@ import ProductComponent from "@/components/ProductComponent";
 
 // import productsJson from "../../../mocks/mock-mat.json";
 import { Text, View } from "react-native";
-import { getStorageData } from "@/lib/api";
+import { useProductDatabase } from "@/database/useProductDatabase";
+import { useSQLiteContext } from "expo-sqlite";
 
 const Products = () => {
+  const useProductDb = useProductDatabase();
   const [productData, setProductData] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
     const loadProducts = async () => {
-      const data = await getStorageData('products')
+      const data = await useProductDb.searchByDescription('')
       setProductData(data)
     }
     loadProducts();

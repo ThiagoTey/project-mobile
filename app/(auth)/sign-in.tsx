@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { images } from "@/constants";
 import FormField from "@/components/FormField";
-import CustomButtom from "@/components/CustomButtom";
+import CustomButtom from "@/components/Button";
 import Checkbox from "expo-checkbox";
 import colors from "@/constants/colors";
 import { Link, router } from "expo-router";

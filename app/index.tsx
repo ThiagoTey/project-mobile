@@ -3,7 +3,7 @@ import React from 'react'
 import { router } from 'expo-router'
 
 import { images } from '@/constants'
-import CustomButtom from '@/components/CustomButtom'
+import CustomButtom from '@/components/Button'
 
 const Index = () => {
   return (

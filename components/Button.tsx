@@ -10,7 +10,7 @@ interface Props {
     isLoading?: boolean;
   }
 
-const CustomButtom = ({
+const Button = ({
     title,
     handlePress,
     containerStyles,
@@ -29,4 +29,4 @@ const CustomButtom = ({
   )
 }
 
-export default CustomButtom
+export default Button
