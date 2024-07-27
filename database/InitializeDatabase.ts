@@ -1,8 +1,8 @@
 import { type SQLiteDatabase } from "expo-sqlite";
 
-export async function initializedatabase(database: SQLiteDatabase) {
+export async function initializedatabase(db: SQLiteDatabase) {
   // Tabela Unidades
-  await database.execAsync(`
+  await db.execAsync(`
     CREATE TABLE IF NOT EXISTS units (
         id INTEGER PRIMARY KEY,
         description TEXT,
@@ -14,7 +14,7 @@ export async function initializedatabase(database: SQLiteDatabase) {
     )
 `);
   // Tabela Grupos
-  await database.execAsync(`
+  await db.execAsync(`
     CREATE DATABSE IF NOT EXISTS groups (
         id: INTEGER PRIMARY KEY,
         description: TEXT,
@@ -24,7 +24,7 @@ export async function initializedatabase(database: SQLiteDatabase) {
     ) 
 `);
   // Tabela Produtos
-  await database.execAsync(`
+  await db.execAsync(`
             CREATE TABLE IF NOT EXISTS products (
                 id INTEGER PRIMARY KEY,
                 description TEXT NOT NULL,
@@ -57,7 +57,7 @@ export async function initializedatabase(database: SQLiteDatabase) {
             );
             `);
   // Tabela Grid de Produtos
-  await database.execAsync(`
+  await db.execAsync(`
                 CREATE TABLE IF NOT EXISTS productGrid (
                     id INTEGER PRIMARY KEY,
                     size TEXT,

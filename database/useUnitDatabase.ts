@@ -5,10 +5,10 @@ import { useSQLiteContext } from "expo-sqlite";
 const unitUrl = process.env.EXPO_PUBLIC_API_UNIT_URL || "";
 
 export const useUnitDatabase = async () => {
-  const database = useSQLiteContext();
+  const db = useSQLiteContext();
 
   const insertUnit = async (unit: Unitsinterface) => {
-    const statement = await database.prepareAsync(
+    const statement = await db.prepareAsync(
       `INSERT INTO units (id, description, abbreviation, weigh, company_id, created_at, updated_at)
             VALUES ($id, $description, $abbreviation, $weigh, $company_id, $created_at, $updated_at)
             `
@@ -46,7 +46,7 @@ export const useUnitDatabase = async () => {
                       FROM units WHERE description LIKE ?
                   `;
   
-        const response = await database.getAllAsync<Unitsinterface>(
+        const response = await db.getAllAsync<Unitsinterface>(
           query,
           `%${description}%`
         );

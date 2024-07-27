@@ -6,12 +6,12 @@ import { fetchAllData } from "@/api/fetchData";
 const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
 
 export const useProductDatabase = () => {
-  const database = useSQLiteContext();
+  const db = useSQLiteContext();
 
   const insertProduct = async (
     product: Omit<ProductInterface, "product_sizes">
   ) => {
-    const statement = await database.prepareAsync(
+    const statement = await db.prepareAsync(
       `INSERT INTO products (id,description, barcode, reference, 
         price_cost, price_cash, price_forward, type_product, quantity, ncm, 
         origin, cst, cfop, pis_cst, pis_percent, cofins_cst, cofins_percent, icms_percent,
@@ -59,7 +59,7 @@ export const useProductDatabase = () => {
   };
 
   const insertGrid = async (grid: ProductSizeInterface) => {
-    const statement = await database.prepareAsync(`
+    const statement = await db.prepareAsync(`
         INSERT INTO productGrid (id, size, quantity, product_id, created_at, updated_at)
         VALUES ($id, $size, $quantity, $product_id, $created_at, $updated_at)
       `);
@@ -101,7 +101,7 @@ export const useProductDatabase = () => {
                     FROM products WHERE description LIKE ?
                 `;
 
-      const response = await database.getAllAsync<ProductInterface>(
+      const response = await db.getAllAsync<ProductInterface>(
         query,
         `%${description}%`
       );

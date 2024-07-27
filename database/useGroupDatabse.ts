@@ -5,10 +5,10 @@ import { useSQLiteContext } from "expo-sqlite"
 const groupUrl = process.env.EXPO_PUBLIC_API_GROUP_URL || "";
 
 export const useGroupDatabase = async () => {
-    const database = useSQLiteContext();
+    const db = useSQLiteContext();
 
     const insertGroup = async (group: GroupsInterface) => {
-        const statement = await database.prepareAsync(
+        const statement = await db.prepareAsync(
           `INSERT INTO groups (id, description, company_id, created_at, updated_at)
                 VALUES ($id, $description, $company_id, $created_at, $updated_at)
                 `
@@ -44,7 +44,7 @@ export const useGroupDatabase = async () => {
                           FROM groups WHERE description LIKE ?
                       `;
       
-            const response = await database.getAllAsync<GroupsInterface>(
+            const response = await db.getAllAsync<GroupsInterface>(
               query,
               `%${description}%`
             );
