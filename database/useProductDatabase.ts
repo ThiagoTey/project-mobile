@@ -94,7 +94,7 @@ export const useProductDatabase = () => {
     }
   };
 
-  const seartchByDescription = async (description: string) => {
+  const searchByDescription = async (description: string) => {
     try {
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 
@@ -111,7 +111,7 @@ export const useProductDatabase = () => {
     }
   };
 
-  const seartchById = async (id: number) => {};
+  const searchById = async (id: number) => {};
 
-  return { seartchByDescription, synchronizeAllProducts };
+  return { searchByDescription, synchronizeAllProducts, searchById };
 };

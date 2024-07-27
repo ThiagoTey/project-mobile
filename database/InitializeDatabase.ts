@@ -1,6 +1,28 @@
 import { type SQLiteDatabase } from "expo-sqlite";
 
 export async function initializedatabase(database: SQLiteDatabase) {
+  // Tabela Unidades
+  await database.execAsync(`
+    CREATE TABLE IF NOT EXISTS units (
+        id INTEGER PRIMARY KEY,
+        description TEXT,
+        abbreviation TEXT,
+        weigh: BOOLEAN,
+        company_id: INTEGER,
+        created_at: DATE,
+        updated_at: DATE
+    )
+`);
+  // Tabela Grupos
+  await database.execAsync(`
+    CREATE DATABSE IF NOT EXISTS groups (
+        id: INTEGER PRIMARY KEY,
+        description: TEXT,
+        company_id: INTEGER,
+        created_at: DATE,
+        updated_at: DATE
+    ) 
+`);
   // Tabela Produtos
   await database.execAsync(`
             CREATE TABLE IF NOT EXISTS products (
@@ -30,6 +52,8 @@ export async function initializedatabase(database: SQLiteDatabase) {
                 created_at DATE,
                 updated_at DATE,
                 code_internal INTEGER,
+                FOREIGN KEY (group_id) REFERENCES groups(id),
+                FOREIGN KEY (measure_id) REFERENCES units(id)
             );
             `);
   // Tabela Grid de Produtos
@@ -44,26 +68,4 @@ export async function initializedatabase(database: SQLiteDatabase) {
                     FOREIGN KEY (product_id) REFERENCES products(id)
                 );
                 `);
-  // Tabela Unidades
-  await database.execAsync(`
-            CREATE TABLE IF NOT EXISTS units (
-                id INTEGER PRIMARY KEY,
-                description TEXT,
-                abbreviation TEXT,
-                weigh: BOOLEAN,
-                company_id: INTEGER,
-                created_at: DATE,
-                updated_at: DATE,
-            )
-        `);
-  // Tabela Grupos
-  await database.execAsync(`
-            CREATE DATABSE IF NOT EXISTS groups (
-                id: INTEGER PRIMARY KEY,
-                description: TEXT,
-                company_id: INTEGER,
-                created_at: DATE,
-                updated_at: DATE
-            ) 
-        `);
 }

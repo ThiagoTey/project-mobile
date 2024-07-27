@@ -48,5 +48,9 @@ export interface Unitsinterface {
 }
 
 export interface GroupsInterface{
-  
+  id: number;
+  description: string;
+  company_id: number;
+  created_at: string;
+  updated_at: string;
 }
