@@ -94,7 +94,7 @@ export const useProductDatabase = () => {
     }
   };
 
-  const searchByDescription = async (description: string) => {
+  const searchByDescription = async (description: string = '') => {
     try {
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 

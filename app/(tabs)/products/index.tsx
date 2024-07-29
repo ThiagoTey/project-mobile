@@ -5,22 +5,22 @@ import { FlatList } from "react-native-gesture-handler";
 import { ProductInterface } from "@/types";
 import ProductComponent from "@/components/ProductComponent";
 
-// import productsJson from "../../../mocks/mock-mat.json";
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
-import { useSQLiteContext } from "expo-sqlite";
+import { useLocalSearchParams } from "expo-router";
 
 const Products = () => {
   const useProductDb = useProductDatabase();
   const [productData, setProductData] = useState<ProductInterface[]>([]);
+  const params = useLocalSearchParams<{ query?: string }>();
 
   useEffect(() => {
     const loadProducts = async () => {
-      const data = await useProductDb.searchByDescription('')
+      const data = await useProductDb.searchByDescription(params.query)
       setProductData(data)
     }
     loadProducts();
-  }, [])
+  }, [params])
 
   return (
     <SafeAreaView>

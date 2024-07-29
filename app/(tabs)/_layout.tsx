@@ -4,10 +4,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome6 } from '@expo/vector-icons';
-import { Modal, Text, View } from "react-native";
+import { MaterialCommunityIcons, FontAwesome6, AntDesign } from '@expo/vector-icons';
 
 import CustomDrawerContent from "@/components/CustomDrawerContent";
 import Header from "@/components/Header";
@@ -39,6 +36,7 @@ export default function TabLayout() {
       >
         <Drawer.Screen
           name="home/index"
+          
           options={{
             drawerLabel: "Home",
             title: "Home",
@@ -53,7 +51,7 @@ export default function TabLayout() {
           options={{
             drawerLabel: "Produtos",
             title: "Produtos",
-            header: () => <Header title="Produtos" />,
+            header: (props) => <Header {...props} title="Produtos" />,
             drawerIcon: ({ size, color }) => (
               <AntDesign name="inbox" size={size} color={color} />
             ),
