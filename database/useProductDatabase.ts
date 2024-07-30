@@ -5,6 +5,13 @@ import { fetchAllData } from "@/api/fetchData";
 
 const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
 
+// type searchProps = {
+//   description?: string;
+//   id?: number;
+//   order?: string;
+//   limit?: number;
+// }
+
 export const useProductDatabase = () => {
   const db = useSQLiteContext();
 
@@ -94,16 +101,26 @@ export const useProductDatabase = () => {
     }
   };
 
-  const searchByDescription = async (description: string = '') => {
+  const searchByDescription = async (
+    description: string = "",
+    id?: number,
+    ascDesc: string = "ASC",
+    order: string = "description",
+    limit: number = 100
+  ) => {
     try {
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 
-                    FROM products WHERE description LIKE ?
+                    FROM products 
+                    WHERE ${id ? "id" : "description"} LIKE ? 
+                    ORDER BY ${order} ${ascDesc} 
+                    LIMIT ?
                 `;
 
       const response = await db.getAllAsync<ProductInterface>(
         query,
-        `%${description}%`
+        `%${id ? id : description}%`,
+        limit
       );
       return response;
     } catch (error) {

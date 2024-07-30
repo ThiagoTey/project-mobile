@@ -8,26 +8,35 @@ import ProductComponent from "@/components/ProductComponent";
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import { useLocalSearchParams } from "expo-router";
-import Sidebar from "@/components/Sidebar";
 
 const Products = () => {
   const useProductDb = useProductDatabase();
   const [productData, setProductData] = useState<ProductInterface[]>([]);
-  const params = useLocalSearchParams<{ query?: string }>();
+  const params = useLocalSearchParams<{
+    query?: string;
+    queryId?: string;
+    order?: string;
+    ascDesc: string;
+  }>();
 
   useEffect(() => {
     const loadProducts = async () => {
-      const data = await useProductDb.searchByDescription(params.query)
-      setProductData(data)
-    }
+      const data = await useProductDb.searchByDescription(
+        params.query,
+        Number(params.queryId),
+        params.order,
+        params.ascDesc
+      );
+      setProductData(data);
+    };
     loadProducts();
-  }, [params])
+  }, [params]);
 
   return (
     <SafeAreaView>
-            {/* <Sidebar /> */}
+      {/* <Sidebar /> */}
 
-      {/* <FlatList
+      <FlatList
         data={productData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
@@ -44,7 +53,7 @@ const Products = () => {
             <Text>Sem produtos disponiveis</Text>
           </View>
         )}
-      /> */}
+      />
     </SafeAreaView>
   );
 };

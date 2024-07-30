@@ -4,11 +4,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons, FontAwesome6, AntDesign } from '@expo/vector-icons';
+import {
+  MaterialCommunityIcons,
+  FontAwesome6,
+  AntDesign,
+} from "@expo/vector-icons";
 
 import CustomDrawerContent from "@/components/CustomDrawerContent";
 import Header from "@/components/Header";
-
 
 const GradientHeader = () => (
   <LinearGradient
@@ -28,15 +31,14 @@ export default function TabLayout() {
         screenOptions={{
           headerBackground: () => <GradientHeader />,
           headerTitleStyle: {
-            color: 'white'
-          },      
-          headerTintColor: 'white',
+            color: "white",
+          },
+          headerTintColor: "white",
           drawerLabelStyle: { marginLeft: -20 },
         }}
       >
         <Drawer.Screen
           name="home/index"
-          
           options={{
             drawerLabel: "Home",
             title: "Home",
