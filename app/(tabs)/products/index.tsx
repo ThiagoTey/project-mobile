@@ -8,6 +8,7 @@ import ProductComponent from "@/components/ProductComponent";
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import { useLocalSearchParams } from "expo-router";
+import Sidebar from "@/components/Sidebar";
 
 const Products = () => {
   const useProductDb = useProductDatabase();
@@ -24,7 +25,9 @@ const Products = () => {
 
   return (
     <SafeAreaView>
-      <FlatList
+            {/* <Sidebar /> */}
+
+      {/* <FlatList
         data={productData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
@@ -41,7 +44,7 @@ const Products = () => {
             <Text>Sem produtos disponiveis</Text>
           </View>
         )}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

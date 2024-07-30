@@ -6,11 +6,13 @@ import { router, useLocalSearchParams } from "expo-router";
 
 import colors from "@/constants/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Sidebar from "./Sidebar";
 
 const Header = ({ title, navigation }: { title: string; navigation: any }) => {
   const params = useLocalSearchParams<{ query?: string }>();
   const [search, setSearch] = useState(params.query);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false)
 
   const handlePress = () => {
     setIsSearchOpen((e) => !e);
@@ -23,10 +25,11 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
   };
 
   const handleFilter = () => {
-    
+    setFilterOpen((e) => !e);
   }
 
   return (
+    <>
     <LinearGradient
       colors={[colors.blue, colors.green, colors.yellow]}
       start={{ x: 0, y: 0 }}
@@ -115,6 +118,8 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
         )}
       </View>
     </LinearGradient>
+    <Sidebar filterOpen={filterOpen}/>
+    </>
   );
 };
 
