@@ -1,20 +1,30 @@
-import { getStorageData } from "@/lib/api";
+// import { getStorageData } from "@/lib/api";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 
+import { useGroupDatabase } from "@/database/useGroupDatabse";
 // import groupsJson from "../../../mocks/mock-groups.json";
 
 const Groups = () => {
+  const useGroupDb = useGroupDatabase();
 
-  const [groups, setGnits] = useState([]);
+  const [groups, setGroup] = useState([]);
+  const params = useLocalSearchParams<{
+    query?: string;
+    sortOrder: string;
+  }>();
 
   useEffect(() => {
     const loadunits = async () => {
-      const data = await getStorageData('groups')
-      setGnits(data)
+      const data = await useGroupDb.searchByQuery(
+        params.query,
+        // params.sortOrder,
+      );
+      setGroup(data)
     }
     loadunits();
-  },[])
+  }, [JSON.stringify(params)]);
 
   return (
     <SafeAreaView>

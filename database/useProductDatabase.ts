@@ -101,7 +101,7 @@ export const useProductDatabase = () => {
     }
   };
 
-  const searchByDescription = async (
+  const searchByQuery = async (
     description: string = "",
     id?: number,
     sortOrder: string = "ASC",
@@ -131,8 +131,6 @@ export const useProductDatabase = () => {
     }
   };
 
-  const searchById = async (id: number) => {};
-
   const getById = async (id: number) => {
     try {
       // Ver a opção de fazer um LEFT JOIN depois
@@ -155,5 +153,5 @@ export const useProductDatabase = () => {
     }
   };
 
-  return { searchByDescription, synchronizeAllProducts, searchById, getById };
+  return { searchByQuery, synchronizeAllProducts, getById };
 };

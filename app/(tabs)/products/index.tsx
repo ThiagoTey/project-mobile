@@ -28,8 +28,7 @@ const Products = () => {
 
   useEffect(() => {
     const loadProducts = async () => {
-      console.log(params)
-      const data = await useProductDb.searchByDescription(
+      const data = await useProductDb.searchByQuery(
         params.query,
         Number(params.queryId),
         params.sortOrder,

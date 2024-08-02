@@ -37,7 +37,7 @@ export const useGroupDatabase = async () => {
         }
       };
     
-      const searchByDescription = async (description:string) => {
+      const searchByQuery = async (description:string) => {
         try {
             const query = `
                           SELECT id, description
@@ -54,6 +54,6 @@ export const useGroupDatabase = async () => {
           }
       }
     
-      return { synchronizeAllGroups, searchByDescription };
+      return { synchronizeAllGroups, searchByQuery };
     
 }

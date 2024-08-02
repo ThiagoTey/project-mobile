@@ -1,12 +1,11 @@
-import { View, Text, Modal, ActivityIndicator } from "react-native";
-import React from "react";
-import colors from "@/constants/colors";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Bem vindo!</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
