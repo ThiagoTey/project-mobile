@@ -7,7 +7,7 @@ import ProductComponent from "@/components/ProductComponent";
 
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 const Products = () => {
   const useProductDb = useProductDatabase();
@@ -15,27 +15,33 @@ const Products = () => {
   const params = useLocalSearchParams<{
     query?: string;
     queryId?: string;
-    order?: string;
-    ascDesc: string;
+    sortBy?: string;
+    sortOrder: string;
   }>();
 
   useEffect(() => {
+    router.setParams({
+      sortBy: "description",
+      sortOrder: "ASC"
+    });
+  }, []);
+
+  useEffect(() => {
     const loadProducts = async () => {
+      console.log(params)
       const data = await useProductDb.searchByDescription(
         params.query,
         Number(params.queryId),
-        params.order,
-        params.ascDesc
+        params.sortOrder,
+        params.sortBy,
       );
       setProductData(data);
     };
     loadProducts();
-  }, [params]);
+  }, [JSON.stringify(params)]);
 
   return (
     <SafeAreaView>
-      {/* <Sidebar /> */}
-
       <FlatList
         data={productData}
         keyExtractor={(item) => item.id.toString()}

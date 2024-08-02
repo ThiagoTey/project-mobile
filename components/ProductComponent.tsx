@@ -24,7 +24,7 @@ const ProductComponent = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="border-b-2 border-gray-200 items-center flex-row gap-2 px-4 pb-2 my-2"
+      className="border-b-2 border-gray-200 justify-between items-center flex-row gap-2 px-6 pb-2 my-2"
     >
         <ProductImage
           description={description}

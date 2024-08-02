@@ -104,26 +104,29 @@ export const useProductDatabase = () => {
   const searchByDescription = async (
     description: string = "",
     id?: number,
-    ascDesc: string = "ASC",
-    order: string = "description",
+    sortOrder: string = "ASC",
+    sortBy: string = "description",
     limit: number = 100
   ) => {
     try {
+      const searchValue = `%${id || description}%`;
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 
                     FROM products 
-                    WHERE ${id ? "id" : "description"} LIKE ? 
-                    ORDER BY ${order} ${ascDesc} 
-                    LIMIT ?
+                    WHERE ${sortBy} LIKE $searchValue 
+                    ORDER BY ${sortBy} ${sortOrder} 
+                    LIMIT $limit
                 `;
-
-      const response = await db.getAllAsync<ProductInterface>(
-        query,
-        `%${id ? id : description}%`,
-        limit
-      );
+      const response = await db.getAllAsync<ProductInterface>(query, {
+        // $searchField: 'description',
+        $searchValue: searchValue,
+        // $sortBy: sortBy,
+        // $sortOrder: sortOrder,
+        $limit: limit,
+      });
       return response;
     } catch (error) {
+      console.log(error)
       throw error;
     }
   };

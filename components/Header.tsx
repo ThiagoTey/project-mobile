@@ -9,7 +9,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Sidebar from "./Sidebar";
 
 const Header = ({ title, navigation }: { title: string; navigation: any }) => {
-  const params = useLocalSearchParams<{ query?: string }>();
+  const params = useLocalSearchParams<{
+    query?: string;
+    queryId?: string;
+    sortBy?: string;
+    sortOrder: string;
+  }>();
   const [search, setSearch] = useState(params.query);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
