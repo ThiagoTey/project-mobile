@@ -54,7 +54,7 @@ const Products = () => {
           />
         )}
         ListEmptyComponent={() => (
-          <View>
+          <View className="flex-1 items-center justify-center">
             <Text>Sem produtos disponiveis</Text>
           </View>
         )}
