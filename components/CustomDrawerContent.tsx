@@ -1,7 +1,8 @@
 import { images } from "@/constants";
 import colors from "@/constants/colors";
-import { synchronizeAll } from "@/database/dbOperations";
+import { useGroupDatabase } from "@/database/useGroupDatabse";
 import { useProductDatabase } from "@/database/useProductDatabase";
+import { useUnitDatabase } from "@/database/useUnitDatabase";
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -9,20 +10,24 @@ import {
 } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Alert, Image, Modal, Text, View } from "react-native";
+import { ActivityIndicator, Image, Modal, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomDrawerContent = (props: any) => {
-  const { top, bottom } = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const productDb = useProductDatabase();
-
+  const unitDb = useUnitDatabase();
+  const groupDb = useGroupDatabase();
+  
   const synchronizeData = async () => {
     setIsSyncing(true);
     try {
       // await synchronizeAll();
-      await productDb.synchronizeAllProducts()
+      await productDb.synchronizeAllProducts();
+      await unitDb.synchronizeAllUnits();
+      await groupDb.synchronizeAllGroups();
     } catch (error) {
       console.log(error);
     } finally {

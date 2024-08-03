@@ -4,7 +4,7 @@ import { useSQLiteContext } from "expo-sqlite";
 
 const unitUrl = process.env.EXPO_PUBLIC_API_UNIT_URL || "";
 
-export const useUnitDatabase = async () => {
+export const useUnitDatabase = () => {
   const db = useSQLiteContext();
 
   const insertUnit = async (unit: Unitsinterface) => {
@@ -39,7 +39,7 @@ export const useUnitDatabase = async () => {
     }
   };
 
-  const searchByDescription = async (description:string) => {
+  const searchByQuery = async (description:string = '') => {
     try {
         const query = `
                       SELECT id, description, abbreviation, weigh
@@ -50,12 +50,13 @@ export const useUnitDatabase = async () => {
           query,
           `%${description}%`
         );
+        console.log(response)
         return response;
       } catch (error) {
         throw error;
       }
   }
 
-  return { synchronizeAllUnits, searchByDescription };
+  return { synchronizeAllUnits, searchByQuery };
 
 };

@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import { Unitsinterface } from '@/types';
 import UnitComponent from '@/components/UnitComponent';
 import { getStorageData } from '@/lib/api';
+import { useUnitDatabase } from '@/database/useUnitDatabase';
 
 const Units = () => {
+  const useUnitDb = useUnitDatabase()
   const [units, setUnits] = useState<Unitsinterface[]>([]);
 
   useEffect(() => {
     const loadunits = async () => {
-      const data = await getStorageData('units')
+      const data = await useUnitDb.searchByQuery()
       setUnits(data)
     }
     loadunits();

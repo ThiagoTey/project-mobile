@@ -4,7 +4,7 @@ import { useSQLiteContext } from "expo-sqlite"
 
 const groupUrl = process.env.EXPO_PUBLIC_API_GROUP_URL || "";
 
-export const useGroupDatabase = async () => {
+export const useGroupDatabase = () => {
     const db = useSQLiteContext();
 
     const insertGroup = async (group: GroupsInterface) => {
@@ -37,7 +37,7 @@ export const useGroupDatabase = async () => {
         }
       };
     
-      const searchByQuery = async (description:string) => {
+      const searchByQuery = async (description:string = '') => {
         try {
             const query = `
                           SELECT id, description

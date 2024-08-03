@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 
 import { useGroupDatabase } from "@/database/useGroupDatabse";
+import { GroupsInterface } from "@/types";
 // import groupsJson from "../../../mocks/mock-groups.json";
 
 const Groups = () => {
   const useGroupDb = useGroupDatabase();
 
-  const [groups, setGroup] = useState([]);
+  const [groups, setGroup] = useState<GroupsInterface[]>([]);
   const params = useLocalSearchParams<{
     query?: string;
     sortOrder: string;
