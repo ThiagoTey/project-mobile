@@ -1,29 +1,71 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Button from '@/components/Button'
-import { useDbOperations } from '@/database/dbOperations'
-import { useRefresh } from '@/context/RefreshContext'
+import { View, Text, Modal, ActivityIndicator, Alert } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Button from "@/components/Button";
+import { useDbOperations } from "@/database/dbOperations";
+import { useRefresh } from "@/context/RefreshContext";
+import colors from "@/constants/colors";
 
 const Config = () => {
-    const dbOperations = useDbOperations(); 
-    const { triggerRefresh } = useRefresh()
-    
-    const deleteDb = async () => {
-      try {
-       await dbOperations.dropDatabase()
-      } catch (error) {
-        console.error('Erro ao dropar banco de dados', error);
-      } finally {
-        triggerRefresh();
-      }
-    }
+  const dbOperations = useDbOperations();
+  const { triggerRefresh } = useRefresh();
+  const [isDeleting, setIsDeleting] = useState(false);
+
+const deleteDb = async () => {
+  try {
+    setIsDeleting(true);
+    await dbOperations.dropDatabase();
+  } catch (error) {
+    console.error("Erro ao dropar banco de dados", error);
+  } finally {
+    setIsDeleting(false);
+    triggerRefresh();
+  }
+}
+
+  const handleDeleteDb =  () => {
+    Alert.alert(
+      "Aviso",
+      "Tem certeza que deseja deletar o banco de dados?",
+      [
+        {
+          text: "Não",
+          onPress: () => {
+            return;
+          },
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: () => deleteDb()
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   return (
     <SafeAreaView>
-      <Button handlePress={deleteDb} title='Deletar banco de dados'/>
+      {/* Modal que só aparece se estiver deletando */}
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isDeleting}
+        onRequestClose={() => {}}
+        style={{ width: 500, height: 500 }}
+      >
+        <View className="flex-1 justify-center items-center bg-black/20">
+          <View className="bg-white w-[200px] h-[100px] items-center justify-center rounded-lg">
+            <ActivityIndicator size="large" color={colors.blue} />
+            <Text>Deletando</Text>
+          </View>
+        </View>
+      </Modal>
+      <View className="items-center">
+        <Button handlePress={handleDeleteDb} title="Deletar banco de dados" containerStyles="bg-red-500"/>
+      </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Config
+export default Config;

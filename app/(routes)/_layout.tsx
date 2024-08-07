@@ -1,8 +1,8 @@
-import React from 'react'
-import { Stack } from 'expo-router'
-import { LinearGradient } from 'expo-linear-gradient';
-import colors from '@/constants/colors';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import { Stack } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
+import colors from "@/constants/colors";
+import { StyleSheet } from "react-native";
 
 // const GradientHeader = () => (
 //   <LinearGradient
@@ -16,24 +16,30 @@ import { StyleSheet } from 'react-native';
 const AuthLayout = () => {
   return (
     <>
-        <Stack
-          screenOptions={{
-            headerStyle: {backgroundColor: colors.blue},
-            headerTitleStyle: {
-              color: 'white'
-            },
-            headerTintColor: 'white',
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: colors.blue },
+          headerTitleStyle: {
+            color: "white",
+          },
+          headerTintColor: "white",
+        }}
+      >
+        <Stack.Screen
+          name="product/[id]"
+          options={{
+            title: "Produto",
           }}
-        >
-            <Stack.Screen
-            name="product/[id]"
-            options={{
-                title:"Produto"
-            }}
-            />
-        </Stack>
+        />
+        <Stack.Screen
+          name="config/index"
+          options={{
+            title: "Configurações",
+          }}
+        />
+      </Stack>
     </>
-  )
-}
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;
