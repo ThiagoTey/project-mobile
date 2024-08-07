@@ -11,7 +11,7 @@ import {
 } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Image, Modal, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Image, Linking, Modal, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomDrawerContent = (props: any) => {
@@ -23,6 +23,22 @@ const CustomDrawerContent = (props: any) => {
   const groupDb = useGroupDatabase();
   const { triggerRefresh } = useRefresh();
 
+  const wppUrl = (`whatsapp://send?phone=+553732321127`)
+
+  const openWhatsApp = () => {
+    Linking.canOpenURL(wppUrl)
+      .then((supported) => {
+        if (!supported) {
+          Alert.alert('WhatsApp não está instalado no seu dispositivo');
+        } else {
+          return Linking.openURL(wppUrl);
+        }
+      })
+      .catch((err) => console.error('Erro ao tentar abrir o WhatsApp:', err));
+  }
+
+
+  // Função sincronizar
   const synchronizeData = async () => {
     setIsSyncing(true);
     try {
@@ -57,9 +73,9 @@ const CustomDrawerContent = (props: any) => {
       </Modal>
       {/* Custom Drawer */}
       <DrawerContentScrollView {...props}>
-        <View className="border-b-slate-100 pl-4 pt-6 border-b-2">
+        <View className="border-b-slate-100 pl-4 pt-6 border-b-2 w-fit">
           <Image
-            className="w-[60px]"
+            className="w-[60px] self-center"
             source={images.logo}
             resizeMode="contain"
           />
@@ -78,7 +94,7 @@ const CustomDrawerContent = (props: any) => {
           label="Configurações"
           onPress={() => router.navigate({ pathname: "/config" })}
         />
-        <DrawerItem label="Entre em contato" onPress={() => {}} />
+        <DrawerItem label="Entre em contato" onPress={openWhatsApp} />
         <DrawerItem label="Deslogar" onPress={() => {}} />
         <DrawerItem label="Sincronizar" onPress={synchronizeData} />
       </View>
