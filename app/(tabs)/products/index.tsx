@@ -8,6 +8,7 @@ import ProductComponent from "@/components/ProductComponent";
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import { router, useLocalSearchParams } from "expo-router";
+import { useRefresh } from "@/context/RefreshContext";
 
 const Products = () => {
   const useProductDb = useProductDatabase();
@@ -18,6 +19,7 @@ const Products = () => {
     sortBy?: string;
     sortOrder: string;
   }>();
+  const { refresh } = useRefresh();
 
   useEffect(() => {
     router.setParams({
@@ -37,7 +39,7 @@ const Products = () => {
       setProductData(data);
     };
     loadProducts();
-  }, [JSON.stringify(params)]);
+  }, [JSON.stringify(params), refresh]);
 
   return (
     <SafeAreaView>

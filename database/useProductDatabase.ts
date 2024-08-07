@@ -89,6 +89,7 @@ export const useProductDatabase = () => {
 
   const synchronizeAllProducts = async () => {
     const jsonData = await fetchAllData(prodUrl);
+    console.log(jsonData)
     for (let i = 0; i < jsonData.length; i++) {
       const product = jsonData[i];
       // Inserir Produto no banco
@@ -146,6 +147,7 @@ export const useProductDatabase = () => {
         gridQuery,
         [id]
       );
+      // console.log(gridResponse);
 
       return { productResponse, gridResponse };
     } catch (error) {

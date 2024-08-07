@@ -23,13 +23,13 @@ const SignIn = () => {
     <SafeAreaView className="flex-1">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-1 w-screen h-screen">
-          <View className="w-full h-full px-12 mt-12 items-center">
+          <View className="w-full h-full px-12 mt-16 items-center">
             <Image
               source={images.logo_title_bellow}
               className="w-[100px] h-[100px]"
               resizeMode="contain"
             />
-            <Text className="text-3xl font-isemibold mt-6">Bem-Vindo</Text>
+            <Text className="text-3xl font-isemibold mt-4">Bem-Vindo</Text>
             <Text className="text-lg font-ilight mt-2">
               Informe seu usuário e senha
             </Text>
@@ -39,7 +39,7 @@ const SignIn = () => {
               title="Email"
               value={form.email}
               keyboardType="email-address"
-              otherStyles="mt-8"
+              otherStyles="mt-6"
             />
 
             <FormField

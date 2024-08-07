@@ -35,10 +35,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
 
   return (
     <>
-      <LinearGradient
-        colors={[colors.blue, colors.green, colors.yellow]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+      <View
         style={{
           height: 90,
           flexDirection: "row",
@@ -47,6 +44,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           paddingHorizontal: 16,
           gap: 12,
           paddingBottom: 12,
+          backgroundColor: colors.blue
         }}
       >
         {/* Abrir Drawer */}
@@ -118,7 +116,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
             </View>
           )}
         </View>
-      </LinearGradient>
+      </View>
       <Sidebar filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
     </>
   );

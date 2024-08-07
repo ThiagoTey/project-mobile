@@ -21,10 +21,16 @@ const ProductComponent = ({
     router.navigate({ pathname: "/product/[id]", params: { id: id } });
   };
 
+  const formatter  = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+  const formattedPrice = formatter.format(Number(price));
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="border-b-2 border-gray-200 justify-between items-center flex-row gap-2 px-6 pb-2 my-2"
+      className="border-b-2 border-gray-200 items-center flex-row gap-x-2 px-6 pb-2 my-2"
     >
         <ProductImage
           description={description}
@@ -32,13 +38,13 @@ const ProductComponent = ({
           customStyles="w-[45px] h-[45px] bg-slate-200"
         />
 
-      <View className="w-[220px]">
+      <View className="w-[210px]">
         <Text>{codeInternal}</Text>
         <Text className="mt-1 font-ibold">{description}</Text>
       </View>
       <View>
-        <Text>Qtde {qtde}</Text>
-        <Text className="mt-1 text-emerald-600">R$ {price}</Text>
+        <Text><Text className="text-gray-500">Qtde:</Text> {qtde ? qtde : 0}</Text>
+        <Text className="mt-1 text-emerald-600">{formattedPrice}</Text>
       </View>
     </TouchableOpacity>
   );

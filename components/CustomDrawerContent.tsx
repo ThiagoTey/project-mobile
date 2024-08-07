@@ -1,5 +1,6 @@
 import { images } from "@/constants";
 import colors from "@/constants/colors";
+import { useRefresh } from "@/context/RefreshContext";
 import { useGroupDatabase } from "@/database/useGroupDatabse";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import { useUnitDatabase } from "@/database/useUnitDatabase";
@@ -20,7 +21,8 @@ const CustomDrawerContent = (props: any) => {
   const productDb = useProductDatabase();
   const unitDb = useUnitDatabase();
   const groupDb = useGroupDatabase();
-  
+  const { triggerRefresh } = useRefresh();
+
   const synchronizeData = async () => {
     setIsSyncing(true);
     try {
@@ -31,6 +33,7 @@ const CustomDrawerContent = (props: any) => {
     } catch (error) {
       console.log(error);
     } finally {
+      triggerRefresh();
       setIsSyncing(false);
     }
   };

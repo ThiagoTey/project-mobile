@@ -2,17 +2,18 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useUnitDatabase } from "./useUnitDatabase";
 import { useGroupDatabase } from "./useGroupDatabse";
 import { useProductDatabase } from "./useProductDatabase";
+import { initializedatabase } from "./InitializeDatabase";
 
 export const useDbOperations = () => {
   const db = useSQLiteContext();
 
   const dropDatabase = async () => {
     try {
-      await db.runAsync('DROP TABLE IF EXISTS units');
-      await db.runAsync('DROP TABLE IF EXISTS groups');
-      await db.runAsync('DROP TABLE IF EXISTS products');
-      await db.runAsync('DROP TABLE IF EXISTS productGrid');
-    console.log('Tables dropped successfully');
+      await db.runAsync('DELETE FROM units');
+      await db.runAsync('DELETE FROM groups');
+      await db.runAsync('DELETE FROM products');
+      await db.runAsync('DELETE FROM productGrid');
+      console.log('Tables DELETED successfully');
     } catch (error) {
       throw error
     }

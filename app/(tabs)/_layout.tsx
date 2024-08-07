@@ -29,7 +29,7 @@ export default function TabLayout() {
         drawerContent={CustomDrawerContent}
         initialRouteName="home/index"
         screenOptions={{
-          headerBackground: () => <GradientHeader />,
+          headerStyle: {backgroundColor: colors.blue},
           headerTitleStyle: {
             color: "white",
           },
@@ -64,7 +64,6 @@ export default function TabLayout() {
           options={{
             drawerLabel: "Unidades",
             title: "Unidades",
-            headerBackground: () => <GradientHeader />,
             drawerIcon: ({ size, color }) => (
               <MaterialCommunityIcons name="inbox" size={size} color={color} />
             ),
@@ -75,7 +74,6 @@ export default function TabLayout() {
           options={{
             drawerLabel: "Grupos",
             title: "Grupos",
-            headerBackground: () => <GradientHeader />,
             drawerIcon: ({ size, color }) => (
               <FontAwesome6 name="layer-group" size={size} color={color} />
             ),

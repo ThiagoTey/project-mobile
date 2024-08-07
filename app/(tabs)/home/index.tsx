@@ -11,8 +11,9 @@ const Container = ({ children }: { children: any }) => {
 };
 
 const Home = () => {
-  const [initialDate, setInitialDate] = useState(new Date());
-  const [finalDate, setFinalDate] = useState(new Date());
+  const now = new Date();
+  const [initialDate, setInitialDate] = useState(new Date(now.getFullYear(), now.getMonth(), 1));
+  const [finalDate, setFinalDate] = useState(new Date(now.getFullYear(), now.getMonth() + 1, 0));
   const [showInitialDate, setShowInitialDate] = useState(false);
   const [showFinalDate, setShowFinalDate] = useState(false);
 
