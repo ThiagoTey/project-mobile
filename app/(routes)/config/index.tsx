@@ -1,4 +1,11 @@
-import { View, Text, Modal, ActivityIndicator, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  ActivityIndicator,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "@/components/Button";
@@ -11,19 +18,24 @@ const Config = () => {
   const { triggerRefresh } = useRefresh();
   const [isDeleting, setIsDeleting] = useState(false);
 
-const deleteDb = async () => {
-  try {
-    setIsDeleting(true);
-    await dbOperations.dropDatabase();
-  } catch (error) {
-    console.error("Erro ao dropar banco de dados", error);
-  } finally {
-    setIsDeleting(false);
-    triggerRefresh();
-  }
-}
+  const deleteDb = async () => {
+    try {
+      setIsDeleting(true);
+      await dbOperations.dropDatabase();
+      ToastAndroid.show("Banco deletado com sucesso!", ToastAndroid.SHORT);
+    } catch (error) {
+      console.error("Erro ao dropar banco de dados", error);
+      Alert.alert(
+        "Erro ao deletar banco de dados",
+        "Tente novamente mais tarde"
+      );
+    } finally {
+      setIsDeleting(false);
+      triggerRefresh();
+    }
+  };
 
-  const handleDeleteDb =  () => {
+  const handleDeleteDb = () => {
     Alert.alert(
       "Aviso",
       "Tem certeza que deseja deletar o banco de dados?",
@@ -37,7 +49,7 @@ const deleteDb = async () => {
         },
         {
           text: "Sim",
-          onPress: () => deleteDb()
+          onPress: () => deleteDb(),
         },
       ],
       { cancelable: false }
@@ -62,7 +74,11 @@ const deleteDb = async () => {
         </View>
       </Modal>
       <View className="items-center">
-        <Button handlePress={handleDeleteDb} title="Deletar banco de dados" containerStyles="bg-red-500"/>
+        <Button
+          handlePress={handleDeleteDb}
+          title="Deletar banco de dados"
+          containerStyles="bg-red-500"
+        />
       </View>
     </SafeAreaView>
   );

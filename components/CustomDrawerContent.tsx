@@ -11,8 +11,22 @@ import {
 } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Alert, Image, Linking, Modal, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Linking,
+  Modal,
+  Text,
+  ToastAndroid,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import Feather from "@expo/vector-icons/Feather";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const CustomDrawerContent = (props: any) => {
   const { bottom } = useSafeAreaInsets();
@@ -23,20 +37,19 @@ const CustomDrawerContent = (props: any) => {
   const groupDb = useGroupDatabase();
   const { triggerRefresh } = useRefresh();
 
-  const wppUrl = (`whatsapp://send?phone=+553732321127`)
+  const wppUrl = `whatsapp://send?phone=+553732321127`;
 
   const openWhatsApp = () => {
     Linking.canOpenURL(wppUrl)
       .then((supported) => {
         if (!supported) {
-          Alert.alert('WhatsApp não está instalado no seu dispositivo');
+          Alert.alert("WhatsApp não está instalado no seu dispositivo");
         } else {
           return Linking.openURL(wppUrl);
         }
       })
-      .catch((err) => console.error('Erro ao tentar abrir o WhatsApp:', err));
-  }
-
+      .catch((err) => console.error("Erro ao tentar abrir o WhatsApp:", err));
+  };
 
   // Função sincronizar
   const synchronizeData = async () => {
@@ -44,10 +57,12 @@ const CustomDrawerContent = (props: any) => {
     try {
       // await synchronizeAll();
       await productDb.synchronizeAllProducts();
-      await unitDb.synchronizeAllUnits();
-      await groupDb.synchronizeAllGroups();
+      // await unitDb.synchronizeAllUnits();
+      // await groupDb.synchronizeAllGroups();
+      ToastAndroid.show("Sincronizado com sucesso!", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error);
+      Alert.alert("Erro ao sincronizar", "Tente novamente mais tarde");
     } finally {
       triggerRefresh();
       setIsSyncing(false);
@@ -91,12 +106,37 @@ const CustomDrawerContent = (props: any) => {
         className="border-t-slate-100 border-t-2"
       >
         <DrawerItem
+          labelStyle={{ marginLeft: -20 }}
+          icon={({ size, color }) => (
+            <AntDesign name="setting" size={size} color={color} />
+          )}
           label="Configurações"
           onPress={() => router.navigate({ pathname: "/config" })}
         />
-        <DrawerItem label="Entre em contato" onPress={openWhatsApp} />
-        <DrawerItem label="Deslogar" onPress={() => {}} />
-        <DrawerItem label="Sincronizar" onPress={synchronizeData} />
+        <DrawerItem
+          labelStyle={{ marginLeft: -20 }}
+          icon={({ size, color }) => (
+            <Feather name="message-circle" size={size} color={color} />
+          )}
+          label="Entre em contato"
+          onPress={openWhatsApp}
+        />
+        <DrawerItem
+          labelStyle={{ marginLeft: -20 }}
+          icon={({ size, color }) => (
+            <SimpleLineIcons name="logout" size={size} color={color} />
+          )}
+          label="Deslogar"
+          onPress={() => {}}
+        />
+        <DrawerItem
+          labelStyle={{ marginLeft: -20 }}
+          icon={({ size, color }) => (
+            <Ionicons name="sync" size={size} color={color} />
+          )}
+          label="Sincronizar"
+          onPress={synchronizeData}
+        />
       </View>
     </View>
   );

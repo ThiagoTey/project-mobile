@@ -12,7 +12,6 @@ export const fetchAllData = async (url:string) => {
             throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
           }
           const data = await response.json();
-          console.log(`${url} : ${data}`)
           return data;
     } catch (error) {
         throw error
