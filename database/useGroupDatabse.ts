@@ -71,7 +71,7 @@ export const useGroupDatabase = () => {
     for (let i = 0; i < jsonData.length; i++) {
       const group = jsonData[i];
 
-      const existingGroup = await verifyGroupExists(group)
+      const existingGroup = await verifyGroupExists(group.id)
 
       if(existingGroup){
         const updateDate = new Date(existingGroup.updated_at);

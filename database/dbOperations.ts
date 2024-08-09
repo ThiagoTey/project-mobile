@@ -9,27 +9,55 @@ export const useDbOperations = () => {
 
   const dropDatabase = async () => {
     try {
-      await db.runAsync('DELETE FROM units');
-      await db.runAsync('DELETE FROM groups');
-      await db.runAsync('DELETE FROM products');
-      await db.runAsync('DELETE FROM productGrid');
-      console.log('Tables DELETED successfully');
+      await db.runAsync("DELETE FROM units");
+      await db.runAsync("DELETE FROM groups");
+      await db.runAsync("DELETE FROM products");
+      await db.runAsync("DELETE FROM productGrid");
+      console.log("Tables DELETED successfully");
     } catch (error) {
-      throw error
+      throw error;
     }
   };
 
-  return { dropDatabase };
+  const updateLastSyncDate = async () => {
+    const now = new Date().toISOString();
+    const statement = await db.prepareAsync(
+      `UPDATE config SET last_sync = $now`
+    );
+
+    try {
+      await statement.executeAsync({
+        $now: now,
+      });
+    } catch (error) {
+      console.log("error updateLastSyncDate" + error);
+      throw error;
+    } finally {
+      statement.finalizeAsync();
+    }
+  };
+
+  const getLastSycndate = async () => {
+    const query = "SELECT last_sync FROM config";
+    try {
+      const response: { last_sync: string } | null = await db.getFirstAsync(
+        query
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  return { dropDatabase, updateLastSyncDate, getLastSycndate };
 };
 
-
-
 export const synchronizeAll = async () => {
-    // const unitDb = useUnitDatabase();
-    // const groupDb = useGroupDatabase();
-    const productDb = useProductDatabase();
+  const unitDb = useUnitDatabase();
+  const groupDb = useGroupDatabase();
+  const productDb = useProductDatabase();
 
-    // (await unitDb).synchronizeAllUnits;
-    // (await groupDb).synchronizeAllGroups;
-    await productDb.synchronizeAllProducts();
+  await productDb.synchronizeAllProducts();
+  await unitDb.synchronizeAllUnits();
+  await groupDb.synchronizeAllGroups();
 };

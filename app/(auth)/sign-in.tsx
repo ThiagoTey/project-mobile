@@ -16,13 +16,13 @@ const SignIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const singUp = () => {
-    router.replace("home")
-  }
+    router.replace("home");
+  };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 w-screen h-screen">
+        <View style={{ flex: 1, width: "100%" }}>
           <View className="w-full h-full px-12 mt-16 items-center">
             <Image
               source={images.logo_title_bellow}
@@ -55,13 +55,11 @@ const SignIn = () => {
                 onValueChange={setRememberMe}
                 color={rememberMe ? colors.blue : undefined}
               />
-              <Text>
-                Lembre-se de mim
-              </Text>
+              <Text>Lembre-se de mim</Text>
             </View>
 
             <View className="w-full flex-row mt-5">
-              <Text>Não é Cadastrado? {' '}</Text>
+              <Text>Não é Cadastrado? </Text>
               <Link href="/" className="text-blue">
                 Entrar em Contato
               </Link>
@@ -76,13 +74,12 @@ const SignIn = () => {
 
           <Image
             source={images.login_image}
-            className="absolute -bottom-8 self-center w-[300px]"
+            className="absolute -bottom-9 self-center w-[300px]"
             resizeMode="contain"
           />
-
           <Image
             source={images.login_image_below}
-            className="absolute -bottom-4"
+            className="absolute -bottom-5"
             resizeMode="contain"
           />
         </View>

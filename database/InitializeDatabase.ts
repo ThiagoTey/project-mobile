@@ -68,4 +68,19 @@ export async function initializedatabase(db: SQLiteDatabase) {
                     FOREIGN KEY (product_id) REFERENCES products(id)
                 );
                 `);
+  // tabela Config
+  await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS config (
+        id INTEGER PRIMARY KEY,
+        last_sync DATE
+      )
+    `)
+  // Verifica se a config já tem uma linha
+  const existingConfig = await db.getFirstAsync('SELECT * FROM config');
+  // Se não existir, insere a linha com id 1
+  if (!existingConfig) {
+    await db.execAsync(`
+      INSERT INTO config (id) VALUES (1)
+    `);
+  }
 }

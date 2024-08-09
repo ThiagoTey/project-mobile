@@ -77,7 +77,7 @@ export const useUnitDatabase = () => {
     for (let i = 0; i < jsonData.length; i++) {
       const unit = jsonData[i];
 
-      const existingUnit = await verifyUnitsExists(unit)
+      const existingUnit = await verifyUnitsExists(unit.id)
 
       if(existingUnit) {
         const updateDate = new Date(existingUnit.updated_at);
@@ -104,7 +104,6 @@ export const useUnitDatabase = () => {
           query,
           `%${description}%`
         );
-        console.log(response)
         return response;
       } catch (error) {
         throw error;

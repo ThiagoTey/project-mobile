@@ -10,7 +10,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -27,15 +27,45 @@ import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 
 const CustomDrawerContent = (props: any) => {
   const { bottom } = useSafeAreaInsets();
 
   const [isSyncing, setIsSyncing] = useState(false);
+  const [lastAsyncDate, setlastAsyncDate] = useState("");
+  const [lastAsyncTime, setlastAsyncTime] = useState("");
   const productDb = useProductDatabase();
   const unitDb = useUnitDatabase();
   const groupDb = useGroupDatabase();
-  const { triggerRefresh } = useRefresh();
+  const dbOperation = useDbOperations();
+  const { triggerRefresh, refresh } = useRefresh();
+
+  useEffect(() => {
+    const getLastAsyncDate = async () => {
+      try {
+        const response = await dbOperation.getLastSycndate();
+        if (response) {
+          const date = new Date(response.last_sync);
+          const formattedDate = date.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          });
+          const formattedTime = date.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false, // Formato 24h
+          });
+          setlastAsyncDate(formattedDate);
+          setlastAsyncTime(formattedTime);
+        }
+      } catch (error) {
+        throw error;
+      }
+    };
+    getLastAsyncDate();
+  }, [refresh]);
 
   const wppUrl = `whatsapp://send?phone=+553732321127`;
 
@@ -59,6 +89,7 @@ const CustomDrawerContent = (props: any) => {
       await productDb.synchronizeAllProducts();
       await unitDb.synchronizeAllUnits();
       await groupDb.synchronizeAllGroups();
+      await dbOperation.updateLastSyncDate();
       ToastAndroid.show("Sincronizado com sucesso!", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error);
@@ -130,11 +161,25 @@ const CustomDrawerContent = (props: any) => {
           onPress={() => {}}
         />
         <DrawerItem
-          labelStyle={{ marginLeft: -20 }}
           icon={({ size, color }) => (
             <Ionicons name="sync" size={size} color={color} />
           )}
-          label="Sincronizar"
+          label={() => (
+            <View className="-ml-5">
+              <Text>Sincronizar</Text>
+              <View className="flex-row justify-between items-center">
+                <Text className="text-xs">Última Sincronização : </Text>
+                <View className="justify-center">
+                  <Text className="text-xs text-gray-500">
+                    {lastAsyncDate ? lastAsyncDate : ""}
+                  </Text>
+                  <Text className="text-xs self-center text-gray-500">
+                    {lastAsyncTime ? lastAsyncTime : ""}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          )}
           onPress={synchronizeData}
         />
       </View>
