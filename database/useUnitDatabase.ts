@@ -30,12 +30,66 @@ export const useUnitDatabase = () => {
     }
   };
 
+  const updateUnit = async (unit: Unitsinterface) => {
+    const statement = await db.prepareAsync(
+      `UPDATE units SET
+          description = $description,
+          abbreviation = $abbreviation,
+          weigh = $weigh,
+          company_id = $company_id,
+          created_at = $created_at,
+          updated_at = $updated_at
+        WHERE id = $id`
+    );
+    try {
+      await statement.executeAsync({
+        $id: unit.id,
+        $description: unit.description,
+        $abbreviation: unit.abbreviation,
+        $weigh: unit.weigh,
+        $company_id: unit.company_id,
+        $created_at: unit.created_at,
+        $updated_at: unit.updated_at,
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      await statement.finalizeAsync();
+    }
+  };
+
+  const verifyUnitsExists = async (UnitId: number) => {
+    const query = `SELECT units FROM products WHERE id = ?`;
+
+    try {
+      const result: { updated_at: string } | null = await db.getFirstAsync(
+        query,
+        UnitId
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const synchronizeAllUnits = async () => {
     const jsonData = await fetchAllData(unitUrl);
     for (let i = 0; i < jsonData.length; i++) {
       const unit = jsonData[i];
-      // Inserir Unidade
-      insertUnit(unit);
+
+      const existingUnit = await verifyUnitsExists(unit)
+
+      if(existingUnit) {
+        const updateDate = new Date(existingUnit.updated_at);
+        const newUpdateDate = new Date(unit.updated_at);
+
+        if (updateDate < newUpdateDate) {
+          updateUnit(unit);
+        }
+      } else {
+        // Inserir Unidade
+        insertUnit(unit);
+      }
     }
   };
 
