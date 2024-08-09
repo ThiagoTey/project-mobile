@@ -28,12 +28,62 @@ export const useGroupDatabase = () => {
     }
   };
 
+  const updateGroup = async (group: GroupsInterface) => {
+    const statement = await db.prepareAsync(
+      `UPDATE groups SET
+          description = $description,
+          company_id = $company_id,
+          created_at = $created_at,
+          updated_at = $updated_at
+        WHERE id = $id`
+    );
+    try {
+      await statement.executeAsync({
+        $id: group.id,
+        $description: group.description,
+        $company_id: group.company_id,
+        $created_at: group.created_at,
+        $updated_at: group.updated_at,
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      await statement.finalizeAsync();
+    }
+  };
+
+  const verifyGroupExists = async (UnitId: number) => {
+    const query = `SELECT updated_at FROM groups WHERE id = ?`;
+
+    try {
+      const result: { updated_at: string } | null = await db.getFirstAsync(
+        query,
+        UnitId
+      );
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const synchronizeAllGroups = async () => {
     const jsonData = await fetchAllData(groupUrl);
     for (let i = 0; i < jsonData.length; i++) {
       const group = jsonData[i];
-      // Inserir Grupo no banco
-      insertGroup(group);
+
+      const existingGroup = await verifyGroupExists(group)
+
+      if(existingGroup){
+        const updateDate = new Date(existingGroup.updated_at);
+        const newUpdateDate = new Date(group.updated_at);
+
+        if (updateDate < newUpdateDate) {
+          updateGroup(group);
+        }
+      }else {
+        // Inserir Grupo no banco
+        insertGroup(group);
+      }
     }
   };
 

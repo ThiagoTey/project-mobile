@@ -57,8 +57,8 @@ const CustomDrawerContent = (props: any) => {
     try {
       // await synchronizeAll();
       await productDb.synchronizeAllProducts();
-      // await unitDb.synchronizeAllUnits();
-      // await groupDb.synchronizeAllGroups();
+      await unitDb.synchronizeAllUnits();
+      await groupDb.synchronizeAllGroups();
       ToastAndroid.show("Sincronizado com sucesso!", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error);

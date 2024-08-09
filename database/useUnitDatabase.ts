@@ -59,7 +59,7 @@ export const useUnitDatabase = () => {
   };
 
   const verifyUnitsExists = async (UnitId: number) => {
-    const query = `SELECT units FROM products WHERE id = ?`;
+    const query = `SELECT updated_at FROM units WHERE id = ?`;
 
     try {
       const result: { updated_at: string } | null = await db.getFirstAsync(
