@@ -165,13 +165,15 @@ const CustomDrawerContent = (props: any) => {
             <Ionicons name="sync" size={size} color={color} />
           )}
           label={() => (
-            <View className="-ml-5">
-              <Text>Sincronizar</Text>
-              <View className="flex-row justify-between items-center">
+            <View className="-ml-5 flex-row justify-between items-center">
+              <View>
+                <Text>Sincronizar</Text>
                 <Text className="text-xs">Última Sincronização : </Text>
+              </View>
+              <View>
                 <View className="justify-center">
                   <Text className="text-xs text-gray-500">
-                    {lastAsyncDate ? lastAsyncDate : ""}
+                    {lastAsyncDate ? lastAsyncDate : "Não sincr."}
                   </Text>
                   <Text className="text-xs self-center text-gray-500">
                     {lastAsyncTime ? lastAsyncTime : ""}
