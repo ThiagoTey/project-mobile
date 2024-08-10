@@ -4,10 +4,11 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import PieChartCustom from "@/components/PieChart";
+import LineChartCustom from "@/components/LineChartCustom";
 
 const Container = ({ children }: { children: any }) => {
   return (
-    <View className=" border-gray-300 border p-2 rounded-lg">{children}</View>
+    <View style={{overflow: "hidden"}} className=" border-gray-300 border p-2 rounded-lg">{children}</View>
   );
 };
 
@@ -84,14 +85,15 @@ const Home = () => {
           </View>
         </View>
       </Container>
-      {/* Vendas Por Mês */}
+      {/* Vendas Por Vendedor */}
       <Container>
-        <Text>Vendas Por vendedor</Text>
+        <Text>Vendas Por Vendedor</Text>
         <PieChartCustom />
       </Container>
       {/* Vendas Por Mês */}
       <Container>
         <Text>Vendas Por Mês</Text>
+        <LineChartCustom />
       </Container>
     </SafeAreaView>
   );
