@@ -96,11 +96,16 @@ const PieChartCustom = () => {
           );
         }}
       />
-        <FlatList
+      <View>
+      {pieData.map((item, index) => (
+        <RenderDesription key={index} item={item} />
+      ))}
+      </View>
+        {/* <FlatList
           data={pieData}
           keyExtractor={(item) => item.desc}
           renderItem={({ item }) => <RenderDesription item={item} />}
-        />
+        /> */}
     </View>
   );
 };
