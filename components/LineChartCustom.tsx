@@ -1,8 +1,7 @@
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { View, Text } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 import { BarChart } from "react-native-gifted-charts";
-import { CartesianChart, Line } from "victory-native";
 
 const LineChartCustom = () => {
   const data = [
@@ -38,47 +37,32 @@ const LineChartCustom = () => {
     { value: 20, label: "30", dataPointText: "20" },
     { value: 10, label: "31", dataPointText: "10" },
   ];
-
-  const victorydata = [
-    { x: 1, y: 2 },
-    { x: 2, y: 3 },
-    { x: 3, y: 5 },
-    { x: 4, y: 4 },
-    { x: 5, y: 7 }
-  ];
-
   return (
-    <View className="mt-4">
-      <LineChart
-        color={colors.blue}
-        dataPointsColor={"black"}
-        data={data}
-        // textShiftY={-2}
-        // textShiftX={-5}  
-        // textFontSize={13}
-        yAxisTextStyle={{pointerEvents: 'none'}}
-        focusEnabled
-        onFocus={item => console.log('item onPress: ', item)}
-        focusedDataPointShape={''}
-        
-        
-        showTextOnFocus
-        delayBeforeUnFocus={5000}
-      />
-      {/* <BarChart data={data} barWidth={22} spacing={12} frontColor={colors.blue} /> */}
+    <View>
+      <View>
+        <Text>Vendas Por Mês</Text>
+      </View>
 
-{/* 
-      <CartesianChart data={victorydata} xKey="x" yKeys={["y"]}>
-      {({ points }) => (
-        //👇 pass a PointsArray to the Line component, as well as options.
-        <Line
-          points={points.y}
-          color="red"
-          strokeWidth={3}
-          animate={{ type: "timing", duration: 300 }}
+      <View className="mt-4">
+        <LineChart
+          color={colors.blue}
+          dataPointsColor={"black"}
+          data={data}
+          // textShiftY={-2}
+          // textShiftX={-5}
+          // textFontSize={13}
+          yAxisTextStyle={{ pointerEvents: "none" }}
+          // focusEnabled
+          onFocus={(item:any) => console.log("item onPress: ", item)}
+          focusedDataPointShape={""}
+          showScrollIndicator={true}
+          nestedScrollEnabled
+          isAnimated
+          showTextOnFocus
+          delayBeforeUnFocus={5000}
         />
-      )}
-    </CartesianChart> */}
+        {/* <BarChart data={data} barWidth={22} spacing={12} frontColor={colors.blue} /> */}
+      </View>
     </View>
   );
 };

@@ -5,6 +5,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import PieChartCustom from "@/components/PieChart";
 import LineChartCustom from "@/components/LineChartCustom";
+import BarHorizontarCustom from "@/components/BarHorizontarCustom";
 
 const Container = ({ children }: { children: any }) => {
   return (
@@ -97,8 +98,11 @@ const Home = () => {
           </Container>
           {/* Vendas Por Mês */}
           <Container>
-            <Text>Vendas Por Mês</Text>
             <LineChartCustom />
+          </Container>
+          {/* Saldo das contas */}
+          <Container>
+            <BarHorizontarCustom />
           </Container>
         </View>
       </ScrollView>

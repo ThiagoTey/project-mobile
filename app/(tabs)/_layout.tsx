@@ -1,4 +1,4 @@
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { Drawer } from "expo-router/drawer";
 import React from "react";
 import { StyleSheet } from "react-native";

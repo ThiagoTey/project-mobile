@@ -73,10 +73,13 @@ const PieChartCustom = () => {
                 setPieDataFocused(extraRadiusForFocused);
             }
         }}
+        toggleFocusOnPress
         data={pieData}
         donut
         showGradient
         sectionAutoFocus
+        focusedPieIndex={2}
+        isAnimated
         focusOnPress
         radius={85}
         innerRadius={60}
@@ -101,11 +104,6 @@ const PieChartCustom = () => {
         <RenderDesription key={index} item={item} />
       ))}
       </View>
-        {/* <FlatList
-          data={pieData}
-          keyExtractor={(item) => item.desc}
-          renderItem={({ item }) => <RenderDesription item={item} />}
-        /> */}
     </View>
   );
 };

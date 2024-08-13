@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "@/components/Button";
 import { useDbOperations } from "@/database/dbOperations";
 import { useRefresh } from "@/context/RefreshContext";
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 
 const Config = () => {
   const dbOperations = useDbOperations();

@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 
 // const GradientHeader = () => (

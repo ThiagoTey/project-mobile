@@ -1,4 +1,4 @@
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import Checkbox from "expo-checkbox";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { Dispatch, useEffect, useState } from "react";

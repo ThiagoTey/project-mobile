@@ -1,5 +1,5 @@
 import { images } from "@/constants";
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { useRefresh } from "@/context/RefreshContext";
 import { useGroupDatabase } from "@/database/useGroupDatabse";
 import { useProductDatabase } from "@/database/useProductDatabase";

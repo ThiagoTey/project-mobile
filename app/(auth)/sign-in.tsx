@@ -5,7 +5,7 @@ import { images } from "@/constants";
 import FormField from "@/components/FormField";
 import CustomButtom from "@/components/Button";
 import Checkbox from "expo-checkbox";
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { Link, router } from "expo-router";
 
 const SignIn = () => {

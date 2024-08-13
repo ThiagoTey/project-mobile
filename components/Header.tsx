@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Sidebar from "./Sidebar";
 
