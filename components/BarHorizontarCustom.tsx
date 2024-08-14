@@ -23,7 +23,7 @@ const BarHorizontarCustom = () => {
                     yAccessor={({ index }) => index}
                     scale={scale.scaleBand}
                     contentInset={{ top: 10, bottom: 10 }}
-                    spacing={0.2}
+                    // spacing={0.2}
                     formatLabel={(_, index) => barData[ index ].label}
                 />
                 <BarChart
@@ -33,7 +33,7 @@ const BarHorizontarCustom = () => {
                     yAccessor={({ item }) => item.value}
                     svg={{ fill: Colors.blue }}
                     contentInset={{ top: 10, bottom: 10 }}
-                    spacing={0.2}
+                    // spacing={0.2}
                     gridMin={0}
                 >
                     <Grid direction={Grid.Direction.VERTICAL}/>

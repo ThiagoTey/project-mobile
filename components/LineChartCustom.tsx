@@ -53,7 +53,7 @@ const LineChartCustom = () => {
           // textFontSize={13}
           yAxisTextStyle={{ pointerEvents: "none" }}
           // focusEnabled
-          onFocus={(item:any) => console.log("item onPress: ", item)}
+          onFocus={(item: any) => console.log("item onPress: ", item)}
           focusedDataPointShape={""}
           showScrollIndicator={true}
           nestedScrollEnabled

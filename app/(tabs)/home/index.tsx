@@ -6,6 +6,8 @@ import { useState } from "react";
 import PieChartCustom from "@/components/PieChart";
 import LineChartCustom from "@/components/LineChartCustom";
 import BarHorizontarCustom from "@/components/BarHorizontarCustom";
+import BarChartCustom from "@/components/BarChartCustom";
+import DRE from "@/components/DRE";
 
 const Container = ({ children }: { children: any }) => {
   return (
@@ -104,6 +106,16 @@ const Home = () => {
           <Container>
             <BarHorizontarCustom />
           </Container>
+          {/* Fluxo de caixa */}
+          <Container>
+            <BarChartCustom />
+          </Container>
+          {/* DRE */}
+          <Container>
+            <DRE />
+          </Container>
+
+          
         </View>
       </ScrollView>
     </SafeAreaView>
