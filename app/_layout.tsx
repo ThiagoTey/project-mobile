@@ -1,10 +1,12 @@
 // import { ThemeProvider } from '@react-navigation/native';
+import Colors from "@/constants/Colors";
 import { RefreshProvider } from "@/context/RefreshContext";
 import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
 import { Stack, SplashScreen } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
 import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -38,7 +40,14 @@ export default function RootLayout() {
     <RefreshProvider>
       <SQLiteProvider databaseName="ability" onInit={initializedatabase}>
         <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="index"
+            options={{
+              statusBarColor: Colors.blue,
+              headerShown:false,
+              headerStyle: { backgroundColor: Colors.blue },
+            }}
+          />
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(routes)" options={{ headerShown: false }} />
@@ -50,3 +59,9 @@ export default function RootLayout() {
     // </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  defaultStyle: {
+      fontFamily: 'Inter-Regular'
+  },
+})
