@@ -59,7 +59,7 @@ const Index = () => {
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <ThemedText>Aumentando a produtividade</ThemedText>
+          <ThemedText style={{fontFamily: "Inter-Bold", fontSize: 22}}>Aumentando a produtividade</ThemedText>
           <ThemedText>Reduzindo riscos</ThemedText>
         </View>
 
