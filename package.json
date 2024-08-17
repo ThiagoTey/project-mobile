@@ -47,7 +47,8 @@
     "react-native-svg": "15.2.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-web": "~0.19.10",
-    "@react-native-picker/picker": "2.7.5"
+    "@react-native-picker/picker": "2.7.5",
+    "@shopify/react-native-skia": "1.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

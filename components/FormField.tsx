@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { Dispatch, useState } from "react";
 import { icons } from "@/constants";
+import ThemedText from "./ThemedText";
 
 interface Props {
   title: string;
@@ -29,7 +30,7 @@ const FormField = ({
 
   return (
     <View className={`space-y-2 ${otherStyles}`}>
-      <Text>{title}</Text>
+      <ThemedText>{title}</ThemedText>
       <View className="border-2 border-gray-200 w-full h-[50px] px-4 rounded-2xl focus:border-gray-400 items-center flex-row">
         <TextInput
           className="flex-1 font-imedium text-base"
