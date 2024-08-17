@@ -4,9 +4,10 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import React, { useRef, useState } from "react";
-import { Link, router } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
 import HomeSvg from "@/components/homeSvg";
@@ -16,24 +17,35 @@ import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
 import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
+import { fetchCompanies } from "@/api/auth";
 
 const SignInPassword = () => {
-  const [companies, setCompanies] = useState([
-    { id: 1, name: "teste 1" },
-    { id: 2, name: "teste 2" },
-  ]);
+  const [companies, setCompanies] = useState([]);
+
+  const { email } = useLocalSearchParams<{
+    email?: string;
+  }>();
+
+  console.log("tes")
+
+  useEffect(() => {
+    const getCompanys = async () => {
+      try {
+        if(email) {
+          const companiesResponse = await fetchCompanies(email.toLowerCase());
+          setCompanies(companiesResponse);
+        }
+      } catch (error) {
+        Alert.alert("Erro", "Por vafor tente mais tarde");
+        throw error;
+      }
+    };
+    getCompanys()
+  }, []);
+
   const [selectCompany, setSelectCompany] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
-  const pickerRef = useRef();
-
-  function open() {
-    pickerRef.current.focus();
-  }
-  function close() {
-    pickerRef.current.blur();
-  }
 
   const singUp = () => {
     router.navigate("sign-in-password");
@@ -76,7 +88,6 @@ const SignInPassword = () => {
               }}
             >
               <Picker
-                ref={pickerRef}
                 selectedValue={selectCompany}
                 onValueChange={(itemValue, itemIndex) =>
                   setSelectCompany(itemValue)

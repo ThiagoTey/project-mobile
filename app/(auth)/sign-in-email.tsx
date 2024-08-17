@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { Link, router } from "expo-router";
@@ -13,12 +14,35 @@ import ThemedText from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
+import { fetchCompanies } from "@/api/auth";
 
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
 
   const singUp = () => {
-    router.navigate("sign-in-password")
+    const getCompanys = async () => {
+      try {
+        const companiesResponse = await fetchCompanies(email.toLowerCase());
+
+        if (!companiesResponse[0]) {
+          Alert.alert("Email não registrado");
+        } else {
+          router.push({
+            pathname: "sign-in-password",
+            params: { email: email},
+          });
+        }
+      } catch (error) {
+        Alert.alert("Erro", "Por vafor tente mais tarde");
+        throw error;
+      }
+    };
+
+    if (email.includes("@")) {
+      getCompanys();
+    } else {
+      Alert.alert("Email, inválido", "Por favor, insira um email válido.");
+    }
   };
 
   return (
