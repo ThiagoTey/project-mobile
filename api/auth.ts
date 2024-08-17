@@ -1,6 +1,8 @@
 export const fetchCompanies = async (email: string) => {
   try {
-    const url = new URL("http://config.ability.app.br/api/v1/companies_by_email");
+    const url = new URL(
+      "http://config.ability.app.br/api/v1/companies_by_email"
+    );
     url.searchParams.append("email", email);
 
     const response = await fetch(url.toString(), { method: "GET" });
@@ -16,4 +18,15 @@ export const fetchCompanies = async (email: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const loginAuth = async (
+  email: string,
+  password: string,
+  companyid: number
+) => {
+  const url = new URL("http://config.ability.app.br/api/v1/users");
+  // url.searchParams.append("email", email);
+
+  
 };

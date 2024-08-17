@@ -47,6 +47,8 @@ const SignInPassword = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  
+
   const singUp = () => {
     router.navigate("sign-in-password");
   };
