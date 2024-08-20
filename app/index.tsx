@@ -5,7 +5,7 @@ import { Link, router } from "expo-router";
 import { images } from "@/constants";
 import CustomButtom from "@/components/Button";
 import ThemedText from "@/components/ThemedText";
-import HomeSvg from "@/components/homeSvg";
+import HomeSvg from "@/components/HomeSvg";
 
 const Index = () => {
   return (

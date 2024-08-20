@@ -6,21 +6,24 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
-import HomeSvg from "@/components/homeSvg";
+import HomeSvg from "@/components/HomeSvg";
 import ThemedText from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
 import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
-import { fetchCompanies } from "@/api/auth";
+import { fetchCompanies, loginAuth } from "@/api/auth";
 
 const SignInPassword = () => {
-  const [companies, setCompanies] = useState([]);
+  const [companies, setCompanies] = useState([{
+    id: 1,
+    name: ""
+  }]);
 
   const { email } = useLocalSearchParams<{
     email?: string;
@@ -43,14 +46,20 @@ const SignInPassword = () => {
     getCompanys()
   }, []);
 
-  const [selectCompany, setSelectCompany] = useState("");
+  const [selectCompany, setSelectCompany] = useState({
+    id: undefined,
+    name: ""
+  });
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   
 
   const singUp = () => {
-    router.navigate("sign-in-password");
+    console.log(selectCompany.id)
+    if(email && password && selectCompany.id){
+      loginAuth(email, password, selectCompany.id )
+    }
   };
 
   return (

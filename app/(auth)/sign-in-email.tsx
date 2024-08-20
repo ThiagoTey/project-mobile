@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import { Link, router } from "expo-router";
 
-import HomeSvg from "@/components/homeSvg";
+import HomeSvg from "@/components/HomeSvg";
 import ThemedText from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomButtom from "@/components/Button";
