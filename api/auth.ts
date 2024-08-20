@@ -1,6 +1,8 @@
 import CryptoJS from "crypto-js";
 import Base64 from "base-64";
+import { EXPO_SECRET_KEY } from "@env";
 
+// Função que pega os dados das empresas da API
 export const fetchCompanies = async (email: string) => {
   try {
     const url = new URL(
@@ -22,6 +24,17 @@ export const fetchCompanies = async (email: string) => {
     throw error;
   }
 };
+
+// Função para decodificar a parte do payload do JWT
+function decodeJWT(jwt : string) {
+  const [header, payload, signature] = jwt.split('.');
+
+  // Decodificar o payload do formato Base64URL
+  const decodedPayload = Base64.decode(payload.replace(/-/g, '+').replace(/_/g, '/'));
+
+  // Converter para um objeto JSON
+  return JSON.parse(decodedPayload);
+}
 
 // Função para codificar em Base64URL
 function toBase64URL(base64: string) {
@@ -64,9 +77,7 @@ export const loginAuth = async (
   companyid: number
 ) => {
   const url = new URL("http://config.ability.app.br/api/v1/users");
-  // url.searchParams.append("email", email);
 
-  // const encryptedJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbmZpZ0BhYmlsaXR5b25saW5lLmNvbS5iciIsInBhc3N3b3JkIjoiI0E3NSQmIiwiY29tcGFueV9pZCI6Mzh9.WFJ5_hx9eKwEqJpWwr66DNNxa2qUEEwJEf7xyk0iq64';
   // Dados a serem transformados em JWT
   const payload = {
     email: email,
@@ -75,23 +86,24 @@ export const loginAuth = async (
   };
 
   // Chave secreta para assinar o JWT
-  const secretKey = process.env.SECRET_KEY || "";
+  const secretKey = EXPO_SECRET_KEY;
 
   // Criar o JWT
   const jwt = createJWT(payload, secretKey);
   console.log("JWT:", jwt);
 
-  // let bytes = CryptoJS.AES.decrypt(encryptedJWT, secretKey);
-  // let decryptedJWT = bytes.toString(CryptoJS.enc.Utf8);
-  // console.log('JWT Descriptografado:', decryptedJWT);
+  url.searchParams.append("token", jwt);
 
-  // try {
-  //   const response = await fetch(url, {
-  //     body: JSON.stringify({
-  //       token : token
-  //     })
-  //   })
-  // } catch (error) {
-  //   throw error
-  // }
+  try {
+    const response = await fetch(url.toString(), {
+      method: "GET",
+    });
+
+    const data = await response.json();
+    const decodedData = decodeJWT(data.authentication_token);
+    console.log('Dados Decodificados:', decodedData);
+    
+  } catch (error) {
+    throw error;
+  }
 };

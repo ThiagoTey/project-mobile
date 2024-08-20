@@ -33,7 +33,7 @@ const SignInEmail = () => {
           });
         }
       } catch (error) {
-        Alert.alert("Erro", "Por vafor tente mais tarde");
+        Alert.alert("Erro", "Por Favor tente mais tarde");
         throw error;
       }
     };

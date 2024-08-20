@@ -43,6 +43,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.74.2",
     "react-native-crypto-js": "^1.0.0",
+    "react-native-dotenv": "^3.4.11",
     "react-native-drawer-layout": "^3.3.2",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-gifted-charts": "^1.4.28",

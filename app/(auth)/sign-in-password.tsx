@@ -24,12 +24,14 @@ const SignInPassword = () => {
     id: 1,
     name: ""
   }]);
+  
+  const [selectCompany, setSelectCompany] = useState();
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const { email } = useLocalSearchParams<{
     email?: string;
   }>();
-
-  console.log("tes")
 
   useEffect(() => {
     const getCompanys = async () => {
@@ -37,28 +39,20 @@ const SignInPassword = () => {
         if(email) {
           const companiesResponse = await fetchCompanies(email.toLowerCase());
           setCompanies(companiesResponse);
+          setSelectCompany(companiesResponse[0].id);
         }
       } catch (error) {
-        Alert.alert("Erro", "Por vafor tente mais tarde");
+        Alert.alert("Erro", "Por Favor tente mais tarde");
         throw error;
       }
     };
     getCompanys()
   }, []);
 
-  const [selectCompany, setSelectCompany] = useState({
-    id: undefined,
-    name: ""
-  });
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-
-  
-
   const singUp = () => {
-    console.log(selectCompany.id)
-    if(email && password && selectCompany.id){
-      loginAuth(email, password, selectCompany.id )
+    console.log(selectCompany)
+    if(email && password && selectCompany){
+      loginAuth(email, password, selectCompany)
     }
   };
 
