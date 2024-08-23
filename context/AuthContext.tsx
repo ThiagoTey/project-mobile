@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect, Dispatch, SetStateAction } from "react";
 import * as SecureStore from "expo-secure-store";
 import { loginAuth } from "@/api/auth";
 
@@ -7,9 +7,16 @@ interface AuthContextType {
   userEmail: string | null;
   userCompany: string | null;
   isLoading: boolean;
-  login: (email: string, password: string, selectCompany: number, rememberMe: boolean) => void;
+  login: (
+    email: string,
+    password: string,
+    selectCompany: number,
+    rememberMe: boolean
+  ) => void;
   logout: () => void;
   isLoggedIn: boolean;
+  error: string | null;
+  setError: Dispatch<SetStateAction<string | null>>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -22,11 +29,13 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [userCompany, setUserCompany] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadUser = async () => {
       try {
         setIsLoading(true);
+        setError(null)
         const token = await SecureStore.getItemAsync("userToken");
         const email = await SecureStore.getItemAsync("userEmail");
         const company = await SecureStore.getItemAsync("userCompany");
@@ -53,16 +62,16 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   ) => {
     try {
       setIsLoading(true);
-      const token = await loginAuth(email, password, selectCompany);
-
-      if (token) {
-        await SecureStore.setItemAsync("userToken", token);
+      setError(null)
+      const token = await loginAuth(email, password, selectCompany, setError);
+      if (token?.authentication_token) {
+        await SecureStore.setItemAsync("userToken", token.authentication_token);
         await SecureStore.setItemAsync("userEmail", email);
         await SecureStore.setItemAsync("userCompany", selectCompany.toString());
         setUserToken(token);
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
-
+        setIsLoggedIn(true);
         if (!rememberMe) {
           setTimeout(async () => {
             await logout();
@@ -85,6 +94,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       setUserToken(null);
       setUserEmail(null);
       setUserCompany(null);
+      setIsLoggedIn(false);
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
       throw error;
@@ -103,6 +113,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         login,
         logout,
         isLoggedIn,
+        error,
+        setError
       }}
     >
       {children}

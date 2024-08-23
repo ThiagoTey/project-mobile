@@ -18,16 +18,21 @@ import FormField from "@/components/FormField";
 import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
 import { fetchCompanies, loginAuth } from "@/api/auth";
+import { useAuth } from "@/context/AuthContext";
 
 const SignInPassword = () => {
-  const [companies, setCompanies] = useState([{
-    id: 1,
-    name: ""
-  }]);
-  
+  const [companies, setCompanies] = useState([
+    {
+      id: 1,
+      name: "",
+    },
+  ]);
+
   const [selectCompany, setSelectCompany] = useState();
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const { login, error } = useAuth();
 
   const { email } = useLocalSearchParams<{
     email?: string;
@@ -36,7 +41,7 @@ const SignInPassword = () => {
   useEffect(() => {
     const getCompanys = async () => {
       try {
-        if(email) {
+        if (email) {
           const companiesResponse = await fetchCompanies(email.toLowerCase());
           setCompanies(companiesResponse);
           setSelectCompany(companiesResponse[0].id);
@@ -46,13 +51,17 @@ const SignInPassword = () => {
         throw error;
       }
     };
-    getCompanys()
+    getCompanys();
   }, []);
 
   const singUp = () => {
-    console.log(selectCompany)
-    if(email && password && selectCompany){
-      loginAuth(email, password, selectCompany)
+    setPasswordError(null);
+    if (!password) {
+      setPasswordError("Informe Sua Senha");
+    }
+
+    if (email && password && selectCompany) {
+      login(email, password, selectCompany, rememberMe);
     }
   };
 
@@ -115,6 +124,11 @@ const SignInPassword = () => {
             value={password}
             otherStyles="mt-6"
           />
+          {passwordError && (
+            <ThemedText className="self-start text-red-600">
+              {passwordError}
+            </ThemedText>
+          )}
 
           <View className="w-full flex-row gap-1 mt-4">
             <Checkbox
@@ -124,6 +138,11 @@ const SignInPassword = () => {
             />
             <ThemedText>Lembre-se de mim</ThemedText>
           </View>
+          {error && (
+            <ThemedText className="self-start text-red-600 mt-6">
+              {error}
+            </ThemedText>
+          )}
         </View>
 
         <View style={style.signInButtonContainer}>

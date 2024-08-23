@@ -73,7 +73,8 @@ function createJWT(
 export const loginAuth = async (
   email: string,
   password: string,
-  companyid: number
+  companyid: number,
+  setError: (error: string) => void
 ) => {
   const url = new URL("http://config.ability.app.br/api/v1/users");
 
@@ -85,7 +86,12 @@ export const loginAuth = async (
   };
 
   // Chave secreta para assinar o JWT
-  const secretKey = process.env.EXPO_PUBLIC_SECRET_KEY  || "";
+  const secretKey = process.env.EXPO_PUBLIC_SECRET_KEY;
+
+  if(!secretKey){
+    console.log("No secretKey");
+    return
+  }
 
   // Criar o JWT
   const jwt = createJWT(payload, secretKey);
@@ -98,11 +104,23 @@ export const loginAuth = async (
       method: "GET",
     });
 
+    if (!response.ok) {
+      setError("Falha na autenticação, verifique suas credenciais.");
+      return;
+    }
+
     const data = await response.json();
-    const decodedData = decodeJWT(data.authentication_token);
-    console.log('Dados Decodificados:', decodedData);
-    return decodedData;
+
+    if(data?.authentication_token) {
+      const decodedData = decodeJWT(data.authentication_token);
+      console.log('Dados Decodificados:', decodedData);
+      return decodedData;
+    } else {
+      setError("Falha na autenticação, verifique suas credenciais.")
+    }
+
   } catch (error) {
+    setError("Erro ao tentar fazer login. Por favor, tente novamente.");
     throw error;
   }
 };

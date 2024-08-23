@@ -18,6 +18,7 @@ import { fetchCompanies } from "@/api/auth";
 
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   const singUp = () => {
     const getCompanys = async () => {
@@ -25,11 +26,11 @@ const SignInEmail = () => {
         const companiesResponse = await fetchCompanies(email.toLowerCase());
 
         if (!companiesResponse[0]) {
-          Alert.alert("Email não registrado");
+          setEmailError("Email não registrado");
         } else {
           router.push({
             pathname: "/(auth)/sign-in-password",
-            params: { email: email},
+            params: { email: email },
           });
         }
       } catch (error) {
@@ -41,7 +42,7 @@ const SignInEmail = () => {
     if (email.includes("@")) {
       getCompanys();
     } else {
-      Alert.alert("Email, inválido", "Por favor, insira um email válido.");
+      setEmailError("Por favor, insira um email válido.");
     }
   };
 
@@ -72,6 +73,11 @@ const SignInEmail = () => {
             keyboardType="email-address"
             otherStyles="mt-6"
           />
+          {emailError && (
+            <ThemedText className="self-start text-red-600">
+              {emailError}
+            </ThemedText>
+          )}
         </View>
 
         <View style={style.signInButtonContainer}>

@@ -7,7 +7,7 @@ import { useFonts } from "expo-font";
 import { Stack, SplashScreen } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
 import { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
 
