@@ -36,6 +36,7 @@ export default function RootLayout() {
     return null;
   }
 
+
   return (
     // <ThemeProvider value={}>
     <AuthProvider>
@@ -50,9 +51,30 @@ export default function RootLayout() {
                 headerStyle: { backgroundColor: Colors.blue },
               }}
             />
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="(routes)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="(auth)"
+              options={{
+                headerShown: false,
+                headerStyle: { backgroundColor: Colors.blue },
+                statusBarColor: Colors.blue,
+              }}
+            />
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+                headerStyle: { backgroundColor: Colors.blue },
+                statusBarColor: Colors.blue,
+              }}
+            />
+            <Stack.Screen
+              name="(routes)"
+              options={{
+                headerShown: false,
+                headerStyle: { backgroundColor: Colors.blue },
+                statusBarColor: Colors.blue,
+              }}
+            />
             <Stack.Screen name="+not-found" />
           </Stack>
         </SQLiteProvider>

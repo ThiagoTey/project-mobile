@@ -28,8 +28,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
+import { useAuth } from "@/context/AuthContext";
 
 const CustomDrawerContent = (props: any) => {
+  const { logout } = useAuth();
   const { bottom } = useSafeAreaInsets();
 
   const [isSyncing, setIsSyncing] = useState(false);
@@ -158,7 +160,7 @@ const CustomDrawerContent = (props: any) => {
             <SimpleLineIcons name="logout" size={size} color={color} />
           )}
           label="Deslogar"
-          onPress={() => {}}
+          onPress={logout}
         />
         <DrawerItem
           icon={({ size, color }) => (

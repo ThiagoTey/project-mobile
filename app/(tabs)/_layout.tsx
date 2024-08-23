@@ -13,14 +13,14 @@ import {
 import CustomDrawerContent from "@/components/CustomDrawerContent";
 import Header from "@/components/Header";
 
-const GradientHeader = () => (
-  <LinearGradient
-    colors={[colors.blue, colors.green, colors.yellow]}
-    start={{ x: 0, y: 0 }}
-    end={{ x: 1, y: 1 }}
-    style={StyleSheet.absoluteFill}
-  />
-);
+// const GradientHeader = () => (
+//   <LinearGradient
+//     colors={[colors.blue, colors.green, colors.yellow]}
+//     start={{ x: 0, y: 0 }}
+//     end={{ x: 1, y: 1 }}
+//     style={StyleSheet.absoluteFill}
+//   />
+// );
 
 export default function TabLayout() {
   return (

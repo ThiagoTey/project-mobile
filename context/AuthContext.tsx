@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect, Dispatch, SetStateAction } from "react";
 import * as SecureStore from "expo-secure-store";
 import { loginAuth } from "@/api/auth";
+import { router, useRootNavigationState } from "expo-router";
 
 interface AuthContextType {
   userToken: string | null;
@@ -40,6 +41,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         const email = await SecureStore.getItemAsync("userEmail");
         const company = await SecureStore.getItemAsync("userCompany");
         if (token && email && company) {
+          console.log("conseguiut pegar token do secureStore")
           setUserToken(token);
           setUserEmail(email);
           setUserCompany(company);
@@ -72,6 +74,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
+        router.replace('/(tabs)/home')
         if (!rememberMe) {
           setTimeout(async () => {
             await logout();
@@ -95,6 +98,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       setUserEmail(null);
       setUserCompany(null);
       setIsLoggedIn(false);
+      router.replace('/')
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
       throw error;
