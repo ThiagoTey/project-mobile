@@ -1,6 +1,5 @@
 import CryptoJS from "crypto-js";
 import Base64 from "base-64";
-import { EXPO_SECRET_KEY } from "@env";
 
 // Função que pega os dados das empresas da API
 export const fetchCompanies = async (email: string) => {
@@ -86,7 +85,7 @@ export const loginAuth = async (
   };
 
   // Chave secreta para assinar o JWT
-  const secretKey = EXPO_SECRET_KEY;
+  const secretKey = process.env.EXPO_PUBLIC_SECRET_KEY  || "";
 
   // Criar o JWT
   const jwt = createJWT(payload, secretKey);
@@ -102,7 +101,7 @@ export const loginAuth = async (
     const data = await response.json();
     const decodedData = decodeJWT(data.authentication_token);
     console.log('Dados Decodificados:', decodedData);
-    
+    return decodedData;
   } catch (error) {
     throw error;
   }

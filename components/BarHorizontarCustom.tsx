@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { YAxis,BarChart, Grid } from "react-native-svg-charts";
-import * as scale from 'd3-scale'
+// import { YAxis,BarChart, Grid } from "react-native-svg-charts";
+// import * as scale from 'd3-scale'
 import Colors from "@/constants/Colors";
 
 const BarHorizontarCustom = () => {
@@ -16,7 +16,7 @@ const BarHorizontarCustom = () => {
   ];
   return (
     <View>
-      <Text>Saldo nas contas</Text>
+      {/* <Text>Saldo nas contas</Text>
       <View style={{ flexDirection: 'row', height: 200, paddingVertical: 16 }}>
                 <YAxis
                     data={barData}
@@ -38,7 +38,7 @@ const BarHorizontarCustom = () => {
                 >
                     <Grid direction={Grid.Direction.VERTICAL}/>
                 </BarChart>
-            </View>
+            </View> */}
     </View>
   );
 };

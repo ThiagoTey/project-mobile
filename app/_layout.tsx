@@ -1,5 +1,6 @@
 // import { ThemeProvider } from '@react-navigation/native';
 import Colors from "@/constants/Colors";
+import { AuthProvider } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
 import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
@@ -37,24 +38,26 @@ export default function RootLayout() {
 
   return (
     // <ThemeProvider value={}>
-    <RefreshProvider>
-      <SQLiteProvider databaseName="ability" onInit={initializedatabase}>
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{
-              statusBarColor: Colors.blue,
-              headerShown:false,
-              headerStyle: { backgroundColor: Colors.blue },
-            }}
-          />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(routes)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </SQLiteProvider>
-    </RefreshProvider>
+    <AuthProvider>
+      <RefreshProvider>
+        <SQLiteProvider databaseName="ability" onInit={initializedatabase}>
+          <Stack>
+            <Stack.Screen
+              name="index"
+              options={{
+                statusBarColor: Colors.blue,
+                headerShown: false,
+                headerStyle: { backgroundColor: Colors.blue },
+              }}
+            />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(routes)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </SQLiteProvider>
+      </RefreshProvider>
+    </AuthProvider>
 
     // </ThemeProvider>
   );
@@ -62,6 +65,6 @@ export default function RootLayout() {
 
 const styles = StyleSheet.create({
   defaultStyle: {
-      fontFamily: 'Inter-Regular'
+    fontFamily: "Inter-Regular",
   },
-})
+});

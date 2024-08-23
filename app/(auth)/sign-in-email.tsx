@@ -28,7 +28,7 @@ const SignInEmail = () => {
           Alert.alert("Email não registrado");
         } else {
           router.push({
-            pathname: "sign-in-password",
+            pathname: "/(auth)/sign-in-password",
             params: { email: email},
           });
         }
