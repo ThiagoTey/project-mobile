@@ -32,7 +32,23 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const navigationState = useRootNavigationState()
+
+  // useEffect(() => {
+  //   if(!navigationState?.key && isLoading) return
+
+  //   console.log("navi state: "+ !navigationState?.key)
+
+  //   // if(!isLoading && isLoggedIn){
+  //   //   router.replace('/(tabs)/home')
+  //   // }
+  // },[navigationState?.key])
+
   useEffect(() => {
+    if(!navigationState?.key && isLoading) return
+
+    console.log("isloadi " + isLoading)
+
     const loadUser = async () => {
       try {
         setIsLoading(true);
@@ -46,15 +62,16 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           setUserEmail(email);
           setUserCompany(company);
           setIsLoggedIn(true);
+          router.replace('/(tabs)/home')
         }
       } catch (error) {
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     };
 
     loadUser();
-  }, []);
+  }, [navigationState?.key]);
 
   const login = async (
     email: string,
@@ -84,7 +101,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     } catch (error) {
       throw error;
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
@@ -103,7 +120,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       console.error("Erro ao fazer logout:", error);
       throw error;
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
