@@ -19,6 +19,7 @@ import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
 import { fetchCompanies, loginAuth } from "@/api/auth";
 import { useAuth } from "@/context/AuthContext";
+import LoadingModal from "@/components/LoadingModal";
 
 const SignInPassword = () => {
   const [companies, setCompanies] = useState([
@@ -32,7 +33,7 @@ const SignInPassword = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-  const { login, error } = useAuth();
+  const { login, error, isLoading } = useAuth();
 
   const { email } = useLocalSearchParams<{
     email?: string;
@@ -68,6 +69,7 @@ const SignInPassword = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <LoadingModal description="Processando dados..." isLoading={isLoading} />
         <HomeSvg className="absolute" />
         <TouchableOpacity
           onPress={() => router.back()}

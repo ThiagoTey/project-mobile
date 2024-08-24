@@ -29,6 +29,7 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 import { useAuth } from "@/context/AuthContext";
+import LoadingModal from "./LoadingModal";
 
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
@@ -105,20 +106,7 @@ const CustomDrawerContent = (props: any) => {
   return (
     <View style={{ flex: 1, height: "100%" }}>
       {/* Modal que só aparece se estiver sincronizando */}
-      <Modal
-        transparent={true}
-        animationType="fade"
-        visible={isSyncing}
-        onRequestClose={() => {}}
-        style={{ width: 500, height: 500 }}
-      >
-        <View className="flex-1 justify-center items-center bg-black/20">
-          <View className="bg-white w-[200px] h-[100px] items-center justify-center rounded-lg">
-            <ActivityIndicator size="large" color={colors.blue} />
-            <Text>Sincronizando...</Text>
-          </View>
-        </View>
-      </Modal>
+      <LoadingModal description="Sincronizando..." isLoading={isSyncing} />
       {/* Custom Drawer */}
       <DrawerContentScrollView {...props}>
         <View className="border-b-slate-100 pl-4 pt-6 border-b-2 w-fit">

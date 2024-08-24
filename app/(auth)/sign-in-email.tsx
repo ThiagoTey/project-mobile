@@ -15,14 +15,17 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
 import { fetchCompanies } from "@/api/auth";
+import LoadingModal from "@/components/LoadingModal";
 
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const singUp = () => {
     const getCompanys = async () => {
       try {
+        setIsLoading(true)
         const companiesResponse = await fetchCompanies(email.toLowerCase());
 
         if (!companiesResponse[0]) {
@@ -36,6 +39,8 @@ const SignInEmail = () => {
       } catch (error) {
         Alert.alert("Erro", "Por Favor tente mais tarde");
         throw error;
+      } finally {
+        setIsLoading(false)
       }
     };
 
@@ -49,6 +54,7 @@ const SignInEmail = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <LoadingModal description="Processando dados..." isLoading={isLoading} />
         <HomeSvg className="absolute" />
         <TouchableOpacity
           onPress={() => router.back()}

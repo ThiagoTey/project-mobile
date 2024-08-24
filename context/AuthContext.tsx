@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         }
       } catch (error) {
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -101,7 +101,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     } catch (error) {
       throw error;
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -120,7 +120,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       console.error("Erro ao fazer logout:", error);
       throw error;
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 

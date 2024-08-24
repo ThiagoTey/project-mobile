@@ -93,9 +93,3 @@ export default function RootLayout() {
     // </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  defaultStyle: {
-    fontFamily: "Inter-Regular",
-  },
-});
