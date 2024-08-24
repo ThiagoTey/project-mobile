@@ -1,7 +1,15 @@
-import React, { createContext, useState, useContext, useEffect, Dispatch, SetStateAction } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import * as SecureStore from "expo-secure-store";
 import { loginAuth } from "@/api/auth";
 import { router, useRootNavigationState } from "expo-router";
+import { useDbOperations } from "@/database/dbOperations";
 
 interface AuthContextType {
   userToken: string | null;
@@ -32,37 +40,20 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const navigationState = useRootNavigationState()
-
-  // useEffect(() => {
-  //   if(!navigationState?.key && isLoading) return
-
-  //   console.log("navi state: "+ !navigationState?.key)
-
-  //   // if(!isLoading && isLoggedIn){
-  //   //   router.replace('/(tabs)/home')
-  //   // }
-  // },[navigationState?.key])
-
   useEffect(() => {
-    if(!navigationState?.key && isLoading) return
-
-    console.log("isloadi " + isLoading)
-
     const loadUser = async () => {
       try {
         setIsLoading(true);
-        setError(null)
+        setError(null);
         const token = await SecureStore.getItemAsync("userToken");
         const email = await SecureStore.getItemAsync("userEmail");
         const company = await SecureStore.getItemAsync("userCompany");
         if (token && email && company) {
-          console.log("conseguiut pegar token do secureStore")
+          console.log("conseguiut pegar token do secureStore");
           setUserToken(token);
           setUserEmail(email);
           setUserCompany(company);
           setIsLoggedIn(true);
-          router.replace('/(tabs)/home')
         }
       } catch (error) {
       } finally {
@@ -71,7 +62,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     };
 
     loadUser();
-  }, [navigationState?.key]);
+  }, []);
 
   const login = async (
     email: string,
@@ -81,7 +72,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   ) => {
     try {
       setIsLoading(true);
-      setError(null)
+      setError(null);
       const token = await loginAuth(email, password, selectCompany, setError);
       if (token?.authentication_token) {
         await SecureStore.setItemAsync("userToken", token.authentication_token);
@@ -91,7 +82,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
-        router.replace('/(tabs)/home')
+        router.replace("/(tabs)/home");
         if (!rememberMe) {
           setTimeout(async () => {
             await logout();
@@ -115,7 +106,6 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       setUserEmail(null);
       setUserCompany(null);
       setIsLoggedIn(false);
-      router.replace('/')
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
       throw error;
@@ -135,7 +125,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         logout,
         isLoggedIn,
         error,
-        setError
+        setError,
       }}
     >
       {children}

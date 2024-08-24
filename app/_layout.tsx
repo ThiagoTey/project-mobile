@@ -4,7 +4,7 @@ import { AuthContext, AuthProvider, useAuth } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
 import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
-import { Stack, SplashScreen } from "expo-router";
+import { Stack, SplashScreen, useNavigation } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
 import { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
@@ -22,7 +22,7 @@ function AppContent() {
       databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
       onInit={isLoggedIn ? initializedatabase : undefined}
     >
-      <Stack>
+      <Stack initialRouteName={isLoggedIn ? `(tabs)` : `index`} >
         <Stack.Screen
           name="index"
           options={{

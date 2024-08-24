@@ -7,6 +7,17 @@ import { initializedatabase } from "./InitializeDatabase";
 export const useDbOperations = () => {
   const db = useSQLiteContext();
 
+  const closeDb = async () => {
+    try {
+      const response = await db.getFirstAsync("SELECT * from products")
+      console.log("closeee" + response)
+      await db.closeAsync();
+      console.log("Database closed successfully");
+    } catch (error) {
+      console.error("Failed to close the database: ", error);
+    }
+  }
+
   const dropDatabase = async () => {
     try {
       await db.runAsync("DELETE FROM units");
@@ -49,7 +60,7 @@ export const useDbOperations = () => {
     }
   };
 
-  return { dropDatabase, updateLastSyncDate, getLastSycndate };
+  return { dropDatabase, updateLastSyncDate, getLastSycndate, closeDb };
 };
 
 export const synchronizeAll = async () => {

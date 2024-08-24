@@ -1,6 +1,6 @@
 import { View, SafeAreaView, ScrollView, Image, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
-import { router } from "expo-router";
+import { router, useRootNavigationState } from "expo-router";
 
 import { images } from "@/constants";
 import CustomButtom from "@/components/Button";
@@ -10,15 +10,17 @@ import { useAuth } from "@/context/AuthContext";
 
 const Index = () => {
 
+  const navigationState = useRootNavigationState()
   const {isLoggedIn, isLoading = true} = useAuth()
 
   useEffect(() => {
-    if(!isLoading && isLoggedIn){
+  if(isLoading || !navigationState?.key) return;
+    if(isLoggedIn && !isLoading && navigationState?.key) {
+      console.log("entro")
       router.replace('/(tabs)/home')
     }
-  },[])
+  },[isLoading, navigationState?.key])
 
-  if(isLoading) return;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -1,6 +1,6 @@
 import colors from "@/constants/Colors";
 import { Drawer } from "expo-router/drawer";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,6 +12,8 @@ import {
 
 import CustomDrawerContent from "@/components/CustomDrawerContent";
 import Header from "@/components/Header";
+import { useAuth } from "@/context/AuthContext";
+import { router } from "expo-router";
 
 // const GradientHeader = () => (
 //   <LinearGradient
@@ -23,6 +25,15 @@ import Header from "@/components/Header";
 // );
 
 export default function TabLayout() {
+
+  const {isLoggedIn} = useAuth()
+
+  useEffect(() => {
+    if(!isLoggedIn) {
+      router.replace('/')
+    }
+  },[isLoggedIn])
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer

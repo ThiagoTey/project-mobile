@@ -12,11 +12,9 @@ import {
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
   Alert,
   Image,
   Linking,
-  Modal,
   Text,
   ToastAndroid,
   View,
@@ -34,6 +32,7 @@ import LoadingModal from "./LoadingModal";
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
   const { bottom } = useSafeAreaInsets();
+  const { closeDb } = useDbOperations();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastAsyncDate, setlastAsyncDate] = useState("");
@@ -43,6 +42,11 @@ const CustomDrawerContent = (props: any) => {
   const groupDb = useGroupDatabase();
   const dbOperation = useDbOperations();
   const { triggerRefresh, refresh } = useRefresh();
+
+  const onLogout = async () => {
+    await closeDb();
+    // logout();
+  };
 
   useEffect(() => {
     const getLastAsyncDate = async () => {
@@ -148,7 +152,7 @@ const CustomDrawerContent = (props: any) => {
             <SimpleLineIcons name="logout" size={size} color={color} />
           )}
           label="Deslogar"
-          onPress={logout}
+          onPress={onLogout}
         />
         <DrawerItem
           icon={({ size, color }) => (
