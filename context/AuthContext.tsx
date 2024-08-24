@@ -20,7 +20,7 @@ interface AuthContextType {
   setError: Dispatch<SetStateAction<string | null>>;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   children,

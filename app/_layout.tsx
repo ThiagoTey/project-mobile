@@ -1,18 +1,65 @@
 // import { ThemeProvider } from '@react-navigation/native';
 import Colors from "@/constants/Colors";
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthContext, AuthProvider, useAuth } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
 import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
 import { Stack, SplashScreen } from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+function AppContent() {
+  const { isLoggedIn, userEmail, userCompany } = useAuth();
+
+  return (
+    <SQLiteProvider
+      databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
+      onInit={isLoggedIn ? initializedatabase : undefined}
+    >
+      <Stack>
+        <Stack.Screen
+          name="index"
+          options={{
+            statusBarColor: Colors.blue,
+            headerShown: false,
+            headerStyle: { backgroundColor: Colors.blue },
+          }}
+        />
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+            headerStyle: { backgroundColor: Colors.blue },
+            statusBarColor: Colors.blue,
+          }}
+        />
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+            headerStyle: { backgroundColor: Colors.blue },
+            statusBarColor: Colors.blue,
+          }}
+        />
+        <Stack.Screen
+          name="(routes)"
+          options={{
+            headerShown: false,
+            headerStyle: { backgroundColor: Colors.blue },
+            statusBarColor: Colors.blue,
+          }}
+        />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </SQLiteProvider>
+  );
+}
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
@@ -36,51 +83,13 @@ export default function RootLayout() {
     return null;
   }
 
-
   return (
     // <ThemeProvider value={}>
     <AuthProvider>
       <RefreshProvider>
-        <SQLiteProvider databaseName="ability" onInit={initializedatabase}>
-          <Stack>
-            <Stack.Screen
-              name="index"
-              options={{
-                statusBarColor: Colors.blue,
-                headerShown: false,
-                headerStyle: { backgroundColor: Colors.blue },
-              }}
-            />
-            <Stack.Screen
-              name="(auth)"
-              options={{
-                headerShown: false,
-                headerStyle: { backgroundColor: Colors.blue },
-                statusBarColor: Colors.blue,
-              }}
-            />
-            <Stack.Screen
-              name="(tabs)"
-              options={{
-                headerShown: false,
-                headerStyle: { backgroundColor: Colors.blue },
-                statusBarColor: Colors.blue,
-              }}
-            />
-            <Stack.Screen
-              name="(routes)"
-              options={{
-                headerShown: false,
-                headerStyle: { backgroundColor: Colors.blue },
-                statusBarColor: Colors.blue,
-              }}
-            />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </SQLiteProvider>
+        <AppContent />
       </RefreshProvider>
     </AuthProvider>
-
     // </ThemeProvider>
   );
 }

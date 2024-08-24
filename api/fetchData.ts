@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 export const fetchAllData = async (url: string) => {
   const userEmail = (await SecureStore.getItemAsync("userEmail")) || "";
   const userToken = (await SecureStore.getItemAsync("userToken")) || "";
-  const company = await SecureStore.getItemAsync("userCompany") || "";
+  const company = (await SecureStore.getItemAsync("userCompany")) || "";
   const headers = {
     "X-User-Email": userEmail,
     "X-User-Token": userToken,
