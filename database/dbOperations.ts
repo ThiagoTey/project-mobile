@@ -2,7 +2,6 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useUnitDatabase } from "./useUnitDatabase";
 import { useGroupDatabase } from "./useGroupDatabse";
 import { useProductDatabase } from "./useProductDatabase";
-import { initializedatabase } from "./InitializeDatabase";
 
 export const useDbOperations = () => {
   const db = useSQLiteContext();
@@ -10,11 +9,15 @@ export const useDbOperations = () => {
   const closeDb = async () => {
     try {
       const response = await db.getFirstAsync("SELECT * from products")
-      console.log("closeee" + response)
-      await db.closeAsync();
-      console.log("Database closed successfully");
+      console.log("closeee" + JSON.stringify(response))
+      if(response){
+        await db.closeAsync();
+        console.log("Database closed successfully");
+      }
+
     } catch (error) {
       console.error("Failed to close the database: ", error);
+      throw new Error("Failed to close the database: " + error);
     }
   }
 
@@ -26,7 +29,8 @@ export const useDbOperations = () => {
       await db.runAsync("DELETE FROM productGrid");
       console.log("Tables DELETED successfully");
     } catch (error) {
-      throw error;
+      console.error("Failed to drop database ", error);
+      throw new Error("Failed to drop database " + error);
     }
   };
 
@@ -41,8 +45,8 @@ export const useDbOperations = () => {
         $now: now,
       });
     } catch (error) {
-      console.log("error updateLastSyncDate" + error);
-      throw error;
+      console.error("Failed to UpdateLastSyncDate: ", error);
+      throw new Error("Failed to UpdateLastSyncDate: " + error);
     } finally {
       statement.finalizeAsync();
     }
@@ -56,7 +60,8 @@ export const useDbOperations = () => {
       );
       return response;
     } catch (error) {
-      throw error;
+      console.error("Failed to getLastSyncdate: ", error);
+      throw new Error("Failed to getLastSyncdate: " + error);
     }
   };
 

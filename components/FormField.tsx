@@ -1,9 +1,9 @@
 import {
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   Image,
+  TextInputProps,
 } from "react-native";
 import React, { Dispatch, useState } from "react";
 import { icons } from "@/constants";
@@ -16,6 +16,7 @@ interface Props {
   handleChangeText: Dispatch<string>;
   otherStyles?: string;
   keyboardType?: string;
+  props?: TextInputProps;
 }
 
 const FormField = ({
@@ -25,6 +26,7 @@ const FormField = ({
   otherStyles,
   keyboardType,
   placeHolder = "",
+  props
 }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,6 +35,7 @@ const FormField = ({
       <ThemedText>{title}</ThemedText>
       <View className="border-2 border-gray-200 w-full h-[50px] px-4 rounded-2xl focus:border-gray-400 items-center flex-row">
         <TextInput
+          autoComplete={props?.autoComplete}
           className="flex-1 font-imedium text-base"
           value={value}
           placeholder={placeHolder}

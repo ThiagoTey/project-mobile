@@ -24,7 +24,8 @@ export const useUnitDatabase = () => {
         $updated_at: unit.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to insertUnit: ", error);
+      throw new Error("Failed to insertUnit: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -52,7 +53,8 @@ export const useUnitDatabase = () => {
         $updated_at: unit.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to updateUnit: ", error);
+      throw new Error("Failed to updateUnit: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -68,7 +70,8 @@ export const useUnitDatabase = () => {
       );
       return result;
     } catch (error) {
-      throw error;
+      console.error("Failed to verifyUnitsExists: ", error);
+      throw new Error("Failed to verifyUnitsExists: " + error);
     }
   };
 
@@ -106,7 +109,8 @@ export const useUnitDatabase = () => {
         );
         return response;
       } catch (error) {
-        throw error;
+        console.error("Failed to searchByQuery: ", error);
+        throw new Error("Failed to searchByQuery: " + error);
       }
   }
 

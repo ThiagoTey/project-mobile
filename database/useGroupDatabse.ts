@@ -22,7 +22,8 @@ export const useGroupDatabase = () => {
         $updated_at: group.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to inserGroup: ", error);
+      throw new Error("Failed to inserGroup: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -46,7 +47,8 @@ export const useGroupDatabase = () => {
         $updated_at: group.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to updateGroup: ", error);
+      throw new Error("Failed to updateGroup: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -62,7 +64,8 @@ export const useGroupDatabase = () => {
       );
       return result;
     } catch (error) {
-      throw error;
+      console.error("Failed to verifyGroupExists: ", error);
+      throw new Error("Failed to verifyGroupExists: " + error);
     }
   };
 
@@ -100,7 +103,8 @@ export const useGroupDatabase = () => {
       );
       return response;
     } catch (error) {
-      throw error;
+      console.error("Failed to searcgByQuery ", error);
+      throw new Error("Failed to searcgByQuery " + error);
     }
   };
 

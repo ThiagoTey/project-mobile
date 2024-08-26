@@ -52,7 +52,8 @@ export const useProductDatabase = () => {
         $code_internal: product.code_internal,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to insert product: ", error);
+      throw new Error("Failed to insert product: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -121,7 +122,8 @@ export const useProductDatabase = () => {
         $code_internal: product.code_internal,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to updateProduct: ", error);
+      throw new Error("Failed to updateProduct: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -143,7 +145,8 @@ export const useProductDatabase = () => {
         $updated_at: grid.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to insertGroup: ", error);
+      throw new Error("Failed to insertGroup: " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -170,7 +173,8 @@ export const useProductDatabase = () => {
         $updated_at: grid.updated_at,
       });
     } catch (error) {
-      throw error;
+      console.error("Failed to updateGrid : ", error);
+      throw new Error("Failed to updateGrid : " + error);
     } finally {
       await statement.finalizeAsync();
     }
@@ -186,7 +190,8 @@ export const useProductDatabase = () => {
       );
       return result;
     } catch (error) {
-      throw error;
+      console.error("Failed to verifyProductExists: ", error);
+      throw new Error("Failed to verifyProductExists: " + error);
     }
   };
 
@@ -200,7 +205,8 @@ export const useProductDatabase = () => {
       );
       return result;
     } catch (error) {
-      throw error;
+      console.error("Failed to verifyGridExists: ", error);
+      throw new Error("Failed to verifyGridExists: " + error);
     }
   };
 
@@ -269,7 +275,8 @@ export const useProductDatabase = () => {
       return response;
     } catch (error) {
       console.log(error);
-      throw error;
+      console.error("Failed to SearchByQuery: ", error);
+      throw new Error("Failed to SearchByQuery: " + error);
     }
   };
 
@@ -292,7 +299,8 @@ export const useProductDatabase = () => {
 
       return { productResponse, gridResponse };
     } catch (error) {
-      throw error;
+      console.error("Failed to getById: ", error);
+      throw new Error("Failed to getById: " + error);
     }
   };
 

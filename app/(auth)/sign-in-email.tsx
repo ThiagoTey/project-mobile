@@ -78,6 +78,7 @@ const SignInEmail = () => {
             value={email}
             keyboardType="email-address"
             otherStyles="mt-6"
+            props={{autoComplete: "email"}}
           />
           {emailError && (
             <ThemedText className="self-start text-red-600">

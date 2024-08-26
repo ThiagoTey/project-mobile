@@ -1,5 +1,4 @@
 import { images } from "@/constants";
-import colors from "@/constants/Colors";
 import { useRefresh } from "@/context/RefreshContext";
 import { useGroupDatabase } from "@/database/useGroupDatabse";
 import { useProductDatabase } from "@/database/useProductDatabase";
@@ -44,8 +43,8 @@ const CustomDrawerContent = (props: any) => {
   const { triggerRefresh, refresh } = useRefresh();
 
   const onLogout = async () => {
-    await closeDb();
-    // logout();
+    // await closeDb();
+    logout();
   };
 
   useEffect(() => {
