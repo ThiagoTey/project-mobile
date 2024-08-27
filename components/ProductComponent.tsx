@@ -1,6 +1,7 @@
 import { router } from "expo-router";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import ProductImage from "./ProductImage";
+import ThemedText from "./ThemedText";
 
 interface Props {
   id: number;
@@ -32,7 +33,7 @@ const ProductComponent = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={` items-center flex-row gap-x-2 px-6 pb-2 py-2 ${
+      className={`items-center flex-row gap-x-2 px-6 pb-2 py-2 ${
         index % 2 != 0 && `bg-gray-200/60`
       }`}
     >
@@ -43,16 +44,16 @@ const ProductComponent = ({
       />
 
       <View className="w-[210px]">
-        <Text>{codeInternal}</Text>
-        <Text className="mt-1 font-ibold">{description}</Text>
+        <ThemedText>{codeInternal}</ThemedText>
+        <ThemedText className="mt-1 font-isemibold">{description}</ThemedText>
       </View>
       <View>
         <View className="flex-row">
-          <Text className="text-gray-500">Qtde: </Text>
-          <Text>{qtde ? qtde : 0}</Text>
+          <ThemedText className="text-gray-500">Qtde: </ThemedText>
+          <ThemedText>{qtde ? qtde : 0}</ThemedText>
         </View>
 
-        <Text className="mt-1 text-emerald-600">{formattedPrice}</Text>
+        <ThemedText className="mt-1 text-emerald-600">{formattedPrice}</ThemedText>
       </View>
     </TouchableOpacity>
   );

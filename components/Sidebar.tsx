@@ -1,4 +1,4 @@
-import colors from "@/constants/Colors";
+import Colors from "@/constants/Colors";
 import Checkbox from "expo-checkbox";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { Dispatch, useEffect, useState } from "react";
@@ -31,6 +31,7 @@ const Sidebar = ({
     sortBy?: string;
     sortOrder: string;
   }>();
+  const [localParams, setLocalParams] = useState(params);
 
   const handleCheckBoxChange = ({
     type,
@@ -40,6 +41,7 @@ const Sidebar = ({
     value: "description" | "id" | "ASC" | "DESC";
   }) => {
     router.setParams({ [type]: value });
+    setLocalParams((prev) => ({ ...prev, [type]: value }));
   };
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -83,6 +85,13 @@ const Sidebar = ({
     }
   }, [filterOpen]);
 
+  useEffect(() => {
+    router.setParams({ sortBy: 'description' });
+    router.setParams({ sortOrder: 'ASC' });
+    setLocalParams((prev) => ({ ...prev, sortBy: 'description' }));
+    setLocalParams((prev) => ({ ...prev, sortOrder: 'ASC' }));
+  },[])
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       {/* <TouchableWithoutFeedback onPress={() => (filterOpen ? closeDrawer() : null)}>
@@ -97,48 +106,58 @@ const Sidebar = ({
           >
             {/* Qual coluna vai ser agrupada */}
             <Text className="text-lg font-semibold">Agrupar Por</Text>
-            <View className="flex-row">
-              <Checkbox
-                onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortBy", value: "description" })
-                }
-                color={colors.blue}
-                value={params.sortBy === "description"}
-              />
-              <Text>Descrição</Text>
+            <View className="flex-row gap-4">
+              <View className="flex-row">
+                <Checkbox
+                  onValueChange={() =>
+                    handleCheckBoxChange({
+                      type: "sortBy",
+                      value: "description",
+                    })
+                  }
+                  className="rounded-full"
+                  color={Colors.blue}
+                  value={localParams.sortBy === "description"}
+                />
+                <Text className="pl-1">Descrição</Text>
+              </View>
+              <View className="flex-row">
+                <Checkbox
+                  onValueChange={() =>
+                    handleCheckBoxChange({ type: "sortBy", value: "id" })
+                  }
+                  className="rounded-full"
+                  color={Colors.blue}
+                  value={localParams.sortBy === "id"}
+                />
+                <Text className="pl-1">Código</Text>
+              </View>
             </View>
-            <View className="flex-row">
-              <Checkbox
-                onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortBy", value: "id" })
-                }
-                color={colors.blue}
-                value={params.sortBy === "id"}
-              />
-              <Text>Código</Text>
-            </View>
-
             {/* Decrecente ou crescente */}
             <Text className="text-lg font-semibold">Ordem</Text>
-            <View className="flex-row">
-              <Checkbox
-                onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortOrder", value: "ASC" })
-                }
-                color={colors.blue}
-                value={params.sortOrder === "ASC"}
-              />
-              <Text>Crescente</Text>
-            </View>
-            <View className="flex-row">
-              <Checkbox
-                onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortOrder", value: "DESC" })
-                }
-                color={colors.blue}
-                value={params.sortOrder === "DESC"}
-              />
-              <Text>Decrecente</Text>
+            <View className="flex-row gap-4">
+              <View className="flex-row">
+                <Checkbox
+                  onValueChange={() =>
+                    handleCheckBoxChange({ type: "sortOrder", value: "ASC" })
+                  }
+                  className="rounded-full"
+                  color={Colors.blue}
+                  value={localParams.sortOrder === "ASC"}
+                />
+                <Text className="pl-1">Crescente</Text>
+              </View>
+              <View className="flex-row">
+                <Checkbox
+                  onValueChange={() =>
+                    handleCheckBoxChange({ type: "sortOrder", value: "DESC" })
+                  }
+                  className="rounded-full"
+                  color={Colors.blue}
+                  value={localParams.sortOrder === "DESC"}
+                />
+                <Text className="pl-1">Decrecente</Text>
+              </View>
             </View>
           </Animated.View>
         </GestureDetector>
