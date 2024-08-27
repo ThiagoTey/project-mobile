@@ -37,7 +37,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
     <>
       <View
         style={{
-          height: 90,
+          height: 60,
           flexDirection: "row",
           alignItems: "flex-end",
           justifyContent: "space-between",
@@ -74,7 +74,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           </Text>
           {/* Lupa */}
           <TouchableOpacity
-            className={`items-center justify-center rounded-md w-fit h-fit
+            className={`items-center justify-center rounded-md w-7 h-7 p-0 m-0
            ${!isSearchOpen && "hidden"}`}
             disabled={isSearchOpen}
           >

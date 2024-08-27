@@ -46,13 +46,14 @@ const Products = () => {
       <FlatList
         data={productData}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <ProductComponent
             description={item.description}
             codeInternal={item.code_internal}
             id={item.id}
             price={item.price_cash}
             qtde={item.quantity}
+            index={index}
           />
         )}
         ListEmptyComponent={() => (

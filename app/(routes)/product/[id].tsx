@@ -8,11 +8,15 @@ import {
   StyleSheet,
   ActivityIndicator,
   ScrollView,
+  TextInput,
+  TextInputProps,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import ProductImage from "@/components/ProductImage";
 import { useProductDatabase } from "@/database/useProductDatabase";
+import ThemedText from "@/components/ThemedText";
+import FormField from "@/components/FormField";
 
 const CustomText = ({
   customStyles,
@@ -22,9 +26,18 @@ const CustomText = ({
   children: any;
 }) => {
   return (
-    <Text className={`text-base font-iregular ${customStyles}`}>
-      {children}{" "}
-    </Text>
+    <ThemedText className={`text-base font-imedium ${customStyles}`}>
+      {children}
+    </ThemedText>
+  );
+};
+
+const CustomForm = (props: TextInputProps) => {
+  return (
+    <TextInput
+      className="font-iregular text-base p-2 w-full border-b-[1px] border-gray-200 text-gray-500"
+      {...props}
+    />
   );
 };
 
@@ -44,7 +57,7 @@ const Product = () => {
         );
         setProductData(productResponse);
 
-        if(gridResponse){
+        if (gridResponse) {
           setGridData(gridResponse);
         }
       } catch (error) {
@@ -76,7 +89,7 @@ const Product = () => {
 
   return (
     <SafeAreaView>
-      <View className="px-4" style={{ padding: 8 }}>
+      <View className="px-4 h-full" style={{ padding: 8 }}>
         <FlatList
           data={productData.product_sizes || []}
           keyExtractor={(item) => item.id.toString()}
@@ -90,41 +103,145 @@ const Product = () => {
               />
               {/* Informações Gerais */}
               <View style={styles.infoContainer}>
-                <CustomText customStyles="text-xl text-gray-400">
+                <CustomText customStyles="text-xl font-ibold text-gray-700">
                   Geral
                 </CustomText>
-                <CustomText>Código: {productData.code_internal}</CustomText>
-                <CustomText>Código de barras: {productData.barcode}</CustomText>
-                <CustomText>Descrição: {productData.description}</CustomText>
-                <CustomText>Quantidade: {productData.quantity}</CustomText>
-                <CustomText>
-                  Preço de custo: {productData.price_cost}
-                </CustomText>
-                <CustomText>
-                  Preço de compra: {productData.price_cash}
-                </CustomText>
-                <CustomText>Referência: {productData.price_cash}</CustomText>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Código</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={`${productData?.code_internal ? productData?.code_internal.toString() :  'Não informado'}`}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Código de barras</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData?.barcode ? productData?.barcode : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Descrição</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.description ? productData.description : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Quantidade</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.quantity ? productData.quantity : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Preço de custo</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={`R$ ${productData.price_cost ? productData.price_cost : "Não informado"}`}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>Preço de venda</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={`R$ ${productData.price_cash ? productData.price_cash : "Não informado"}`}
+                  />
+                </View>
+                
+                <View style={styles.formContainer}>
+                  <CustomText>Referência</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.reference ? productData.reference : "Não informado"}
+                  />
+                </View>
+
               </View>
               {/* Informações fiscais */}
               <View style={styles.infoContainer}>
-                <CustomText customStyles="text-xl text-gray-400">
+                <CustomText customStyles="text-xl font-ibold text-gray-700">
                   Informações Fiscais
                 </CustomText>
-                <CustomText>NCM: {productData.ncm}</CustomText>
-                <CustomText>CFOP: {productData.cfop}</CustomText>
-                <CustomText>Origem: {productData.origin}</CustomText>
-                <CustomText>CST ICMS: {productData.cst}</CustomText>
-                <CustomText>ICMS %: {productData.icms_percent}</CustomText>
-                <CustomText>CST PIS: {productData.pis_cst}</CustomText>
-                <CustomText>PIS %: {productData.pis_percent}</CustomText>
-                <CustomText>CST COFINS: {productData.cofins_cst}</CustomText>
-                <CustomText>COFINS %: {productData.cofins_percent}</CustomText>
+                <View style={styles.formContainer}>
+                  <CustomText>NCM</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.ncm ? productData.ncm : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>CFOP</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.cfop ? productData.cfop : "Não informado"}
+                  />
+                </View>
+                <View style={styles.formContainer}>
+                  <CustomText>Origem</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.origin ? productData.origin : "Não informado"}
+                  />
+                </View>
+                <View style={styles.formContainer}>
+                  <CustomText>CST ICMS</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.cst ? productData.cst : "Não informado"}
+                  />
+                </View>
+                <View style={styles.formContainer}>
+                  <CustomText>ICMS %</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.icms_percent ? productData.icms_percent : "Não informado"}
+                  />
+                </View>
+                <View style={styles.formContainer}>
+                  <CustomText>CST PIS</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.pis_cst ? productData.pis_cst : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>PIS %</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.pis_percent ? productData.pis_percent : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>CST COFINS</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.cofins_cst ? productData.cofins_cst : "Não informado"}
+                  />
+                </View>
+
+                <View style={styles.formContainer}>
+                  <CustomText>COFINS %</CustomText>
+                  <CustomForm
+                    editable={false}
+                    value={productData.cofins_percent ? productData.cofins_percent : "Não informado"}
+                  />
+                </View>
               </View>
 
               {/* Grade */}
               {gridData ? (
                 <View>
-                  <CustomText customStyles="text-xl text-gray-400 pt-4 pb-2">
+                  <CustomText customStyles="text-xl font-ibold text-gray-700 pt-4 pb-2">
                     Grade
                   </CustomText>
                   <View className="flex-row">
@@ -137,7 +254,7 @@ const Product = () => {
                   </View>
                 </View>
               ) : (
-                <CustomText customStyles="text-xl text-gray-400 pt-4 pb-2">
+                <CustomText customStyles="text-xl font-ibold text-gray-700 pt-4 pb-2">
                   Produto sem Grade
                 </CustomText>
               )}
@@ -162,7 +279,7 @@ const Product = () => {
 
 const styles = StyleSheet.create({
   infoContainer: {
-    gap: 4,
+    gap: 12,
     paddingTop: 16,
   },
   loadingContainer: {
@@ -171,6 +288,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 8,
   },
+  formContainer: {
+    gap: 4
+  }
 });
 
 export default Product;
