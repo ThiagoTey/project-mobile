@@ -10,6 +10,7 @@ import BarChartCustom from "@/components/BarChartCustom";
 import DRE from "@/components/DRE";
 import DashboardStart from "@/components/DashboardStart";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import DashboardSummary from "@/components/DashboardSummary";
 
 const Container = (props:ViewProps) => {
   return (
@@ -32,6 +33,10 @@ const Home = () => {
           {/* Filtro e Inicio */}
           <Container className="items-center border-0">
             <DashboardStart />
+          </Container>
+          {/* Resumo financeiro */}
+          <Container className="items-center border-0">
+            <DashboardSummary />
           </Container>
           {/* Vendas Por Vendedor */}
           <Container>
