@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Linking,
 } from "react-native";
 import React, { useState } from "react";
 import { Link, router } from "expo-router";
@@ -16,21 +17,24 @@ import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
 import { fetchCompanies } from "@/api/auth";
 import LoadingModal from "@/components/LoadingModal";
+import { useAuth } from "@/context/AuthContext";
 
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const {setAllCompanies} = useAuth()
 
   const singUp = () => {
     const getCompanys = async () => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const companiesResponse = await fetchCompanies(email.toLowerCase());
 
         if (!companiesResponse[0]) {
           setEmailError("Email não registrado");
         } else {
+          setAllCompanies(companiesResponse)
           router.push({
             pathname: "/(auth)/sign-in-password",
             params: { email: email },
@@ -40,7 +44,7 @@ const SignInEmail = () => {
         Alert.alert("Erro", "Por Favor tente mais tarde");
         throw error;
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
 
@@ -54,7 +58,10 @@ const SignInEmail = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-      <LoadingModal description="Processando dados..." isLoading={isLoading} />
+        <LoadingModal
+          description="Processando dados..."
+          isLoading={isLoading}
+        />
         <HomeSvg className="absolute" />
         <TouchableOpacity
           onPress={() => router.back()}
@@ -78,7 +85,7 @@ const SignInEmail = () => {
             value={email}
             keyboardType="email-address"
             otherStyles="mt-6"
-            props={{autoComplete: "email"}}
+            props={{ autoComplete: "email" }}
           />
           {emailError && (
             <ThemedText className="self-start text-red-600">
@@ -89,10 +96,16 @@ const SignInEmail = () => {
 
         <View style={style.signInButtonContainer}>
           <View className="flex-row mb-4">
-            <ThemedText>Não é Cadastrado?</ThemedText>
-            <Link href="/" className="text-blue mb-2">
-              Entrar em Contato
-            </Link>
+            <ThemedText>Não é Cadastrado?{' '}</ThemedText>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL("whatsapp://send?phone=+553732321127")
+              }
+            >
+              <ThemedText className="text-blue mb-2">
+                Entrar em Contato
+              </ThemedText>
+            </TouchableOpacity>
           </View>
 
           <CustomButtom handlePress={singUp} title="Continuar" />

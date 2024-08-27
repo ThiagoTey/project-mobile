@@ -4,10 +4,10 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Alert,
+  Linking,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Link, router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
 import HomeSvg from "@/components/HomeSvg";
@@ -17,42 +17,25 @@ import CustomButtom from "@/components/Button";
 import FormField from "@/components/FormField";
 import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
-import { fetchCompanies, loginAuth } from "@/api/auth";
 import { useAuth } from "@/context/AuthContext";
 import LoadingModal from "@/components/LoadingModal";
 
 const SignInPassword = () => {
-  const [companies, setCompanies] = useState([
-    {
-      id: 1,
-      name: "",
-    },
-  ]);
 
-  const [selectCompany, setSelectCompany] = useState();
+  const [selectCompany, setSelectCompany] = useState<number| null>(null);
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-  const { login, error, isLoading } = useAuth();
+  const { login, error, isLoading, allCompanies } = useAuth();
 
   const { email } = useLocalSearchParams<{
     email?: string;
   }>();
 
   useEffect(() => {
-    const getCompanys = async () => {
-      try {
-        if (email) {
-          const companiesResponse = await fetchCompanies(email.toLowerCase());
-          setCompanies(companiesResponse);
-          setSelectCompany(companiesResponse[0].id);
-        }
-      } catch (error) {
-        Alert.alert("Erro", "Por Favor tente mais tarde");
-        throw error;
-      }
-    };
-    getCompanys();
+    if(allCompanies && allCompanies.length > 0){
+      setSelectCompany(allCompanies[0].id);
+    }
   }, []);
 
   const singUp = () => {
@@ -109,7 +92,7 @@ const SignInPassword = () => {
                   setSelectCompany(itemValue)
                 }
               >
-                {companies.map((item) => (
+                {allCompanies && allCompanies.map((item) => (
                   <Picker.Item
                     key={item.id}
                     label={item.name}
@@ -150,9 +133,15 @@ const SignInPassword = () => {
         <View style={style.signInButtonContainer}>
           <View className="flex-row mb-4">
             <ThemedText>Não é Cadastrado? </ThemedText>
-            <Link href="/" className="text-blue mb-2">
-              Entrar em Contato
-            </Link>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL("whatsapp://send?phone=+553732321127")
+              }
+            >
+              <ThemedText className="text-blue mb-2">
+                Entrar em Contato
+              </ThemedText>
+            </TouchableOpacity>
           </View>
 
           <CustomButtom handlePress={singUp} title="Continuar" />

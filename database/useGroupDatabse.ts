@@ -2,7 +2,6 @@ import { fetchAllData } from "@/api/fetchData";
 import { GroupsInterface } from "@/types";
 import { useSQLiteContext } from "expo-sqlite";
 
-const groupUrl = process.env.EXPO_PUBLIC_API_GROUP_URL || "";
 
 export const useGroupDatabase = () => {
   const db = useSQLiteContext();
@@ -70,6 +69,8 @@ export const useGroupDatabase = () => {
   };
 
   const synchronizeAllGroups = async () => {
+    const groupUrl = process.env.EXPO_PUBLIC_API_GROUP_URL || "";
+
     const jsonData = await fetchAllData(groupUrl);
     for (let i = 0; i < jsonData.length; i++) {
       const group = jsonData[i];

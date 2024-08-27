@@ -10,14 +10,7 @@ import {
 } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Image,
-  Linking,
-  Text,
-  ToastAndroid,
-  View,
-} from "react-native";
+import { Alert, Image, Linking, Text, ToastAndroid, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Feather from "@expo/vector-icons/Feather";
@@ -31,7 +24,8 @@ import LoadingModal from "./LoadingModal";
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
   const { bottom } = useSafeAreaInsets();
-  const { closeDb } = useDbOperations();
+
+  const { allCompanies, userCompany } = useAuth();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastAsyncDate, setlastAsyncDate] = useState("");
@@ -41,9 +35,18 @@ const CustomDrawerContent = (props: any) => {
   const groupDb = useGroupDatabase();
   const dbOperation = useDbOperations();
   const { triggerRefresh, refresh } = useRefresh();
+  const [companyName, setCompanyName] = useState("")
+  
+  useEffect(() => {
+    if(allCompanies && userCompany){
+      const companyName = allCompanies.find(company => company.id === Number(userCompany))?.name;
+      if(companyName){
+        setCompanyName(companyName)
+      }
+    }
+  },[userCompany])
 
   const onLogout = async () => {
-    // await closeDb();
     logout();
   };
 
@@ -118,7 +121,9 @@ const CustomDrawerContent = (props: any) => {
             source={images.logo}
             resizeMode="contain"
           />
-          <Text className="py-4 text-base">Nome da empresa</Text>
+          <Text className="py-4 text-base">
+          {companyName}
+          </Text>
         </View>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
