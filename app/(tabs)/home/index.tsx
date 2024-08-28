@@ -16,7 +16,7 @@ const Container = (props:ViewProps) => {
   return (
     <View
       style={{ overflow: "hidden" }}
-      className="border-gray-300 border p-2 rounded-lg "
+      className="border-gray-300 border p-2 rounded-lg"
       {...props}
     >
       {props.children}
@@ -29,18 +29,17 @@ const Home = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{ gap: 12 }} className="p-4 pt-0 mt-0">
+        <View style={{ rowGap: 32 }} className="p-4 pt-0 mt-0">
           {/* Filtro e Inicio */}
-          <Container className="items-center border-0">
+          <Container className="items-center py-0 border-0">
             <DashboardStart />
           </Container>
           {/* Resumo financeiro */}
-          <Container className="items-center border-0">
+          <Container className="items-center py-0 border-0">
             <DashboardSummary />
           </Container>
           {/* Vendas Por Vendedor */}
           <Container>
-            <Text>Vendas Por Vendedor</Text>
             <PieChartCustom />
           </Container>
           {/* Vendas Por Mês */}

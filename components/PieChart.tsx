@@ -1,7 +1,8 @@
 import { View, Text } from "react-native";
 import { useState } from "react";
 import { PieChart } from "react-native-gifted-charts";
-import { FlatList } from "react-native-gesture-handler";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import ThemedText from "./ThemedText";
 
 type PieDataProps = {
   value: number;
@@ -66,43 +67,55 @@ const PieChartCustom = () => {
   };
 
   return (
-    <View className="flex-row pt-4 gap-2">
-      <PieChart
-        onPress={(extraRadiusForFocused: PieDataProps) => {
-            if(extraRadiusForFocused.desc){
-                setPieDataFocused(extraRadiusForFocused);
+    <View>
+      <View className="flex-row items-center gap-x-2">
+        <View className="justify-center items-center w-[40px] h-[40px] rounded-2xl bg-[#1FBCFF]/10">
+          <AntDesign
+            name="user"
+            size={24}
+            color="black"
+          />
+        </View>
+        <ThemedText className="font-isemibold text-base">Vendas Por Vendedor</ThemedText>
+      </View>
+      <View className="flex-row pt-4 gap-2">
+        <PieChart
+          onPress={(extraRadiusForFocused: PieDataProps) => {
+            if (extraRadiusForFocused.desc) {
+              setPieDataFocused(extraRadiusForFocused);
             }
-        }}
-        toggleFocusOnPress
-        data={pieData}
-        donut
-        showGradient
-        sectionAutoFocus
-        focusedPieIndex={2}
-        isAnimated
-        focusOnPress
-        radius={85}
-        innerRadius={60}
-        innerCircleColor={"#232B5D"}
-        centerLabelComponent={() => {
-          return (
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text
-                style={{ fontSize: 22, color: "white", fontWeight: "bold" }}
-              >
-                {pieDataFocused.value}%
-              </Text>
-              <Text style={{ fontSize: 14, color: "white" }}>
-                {pieDataFocused.desc}
-              </Text>
-            </View>
-          );
-        }}
-      />
-      <View>
-      {pieData.map((item, index) => (
-        <RenderDesription key={index} item={item} />
-      ))}
+          }}
+          toggleFocusOnPress
+          data={pieData}
+          donut
+          showGradient
+          sectionAutoFocus
+          focusedPieIndex={2}
+          isAnimated
+          focusOnPress
+          radius={85}
+          innerRadius={60}
+          innerCircleColor={"#232B5D"}
+          centerLabelComponent={() => {
+            return (
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <Text
+                  style={{ fontSize: 22, color: "white", fontWeight: "bold" }}
+                >
+                  {pieDataFocused.value}%
+                </Text>
+                <Text style={{ fontSize: 14, color: "white" }}>
+                  {pieDataFocused.desc}
+                </Text>
+              </View>
+            );
+          }}
+        />
+        <View>
+          {pieData.map((item, index) => (
+            <RenderDesription key={index} item={item} />
+          ))}
+        </View>
       </View>
     </View>
   );
