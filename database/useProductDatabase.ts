@@ -2,8 +2,7 @@ import { useSQLiteContext } from "expo-sqlite";
 
 import { ProductInterface, ProductSizeInterface } from "@/types";
 import { fetchAllData } from "@/api/fetchData";
-
-const prodUrl = process.env.EXPO_PUBLIC_API_PROD_URL || "";
+import * as SecureStore from "expo-secure-store";
 
 export const useProductDatabase = () => {
   const db = useSQLiteContext();
@@ -211,6 +210,9 @@ export const useProductDatabase = () => {
   };
 
   const synchronizeAllProducts = async () => {
+    const subdomain = await SecureStore.getItemAsync("subdomain");
+    const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`
+
     const jsonData = await fetchAllData(prodUrl);
     for (let i = 0; i < jsonData.length; i++) {
       const product = jsonData[i];

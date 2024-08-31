@@ -32,6 +32,7 @@ interface AuthContextType {
   setError: Dispatch<SetStateAction<string | null>>;
   allCompanies: AllCompaniesProps[] | null;
   setAllCompanies: Dispatch<SetStateAction<AllCompaniesProps[] | null>>;
+  subdomain: string | null;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -46,6 +47,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [ allCompanies , setAllCompanies ] = useState<AllCompaniesProps[] | null>(null)
+  const [ subdomain , setSubdomain ] = useState<string | null>(null);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -53,12 +55,14 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setIsLoading(true);
         setError(null);
         const token = await SecureStore.getItemAsync("userToken");
+        const subdomain = await SecureStore.getItemAsync("subdomain");
         const email = await SecureStore.getItemAsync("userEmail");
         const company = await SecureStore.getItemAsync("userCompany");
         const companies = await SecureStore.getItemAsync("userCompanies")
-        if (token && email && company && companies) {
+        if (token && subdomain && email && company && companies) {
           console.log("conseguiut pegar token do secureStore");
           setUserToken(token);
+          setSubdomain(subdomain)
           setUserEmail(email);
           setUserCompany(company);
           setAllCompanies(JSON.parse(companies))
@@ -85,10 +89,12 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       const token = await loginAuth(email, password, selectCompany, setError);
       if (token?.authentication_token) {
         await SecureStore.setItemAsync("userToken", token.authentication_token);
+        await SecureStore.setItemAsync("subdomain", token.subdomain);
         await SecureStore.setItemAsync("userEmail", email);
         await SecureStore.setItemAsync("userCompany", selectCompany.toString());
         await SecureStore.setItemAsync("userCompanies", JSON.stringify(allCompanies))
         setUserToken(token);
+        setSubdomain(token.subdomain);
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
@@ -111,9 +117,11 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       setIsLoading(true);
       await SecureStore.deleteItemAsync("userToken");
       await SecureStore.deleteItemAsync("userEmail");
+      await SecureStore.deleteItemAsync("subdomain");
       await SecureStore.deleteItemAsync("userCompany");
       await SecureStore.deleteItemAsync("userCompanies");
       setUserToken(null);
+      setSubdomain(null)
       setUserEmail(null);
       setUserCompany(null);
       setAllCompanies(null)
@@ -139,7 +147,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         error,
         setError,
         allCompanies,
-        setAllCompanies
+        setAllCompanies,
+        subdomain
       }}
     >
       {children}

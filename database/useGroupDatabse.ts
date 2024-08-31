@@ -1,7 +1,7 @@
 import { fetchAllData } from "@/api/fetchData";
 import { GroupsInterface } from "@/types";
 import { useSQLiteContext } from "expo-sqlite";
-
+import * as SecureStore from "expo-secure-store";
 
 export const useGroupDatabase = () => {
   const db = useSQLiteContext();
@@ -69,7 +69,8 @@ export const useGroupDatabase = () => {
   };
 
   const synchronizeAllGroups = async () => {
-    const groupUrl = process.env.EXPO_PUBLIC_API_GROUP_URL || "";
+        const subdomain = await SecureStore.getItemAsync("subdomain");
+    const groupUrl = `http://${subdomain}.ability.app.br/api/v1/groups`
 
     const jsonData = await fetchAllData(groupUrl);
     for (let i = 0; i < jsonData.length; i++) {

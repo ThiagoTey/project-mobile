@@ -1,8 +1,7 @@
 import { fetchAllData } from "@/api/fetchData";
 import { Unitsinterface } from "@/types";
 import { useSQLiteContext } from "expo-sqlite";
-
-const unitUrl = process.env.EXPO_PUBLIC_API_UNIT_URL || "";
+import * as SecureStore from "expo-secure-store";
 
 export const useUnitDatabase = () => {
   const db = useSQLiteContext();
@@ -76,6 +75,9 @@ export const useUnitDatabase = () => {
   };
 
   const synchronizeAllUnits = async () => {
+    const subdomain = await SecureStore.getItemAsync("subdomain");
+    const unitUrl = `http://${subdomain}.ability.app.br/api/v1/measures`
+
     const jsonData = await fetchAllData(unitUrl);
     for (let i = 0; i < jsonData.length; i++) {
       const unit = jsonData[i];
