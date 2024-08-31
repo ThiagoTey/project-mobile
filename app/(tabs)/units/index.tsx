@@ -3,8 +3,7 @@ import { View, Text, FlatList, SafeAreaView } from 'react-native'
 import { useEffect, useState } from 'react';
 
 import { Unitsinterface } from '@/types';
-import UnitComponent from '@/components/UnitComponent';
-import { getStorageData } from '@/lib/api';
+import UnitComponent from '@/components/products/UnitComponent';
 import { useUnitDatabase } from '@/database/useUnitDatabase';
 
 const Units = () => {

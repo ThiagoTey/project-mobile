@@ -10,15 +10,15 @@ import React, { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 
-import HomeSvg from "@/components/HomeSvg";
-import ThemedText from "@/components/ThemedText";
+import HomeSvg from "@/components/svgs/HomeSvg";
+import ThemedText from "@/components/typography/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import CustomButtom from "@/components/Button";
-import FormField from "@/components/FormField";
+import CustomButtom from "@/components/form/Button";
+import FormField from "@/components/form/FormField";
 import Checkbox from "expo-checkbox";
 import Colors from "@/constants/Colors";
 import { useAuth } from "@/context/AuthContext";
-import LoadingModal from "@/components/LoadingModal";
+import LoadingModal from "@/components/feedback/LoadingModal";
 
 const SignInPassword = () => {
 

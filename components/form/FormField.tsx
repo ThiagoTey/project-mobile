@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { Dispatch, useState } from "react";
 import { icons } from "@/constants";
-import ThemedText from "./ThemedText";
+import ThemedText from "@/components/typography/ThemedText";
 
 interface Props {
   title: string;

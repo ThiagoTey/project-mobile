@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { router, useRootNavigationState } from "expo-router";
 
 import { images } from "@/constants";
-import CustomButtom from "@/components/Button";
-import ThemedText from "@/components/ThemedText";
-import HomeSvg from "@/components/HomeSvg";
+import CustomButtom from "@/components/form/Button";
+import ThemedText from "@/components/typography/ThemedText";
+import HomeSvg from "@/components/svgs/HomeSvg";
 import { useAuth } from "@/context/AuthContext";
 
 const Index = () => {

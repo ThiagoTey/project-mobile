@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { View, TouchableOpacity } from "react-native";
 import ProductImage from "./ProductImage";
-import ThemedText from "./ThemedText";
+import ThemedText from "@/components/typography/ThemedText";
 
 interface Props {
   id: number;

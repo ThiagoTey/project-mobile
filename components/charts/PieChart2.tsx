@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import Button from "./Button";
+import Button from "../form/Button";
 import Animated, {
   FadeInDown,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import ThemedText from "./ThemedText";
+import ThemedText from "../typography/ThemedText";
 
 interface Data {
   value: number;
@@ -62,6 +62,11 @@ const RenderItem = ({ item, index }: { item: Data; index: number }) => {
   );
 };
 
+const RADIUS = 160;
+const STROKE_WIDTH = 30;
+const OUTER_STROKE_WIDTH = 46;
+const GAP = 0.04;
+
 const PieChart2 = () => {
   const n = 5;
   const [data, setData] = useState<Data[]>([]);
@@ -95,6 +100,9 @@ const PieChart2 = () => {
     <View>
       <ThemedText>PieChart2</ThemedText>
       <Button title="generate" handlePress={generateData} />
+      <View>
+        {/* <DonutChart /> */}
+      </View>
       {data.map((item, index) => {
         return <RenderItem item={item} index={index} key={index} />;
       })}

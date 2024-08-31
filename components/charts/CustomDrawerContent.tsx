@@ -19,7 +19,7 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 import { useAuth } from "@/context/AuthContext";
-import LoadingModal from "./LoadingModal";
+import LoadingModal from "@/components/feedback/LoadingModal";
 
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();

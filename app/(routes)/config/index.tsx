@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Button from "@/components/Button";
+import Button from "@/components/form/Button";
 import { useDbOperations } from "@/database/dbOperations";
 import { useRefresh } from "@/context/RefreshContext";
 import colors from "@/constants/Colors";

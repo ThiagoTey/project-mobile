@@ -1,6 +1,6 @@
 import { View } from 'react-native'
 import React from 'react'
-import ThemedText from './ThemedText'
+import ThemedText from "@/components/typography/ThemedText";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 const DashboardStart = () => {

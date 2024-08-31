@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import { useState } from "react";
 import { PieChart } from "react-native-gifted-charts";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import ThemedText from "./ThemedText";
+import ThemedText from "@/components/typography/ThemedText";
 
 type PieDataProps = {
   value: number;

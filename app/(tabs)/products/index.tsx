@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 
 import { ProductInterface } from "@/types";
-import ProductComponent from "@/components/ProductComponent";
+import ProductComponent from "@/components/products/ProductComponent";
 
 import { Text, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";

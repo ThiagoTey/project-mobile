@@ -3,15 +3,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
-import PieChartCustom from "@/components/PieChart";
-import LineChartCustom from "@/components/LineChartCustom";
-import BarHorizontarCustom from "@/components/BarHorizontarCustom";
-import BarChartCustom from "@/components/BarChartCustom";
-import DRE from "@/components/DRE";
-import DashboardStart from "@/components/DashboardStart";
+import PieChartCustom from "@/components/charts/PieChart";
+import LineChartCustom from "@/components/charts/LineChartCustom";
+import BarHorizontarCustom from "@/components/charts/BarHorizontarCustom";
+import BarChartCustom from "@/components/charts/BarChartCustom";
+import DRE from "@/components/dashboard/DRE";
+import DashboardStart from "@/components/dashboard/DashboardStart";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
-import DashboardSummary from "@/components/DashboardSummary";
-import PieChart2 from "@/components/PieChart2";
+import DashboardSummary from "@/components/dashboard/DashboardSummary";
+import PieChart2 from "@/components/charts/PieChart2";
 
 const Container = (props:ViewProps) => {
   return (

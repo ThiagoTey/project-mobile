@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import ProductImage from "./ProductImage";
+import ProductImage from "@/components/products/ProductImage";
 
 type Props = {
   description: string;

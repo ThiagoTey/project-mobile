@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import ThemedText from "./ThemedText";
+import ThemedText from "@/components/typography/ThemedText";
 import Colors from "@/constants/Colors";
 
 const DashboardSummary = () => {

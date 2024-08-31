@@ -10,13 +10,13 @@ import {
 import React, { useState } from "react";
 import { Link, router } from "expo-router";
 
-import HomeSvg from "@/components/HomeSvg";
-import ThemedText from "@/components/ThemedText";
+import HomeSvg from "@/components/svgs/HomeSvg";
+import ThemedText from "@/components/typography/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import CustomButtom from "@/components/Button";
-import FormField from "@/components/FormField";
+import CustomButtom from "@/components/form/Button";
+import FormField from "@/components/form/FormField";
 import { fetchCompanies } from "@/api/auth";
-import LoadingModal from "@/components/LoadingModal";
+import LoadingModal from "@/components/feedback/LoadingModal";
 import { useAuth } from "@/context/AuthContext";
 
 const SignInEmail = () => {

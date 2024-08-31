@@ -10,8 +10,8 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 
-import CustomDrawerContent from "@/components/CustomDrawerContent";
-import Header from "@/components/Header";
+import CustomDrawerContent from "@/components/charts/CustomDrawerContent";
+import Header from "@/components/navigation/Header";
 import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 
