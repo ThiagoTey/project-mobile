@@ -1,7 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import Button from "./Button";
-import { useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import ThemedText from "./ThemedText";
 
 interface Data {
   value: number;
@@ -38,17 +43,24 @@ export function calculatePercentage(
   return percentageArray;
 }
 
-const RenderItem = ({item , index} : {item:Data, index:number}) => {
-  return(
-    <View>
-      <View>
-        <View className="rounded-full w-2 h-2" style={{backgroundColor: item.color}}/>
-        <Text>{item.seller}</Text>
+const RenderItem = ({ item, index }: { item: Data; index: number }) => {
+  return (
+    <Animated.View
+      className="flex-row justify-between px-4 py-1"
+      entering={FadeInDown.delay(index * 150)}
+      exiting={FadeInDown}
+    >
+      <View className="flex-row items-center gap-2">
+        <View
+          className="rounded-full w-2 h-2"
+          style={{ backgroundColor: item.color }}
+        />
+        <ThemedText>{item.seller}</ThemedText>
       </View>
-
-    </View>
-  )
-}
+      <ThemedText className="font-imedium">{item.percentage}%</ThemedText>
+    </Animated.View>
+  );
+};
 
 const PieChart2 = () => {
   const n = 5;
@@ -71,20 +83,20 @@ const PieChart2 = () => {
       value,
       percentage: generatePercentages[index],
       color: colors[index % colors.length],
-      seller: "Vendedor " + index 
-    }))
+      seller: "Vendedor " + index,
+    }));
 
-    totalValue.value = withTiming(total, {duration: 1000});
+    totalValue.value = withTiming(total, { duration: 1000 });
     decimals.value = [...generateDecimals];
-    setData(data)
+    setData(data);
   };
 
   return (
     <View>
-      <Text>PieChart2</Text>
+      <ThemedText>PieChart2</ThemedText>
       <Button title="generate" handlePress={generateData} />
-      {data.map((item,index) =>{
-        return <RenderItem item={item} index={index} key={index}/>
+      {data.map((item, index) => {
+        return <RenderItem item={item} index={index} key={index} />;
       })}
     </View>
   );
@@ -92,6 +104,4 @@ const PieChart2 = () => {
 
 export default PieChart2;
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({});
