@@ -1,12 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import Button from "../form/Button";
-import Animated, {
-  FadeInDown,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
-import ThemedText from "../typography/ThemedText";
+import Button from "@/components/form/Button";
+import { useSharedValue, withTiming } from "react-native-reanimated";
+import ThemedText from "@/components/typography/ThemedText";
+import RenderItem from "./RenderItem";
+import DonutComponent from "./DonutComponent";
 
 interface Data {
   value: number;
@@ -42,32 +40,12 @@ export function calculatePercentage(
 
   return percentageArray;
 }
-
-const RenderItem = ({ item, index }: { item: Data; index: number }) => {
-  return (
-    <Animated.View
-      className="flex-row justify-between px-4 py-1"
-      entering={FadeInDown.delay(index * 150)}
-      exiting={FadeInDown}
-    >
-      <View className="flex-row items-center gap-2">
-        <View
-          className="rounded-full w-2 h-2"
-          style={{ backgroundColor: item.color }}
-        />
-        <ThemedText>{item.seller}</ThemedText>
-      </View>
-      <ThemedText className="font-imedium">{item.percentage}%</ThemedText>
-    </Animated.View>
-  );
-};
-
 const RADIUS = 160;
 const STROKE_WIDTH = 30;
 const OUTER_STROKE_WIDTH = 46;
 const GAP = 0.04;
 
-const PieChart2 = () => {
+const DonutChart = () => {
   const n = 5;
   const [data, setData] = useState<Data[]>([]);
   const totalValue = useSharedValue(0);
@@ -100,8 +78,13 @@ const PieChart2 = () => {
     <View>
       <ThemedText>PieChart2</ThemedText>
       <Button title="generate" handlePress={generateData} />
-      <View>
-        {/* <DonutChart /> */}
+      <View style={styles.chartContainer}>
+        <DonutComponent
+          radius={RADIUS}
+          strokeWidth={STROKE_WIDTH}
+          outerStrokeWidth={OUTER_STROKE_WIDTH}
+          totalValue={totalValue}
+        />
       </View>
       {data.map((item, index) => {
         return <RenderItem item={item} index={index} key={index} />;
@@ -110,6 +93,12 @@ const PieChart2 = () => {
   );
 };
 
-export default PieChart2;
+export default DonutChart;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  chartContainer: {
+    width: RADIUS * 2,
+    height: RADIUS * 2,
+    marginTop: 20,
+  },
+});

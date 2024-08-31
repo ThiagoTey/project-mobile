@@ -11,7 +11,7 @@ import DRE from "@/components/dashboard/DRE";
 import DashboardStart from "@/components/dashboard/DashboardStart";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import DashboardSummary from "@/components/dashboard/DashboardSummary";
-import PieChart2 from "@/components/charts/PieChart2";
+import DonutChart from "@/components/charts/DonutChart/DonutChart";
 
 const Container = (props:ViewProps) => {
   return (
@@ -44,7 +44,7 @@ const Home = () => {
             <PieChartCustom />
           </Container>
           <Container>
-            <PieChart2 />
+            <DonutChart />
           </Container>
           {/* Vendas Por Mês */}
           <Container>
