@@ -37,6 +37,12 @@ const AuthLayout = () => {
             title: "Configurações",
           }}
         />
+        <Stack.Screen
+          name="config/dataManagement/index"
+          options={{
+            title: "Gestão de dados",
+          }}
+        />
       </Stack>
     </>
   );
