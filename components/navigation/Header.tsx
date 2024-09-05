@@ -78,7 +78,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
            ${!isSearchOpen && "hidden"}`}
             disabled={isSearchOpen}
           >
-            <EvilIcons name="search" size={24} color="gray" />
+            <EvilIcons name="search" style={{marginBottom: 4}} size={24} color="gray" />
           </TouchableOpacity>
           {/* Input de Pesquisa */}
           <TextInput
@@ -108,7 +108,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
                 disabled={isSearchOpen}
                 onPress={handlePress}
               >
-                <EvilIcons name="search" size={24} color="black" />
+                <EvilIcons name="search" style={{marginBottom: 4}} size={24} color="black" />
               </TouchableOpacity>
               <TouchableOpacity onPress={handleFilter}>
                 <Feather name="filter" size={24} color="white" />

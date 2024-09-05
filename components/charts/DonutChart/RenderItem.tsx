@@ -1,6 +1,6 @@
 import ThemedText from "@/components/typography/ThemedText";
+import { View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { View } from "react-native-reanimated/lib/typescript/Animated";
 
 interface Data {
     value: number;

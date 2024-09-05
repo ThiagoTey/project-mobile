@@ -12,6 +12,8 @@ import Button from "@/components/form/Button";
 import { useDbOperations } from "@/database/dbOperations";
 import { useRefresh } from "@/context/RefreshContext";
 import colors from "@/constants/Colors";
+import ConfigRoute from "@/components/config/ConfigRoute";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Config = () => {
   const dbOperations = useDbOperations();
@@ -73,12 +75,15 @@ const Config = () => {
           </View>
         </View>
       </Modal>
-      <View className="items-center">
-        <Button
-          handlePress={handleDeleteDb}
-          title="Deletar banco de dados"
-          containerStyles="bg-red-500"
-        />
+      <View className="px-6 mt-4">
+        <ConfigRoute href={"/config"} iconName="user" Icon={AntDesign} title="Usuário" />
+        <View className="items-center">
+          <Button
+            handlePress={handleDeleteDb}
+            title="Deletar banco de dados"
+            containerStyles="bg-red-500"
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
