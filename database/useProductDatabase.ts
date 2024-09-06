@@ -256,7 +256,7 @@ export const useProductDatabase = () => {
     id?: number,
     sortOrder: string = "ASC",
     sortBy: string = "description",
-    limit: number = 100
+    limit: number = 50
   ) => {
     try {
       const searchValue = `%${id || description}%`;

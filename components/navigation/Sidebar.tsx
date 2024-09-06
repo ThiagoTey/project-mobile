@@ -98,8 +98,9 @@ const Sidebar = ({
         a
       </TouchableWithoutFeedback> */}
       <View style={{ flex: 1 }}>
-        <GestureDetector gesture={handleGesture}>
+        {/* <GestureDetector gesture={handleGesture}> */}
           {/* Drawer aberto */}
+          <View className="bg-slate-500" style={styles.outside}/>
           <Animated.View
             className="h-screen"
             style={[styles.drawer, animatedStyles]}
@@ -160,7 +161,7 @@ const Sidebar = ({
               </View>
             </View>
           </Animated.View>
-        </GestureDetector>
+        {/* </GestureDetector> */}
       </View>
     </GestureHandlerRootView>
   );
@@ -180,6 +181,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 5,
+    gap: 4,
+  },
+  outside: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: width - DRAWER_WIDTH,
+    backgroundColor: "#fff",
+    padding: 20,
     gap: 4,
   },
 });

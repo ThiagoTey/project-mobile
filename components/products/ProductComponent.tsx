@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { View, TouchableOpacity } from "react-native";
 import ProductImage from "./ProductImage";
 import ThemedText from "@/components/typography/ThemedText";
+import React from "react";
 
 interface Props {
   id: number;
@@ -59,4 +60,10 @@ const ProductComponent = ({
   );
 };
 
-export default ProductComponent;
+export default React.memo(ProductComponent, (prevProps, nextProps) => {
+  return(
+    prevProps.id === nextProps.id &&
+    prevProps.price === nextProps.price &&
+    prevProps.qtde === nextProps.qtde
+  )
+});

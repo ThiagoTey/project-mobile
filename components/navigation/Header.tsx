@@ -1,7 +1,6 @@
 import { Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
+import { SimpleLineIcons, Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 
 import colors from "@/constants/Colors";
@@ -21,6 +20,17 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
 
   const handlePress = () => {
     setIsSearchOpen((e) => !e);
+  };
+
+  const handleExit = () => {
+    setIsSearchOpen((e) => !e);
+    setSearch("");
+    router.setParams({ query: "" });
+  };
+
+  const handleClean = () => {
+    setSearch("");
+    router.setParams({ query: "" });
   };
 
   const handleEndEditing = () => {
@@ -93,12 +103,21 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           />
           {/* Exit button */}
           {isSearchOpen && (
+            <View className="flex-row gap-x-1">
             <TouchableOpacity
               className="items-center justify-center rounded-md w-fit h-fit"
-              onPress={handlePress}
+              onPress={handleClean}
             >
-              <AntDesign name="close" size={24} color="gray" />
+              <SimpleLineIcons name="trash" thickness size={18} color="gray" />
             </TouchableOpacity>
+
+            <TouchableOpacity
+              className="items-center justify-center rounded-md w-fit h-fit"
+              onPress={handleExit}
+            >
+              <AntDesign name="close" size={20} color="gray" />
+            </TouchableOpacity>
+            </View>
           )}
           {/* Icone Filtro e Lupa*/}
           {!isSearchOpen && (

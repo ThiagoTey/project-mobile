@@ -7,7 +7,6 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
-  ScrollView,
   TextInput,
   TextInputProps,
 } from "react-native";
@@ -16,7 +15,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ProductImage from "@/components/products/ProductImage";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import ThemedText from "@/components/typography/ThemedText";
-import FormField from "@/components/form/FormField";
 
 const CustomText = ({
   customStyles,
