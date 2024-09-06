@@ -11,7 +11,7 @@ const Config = () => {
   return (
     <SafeAreaView>
       <View className="px-6 mt-4" style={{rowGap: 12}}>
-        <ConfigRoute href={"/config"} iconName="user" Icon={AntDesign} title="Usuário" />
+        <ConfigRoute href={"/(routes)/config/user"} iconName="user" Icon={AntDesign} title="Conta" />
         <ConfigRoute href={"/(routes)/config/dataManagement"} iconName="database" Icon={AntDesign} title="Gestão de dados" />
       </View>
     </SafeAreaView>

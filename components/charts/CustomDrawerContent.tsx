@@ -79,15 +79,7 @@ const CustomDrawerContent = (props: any) => {
   const wppUrl = `whatsapp://send?phone=+553732321127`;
 
   const openWhatsApp = () => {
-    Linking.canOpenURL(wppUrl)
-      .then((supported) => {
-        if (!supported) {
-          Alert.alert("WhatsApp não está instalado no seu dispositivo");
-        } else {
-          return Linking.openURL(wppUrl);
-        }
-      })
-      .catch((err) => console.error("Erro ao tentar abrir o WhatsApp:", err));
+    Linking.openURL(wppUrl)
   };
 
   // Função sincronizar

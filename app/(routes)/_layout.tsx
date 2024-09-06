@@ -43,6 +43,12 @@ const AuthLayout = () => {
             title: "Gestão de dados",
           }}
         />
+        <Stack.Screen
+          name="config/user/index"
+          options={{
+            title: "Informações da conta",
+          }}
+        />
       </Stack>
     </>
   );
