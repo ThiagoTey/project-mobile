@@ -13,7 +13,7 @@ import { router } from "expo-router";
 type AllCompaniesProps = {
   id: number;
   name: string;
-}
+};
 
 interface AuthContextType {
   userToken: string | null;
@@ -46,8 +46,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [ allCompanies , setAllCompanies ] = useState<AllCompaniesProps[] | null>(null)
-  const [ subdomain , setSubdomain ] = useState<string | null>(null);
+  const [allCompanies, setAllCompanies] = useState<AllCompaniesProps[] | null>(
+    null
+  );
+  const [subdomain, setSubdomain] = useState<string | null>(null);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -58,14 +60,14 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         const subdomain = await SecureStore.getItemAsync("subdomain");
         const email = await SecureStore.getItemAsync("userEmail");
         const company = await SecureStore.getItemAsync("userCompany");
-        const companies = await SecureStore.getItemAsync("userCompanies")
+        const companies = await SecureStore.getItemAsync("userCompanies");
         if (token && subdomain && email && company && companies) {
           console.log("conseguiut pegar token do secureStore");
           setUserToken(token);
-          setSubdomain(subdomain)
+          setSubdomain(subdomain);
           setUserEmail(email);
           setUserCompany(company);
-          setAllCompanies(JSON.parse(companies))
+          setAllCompanies(JSON.parse(companies));
           setIsLoggedIn(true);
         }
       } catch (error) {
@@ -92,13 +94,15 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         await SecureStore.setItemAsync("subdomain", token.subdomain);
         await SecureStore.setItemAsync("userEmail", email);
         await SecureStore.setItemAsync("userCompany", selectCompany.toString());
-        await SecureStore.setItemAsync("userCompanies", JSON.stringify(allCompanies))
+        await SecureStore.setItemAsync(
+          "userCompanies",
+          JSON.stringify(allCompanies)
+        );
         setUserToken(token);
         setSubdomain(token.subdomain);
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
-        router.replace("/(tabs)/home");
         if (!rememberMe) {
           setTimeout(async () => {
             await logout();
@@ -121,10 +125,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       await SecureStore.deleteItemAsync("userCompany");
       await SecureStore.deleteItemAsync("userCompanies");
       setUserToken(null);
-      setSubdomain(null)
+      setSubdomain(null);
       setUserEmail(null);
       setUserCompany(null);
-      setAllCompanies(null)
+      setAllCompanies(null);
       setIsLoggedIn(false);
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
@@ -148,7 +152,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setError,
         allCompanies,
         setAllCompanies,
-        subdomain
+        subdomain,
       }}
     >
       {children}

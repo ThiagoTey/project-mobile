@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { SharedValue } from "react-native-reanimated";
 import {Canvas, Path, SkFont, Skia} from '@shopify/react-native-skia';
+import Colors from "@/constants/Colors";
 
 type Props = {
   radius: number;
@@ -24,7 +25,8 @@ const DonutComponent = ({
   return (
     <View>
       <Canvas style={styles.container}>
-        <Path path={path} />
+        <Path path={path} color={Colors.grey} style={"stroke"} strokeWidth={outerStrokeWidth}
+        strokeJoin='round'/>
       </Canvas>
     </View>
   );

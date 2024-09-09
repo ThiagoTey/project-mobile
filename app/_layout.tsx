@@ -1,13 +1,19 @@
 // import { ThemeProvider } from '@react-navigation/native';
 import Colors from "@/constants/Colors";
-import { AuthContext, AuthProvider, useAuth } from "@/context/AuthContext";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
 import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
-import { Stack, SplashScreen, useNavigation } from "expo-router";
+import {
+  Stack,
+  SplashScreen,
+  Slot,
+  useRootNavigationState,
+  router,
+} from "expo-router";
 import { SQLiteProvider } from "expo-sqlite";
-import { useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { useNavigation } from "expo-router";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -15,49 +21,52 @@ import { StyleSheet } from "react-native";
 SplashScreen.preventAutoHideAsync();
 
 function AppContent() {
-  const { isLoggedIn, userEmail, userCompany } = useAuth();
+  const { isLoggedIn, userEmail, userCompany, isLoading = true } = useAuth();
+
+  const navigationState = useRootNavigationState();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if ((navigationState?.key, !isLoading)) {
+      setIsReady(true);
+    }
+  }, [navigationState?.key, isLoading]);
+
+  if (!isReady) {
+    return null;
+  }
+  const initialRouteName = isLoggedIn ? "(tabs)" : "index";
+  console.log("Está logado?" + isLoggedIn);
+  console.log("initialRouteName" + initialRouteName);
 
   return (
     <SQLiteProvider
       databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
       onInit={isLoggedIn ? initializedatabase : undefined}
     >
-      <Stack initialRouteName={isLoggedIn ? `(tabs)` : `index`} >
-        <Stack.Screen
-          name="index"
-          options={{
-            statusBarColor: Colors.blue,
-            headerShown: false,
-            headerStyle: { backgroundColor: Colors.blue },
-          }}
-        />
-        <Stack.Screen
-          name="(auth)"
-          options={{
-            headerShown: false,
-            headerStyle: { backgroundColor: Colors.blue },
-            statusBarColor: Colors.blue,
-          }}
-        />
-        <Stack.Screen
-          name="(tabs)"
-          options={{
-            headerShown: false,
-            headerStyle: { backgroundColor: Colors.blue },
-            statusBarColor: Colors.blue,
-          }}
-        />
-        <Stack.Screen
-          name="(routes)"
-          options={{
-            headerShown: false,
-            headerStyle: { backgroundColor: Colors.blue },
-            statusBarColor: Colors.blue,
-          }}
-        />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <AuthStack isLoggedIn={isLoggedIn} />
     </SQLiteProvider>
+  );
+}
+
+function AuthStack({ isLoggedIn } : { isLoggedIn : boolean}) {
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        statusBarColor: Colors.blue,
+      }}
+    >
+      {isLoggedIn ? (
+        <Stack.Screen name="(tabs)" />
+      ) : (
+        <Stack.Screen name="index" />
+      )}
+      {/* Adicione outras telas após a condicional */}
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(routes)" />
+      <Stack.Screen name="+not-found" />
+    </Stack>
   );
 }
 
@@ -87,6 +96,7 @@ export default function RootLayout() {
     // <ThemeProvider value={}>
     <AuthProvider>
       <RefreshProvider>
+      {/* <Slot /> */}
         <AppContent />
       </RefreshProvider>
     </AuthProvider>

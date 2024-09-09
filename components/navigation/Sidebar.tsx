@@ -10,17 +10,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import {
-  Gesture,
-  GestureDetector,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { opacity } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
 const { width, height } = Dimensions.get("window");
 const DRAWER_WIDTH = 320;
@@ -47,7 +43,7 @@ const Sidebar = ({
     value,
   }: {
     type: "sortBy" | "sortOrder";
-    value: "description" | "id" | "ASC" | "DESC";
+    value: "description" | "code_internal" | "ASC" | "DESC";
   }) => {
     router.setParams({ [type]: value });
     setLocalParams((prev) => ({ ...prev, [type]: value }));
@@ -131,11 +127,11 @@ const Sidebar = ({
             <View className="flex-row">
               <Checkbox
                 onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortBy", value: "id" })
+                  handleCheckBoxChange({ type: "sortBy", value: "code_internal" })
                 }
                 className="rounded-full"
                 color={Colors.blue}
-                value={localParams.sortBy === "id"}
+                value={localParams.sortBy === "code_internal"}
               />
               <Text className="pl-1">Código</Text>
             </View>

@@ -13,7 +13,7 @@ import {
 import CustomDrawerContent from "@/components/charts/CustomDrawerContent";
 import Header from "@/components/navigation/Header";
 import { useAuth } from "@/context/AuthContext";
-import { router } from "expo-router";
+import { router, Slot, useRootNavigationState } from "expo-router";
 
 // const GradientHeader = () => (
 //   <LinearGradient
@@ -26,13 +26,20 @@ import { router } from "expo-router";
 
 export default function TabLayout() {
 
-  const {isLoggedIn} = useAuth()
+  const { isLoggedIn } = useAuth()
 
   useEffect(() => {
     if(!isLoggedIn) {
       router.replace('/')
     }
   },[isLoggedIn])
+
+  const navigationState = useRootNavigationState();
+
+  useEffect(() => {
+    console.log('dentr do trem :' + !navigationState?.key)
+    if (!navigationState?.key) return;
+  }, [navigationState?.key]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

@@ -13,13 +13,13 @@ const Index = () => {
   const navigationState = useRootNavigationState()
   const {isLoggedIn, isLoading = true} = useAuth()
 
-  useEffect(() => {
-  if(isLoading || !navigationState?.key) return;
-    if(isLoggedIn && !isLoading && navigationState?.key) {
-      console.log("entro")
-      router.replace('/(tabs)/home')
-    }
-  },[isLoading, navigationState?.key])
+  // useEffect(() => {
+  // if(isLoading || !navigationState?.key) return;
+  //   if(isLoggedIn && !isLoading && navigationState?.key) {
+  //     console.log("entro")
+  //     router.replace('/(tabs)/home')
+  //   }
+  // },[isLoading, navigationState?.key])
 
 
   return (

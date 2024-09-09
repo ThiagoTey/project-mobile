@@ -1,7 +1,7 @@
 import { Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import { SimpleLineIcons, Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, useRootNavigationState } from "expo-router";
 
 import colors from "@/constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";

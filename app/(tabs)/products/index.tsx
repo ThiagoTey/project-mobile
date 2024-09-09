@@ -7,7 +7,7 @@ import ProductComponent from "@/components/products/ProductComponent";
 
 import { ActivityIndicator, View } from "react-native";
 import { useProductDatabase } from "@/database/useProductDatabase";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, useRootNavigationState } from "expo-router";
 import { useRefresh } from "@/context/RefreshContext";
 import ThemedText from "@/components/typography/ThemedText";
 import Button from "@/components/form/Button";
@@ -26,6 +26,10 @@ const Products = () => {
   const [limit, setLimit] = useState(50);
   const [isLoading, setIsloading] = useState(true);
 
+  const navigationState = useRootNavigationState();
+
+  if (!navigationState?.key) return;
+  
   useEffect(() => {
     router.setParams({
       sortBy: "description",
