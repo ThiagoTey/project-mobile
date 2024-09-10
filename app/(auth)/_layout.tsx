@@ -1,30 +1,19 @@
-import React from 'react'
-import { Stack } from 'expo-router'
-import Colors from '@/constants/Colors'
+import React from "react";
+import { Stack } from "expo-router";
+import Colors from "@/constants/Colors";
 
 const AuthLayout = () => {
   return (
     <>
-      <Stack>
-        <Stack.Screen
-          name="sign-in-email"
-          options={{
-            statusBarColor: Colors.blue,
-            headerShown:false,
-            headerStyle: { backgroundColor: Colors.blue },
-          }}
-        />
-        <Stack.Screen
-          name="sign-in-password"
-          options={{
-            statusBarColor: Colors.blue,
-            headerShown:false,
-            headerStyle: { backgroundColor: Colors.blue },
-          }}
-        />
-      </Stack>
+      <Stack
+        screenOptions={{
+          statusBarColor: Colors.blue,
+          headerShown: false,
+          headerStyle: { backgroundColor: Colors.blue },
+        }}
+      />
     </>
-  )
-}
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;

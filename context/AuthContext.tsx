@@ -103,6 +103,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
+        router.replace('/');
         if (!rememberMe) {
           setTimeout(async () => {
             await logout();

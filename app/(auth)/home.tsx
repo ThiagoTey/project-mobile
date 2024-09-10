@@ -1,27 +1,11 @@
-import { View, SafeAreaView, ScrollView, Image, ActivityIndicator } from "react-native";
-import React, { useEffect } from "react";
-import { router, useRootNavigationState } from "expo-router";
-
+import { View, SafeAreaView, ScrollView, Image } from "react-native";
+import { router } from "expo-router";
 import { images } from "@/constants";
 import CustomButtom from "@/components/form/Button";
 import ThemedText from "@/components/typography/ThemedText";
 import HomeSvg from "@/components/svgs/HomeSvg";
-import { useAuth } from "@/context/AuthContext";
 
-const Index = () => {
-
-  const navigationState = useRootNavigationState()
-  const {isLoggedIn, isLoading = true} = useAuth()
-
-  // useEffect(() => {
-  // if(isLoading || !navigationState?.key) return;
-  //   if(isLoggedIn && !isLoading && navigationState?.key) {
-  //     console.log("entro")
-  //     router.replace('/(tabs)/home')
-  //   }
-  // },[isLoading, navigationState?.key])
-
-
+const Home = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -69,4 +53,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

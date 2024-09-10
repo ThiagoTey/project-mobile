@@ -1,45 +1,15 @@
 import colors from "@/constants/Colors";
 import { Drawer } from "expo-router/drawer";
-import React, { useEffect } from "react";
-import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
 import {
   MaterialCommunityIcons,
   FontAwesome6,
   AntDesign,
 } from "@expo/vector-icons";
-
 import CustomDrawerContent from "@/components/charts/CustomDrawerContent";
 import Header from "@/components/navigation/Header";
-import { useAuth } from "@/context/AuthContext";
-import { router, Slot, useRootNavigationState } from "expo-router";
-
-// const GradientHeader = () => (
-//   <LinearGradient
-//     colors={[colors.blue, colors.green, colors.yellow]}
-//     start={{ x: 0, y: 0 }}
-//     end={{ x: 1, y: 1 }}
-//     style={StyleSheet.absoluteFill}
-//   />
-// );
 
 export default function TabLayout() {
-
-  const { isLoggedIn } = useAuth()
-
-  useEffect(() => {
-    if(!isLoggedIn) {
-      router.replace('/')
-    }
-  },[isLoggedIn])
-
-  const navigationState = useRootNavigationState();
-
-  useEffect(() => {
-    console.log('dentr do trem :' + !navigationState?.key)
-    if (!navigationState?.key) return;
-  }, [navigationState?.key]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -103,9 +73,3 @@ export default function TabLayout() {
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  HeaderStyles: {
-    color: "white",
-  },
-});

@@ -1,74 +1,64 @@
-// import { ThemeProvider } from '@react-navigation/native';
-import Colors from "@/constants/Colors";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
-import { initializedatabase } from "@/database/InitializeDatabase";
 import { useFonts } from "expo-font";
 import {
-  Stack,
   SplashScreen,
   Slot,
-  useRootNavigationState,
-  router,
 } from "expo-router";
-import { SQLiteProvider } from "expo-sqlite";
-import { useEffect, useState } from "react";
-import { useNavigation } from "expo-router";
-
-// import { useColorScheme } from "@/hooks/useColorScheme";
+import { useEffect } from "react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-function AppContent() {
-  const { isLoggedIn, userEmail, userCompany, isLoading = true } = useAuth();
+// function AppContent() {
+//   const { isLoggedIn, userEmail, userCompany, isLoading = true } = useAuth();
 
-  const navigationState = useRootNavigationState();
-  const [isReady, setIsReady] = useState(false);
+//   const navigationState = useRootNavigationState();
+//   const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
-    if ((navigationState?.key, !isLoading)) {
-      setIsReady(true);
-    }
-  }, [navigationState?.key, isLoading]);
+//   useEffect(() => {
+//     if ((navigationState?.key, !isLoading)) {
+//       setIsReady(true);
+//     }
+//   }, [navigationState?.key, isLoading]);
 
-  if (!isReady) {
-    return null;
-  }
-  const initialRouteName = isLoggedIn ? "(tabs)" : "index";
-  console.log("Está logado?" + isLoggedIn);
-  console.log("initialRouteName" + initialRouteName);
+//   if (!isReady) {
+//     return null;
+//   }
+//   const initialRouteName = isLoggedIn ? "(tabs)" : "index";
+//   console.log("Está logado?" + isLoggedIn);
+//   console.log("initialRouteName" + initialRouteName);
 
-  return (
-    <SQLiteProvider
-      databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
-      onInit={isLoggedIn ? initializedatabase : undefined}
-    >
-      <AuthStack isLoggedIn={isLoggedIn} />
-    </SQLiteProvider>
-  );
-}
+//   return (
+//     <SQLiteProvider
+//       databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
+//       onInit={isLoggedIn ? initializedatabase : undefined}
+//     >
+//       <AuthStack isLoggedIn={isLoggedIn} />
+//     </SQLiteProvider>
+//   );
+// }
 
-function AuthStack({ isLoggedIn } : { isLoggedIn : boolean}) {
-  return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        statusBarColor: Colors.blue,
-      }}
-    >
-      {isLoggedIn ? (
-        <Stack.Screen name="(tabs)" />
-      ) : (
-        <Stack.Screen name="index" />
-      )}
-      {/* Adicione outras telas após a condicional */}
-      <Stack.Screen name="(auth)" />
-      <Stack.Screen name="(routes)" />
-      <Stack.Screen name="+not-found" />
-    </Stack>
-  );
-}
+// function AuthStack({ isLoggedIn } : { isLoggedIn : boolean}) {
+//   return (
+    // <Stack
+    //   screenOptions={{
+    //     headerShown: false,
+    //     statusBarColor: Colors.blue,
+    //   }}
+    // >
+    //   {isLoggedIn ? (
+    //     <Stack.Screen name="(tabs)" />
+    //   ) : (
+    //     <Stack.Screen name="index" />
+    //   )}
+    //   {/* Adicione outras telas após a condicional */}
+    //   <Stack.Screen name="(auth)" />
+    //   <Stack.Screen name="(routes)" />
+    //   <Stack.Screen name="+not-found" />
+    // </Stack>
+//   );
+// }
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
@@ -93,13 +83,10 @@ export default function RootLayout() {
   }
 
   return (
-    // <ThemeProvider value={}>
     <AuthProvider>
       <RefreshProvider>
-      {/* <Slot /> */}
-        <AppContent />
+        <Slot />
       </RefreshProvider>
     </AuthProvider>
-    // </ThemeProvider>
   );
 }
