@@ -1,8 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { SharedValue } from "react-native-reanimated";
-import {Canvas, Path, SkFont, Skia} from '@shopify/react-native-skia';
+import { SharedValue, useDerivedValue } from "react-native-reanimated";
+import { Canvas, Path, SkFont, Skia , Text as SkiaText} from "@shopify/react-native-skia";
 import Colors from "@/constants/Colors";
+import ThemedText from "@/components/typography/ThemedText";
 
 type Props = {
   radius: number;
@@ -17,16 +18,31 @@ const DonutComponent = ({
   outerStrokeWidth,
   totalValue,
 }: Props) => {
-
   const innerRadius = radius - outerStrokeWidth / 2;
   const path = Skia.Path.Make();
-  path.addCircle(radius, radius, innerRadius)
+  path.addCircle(radius, radius, innerRadius);
+
+  const targetText = useDerivedValue(
+    () => `${Math.round(totalValue.value)}`,
+    [],
+  )
+
+  const fontSize = 20;
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Canvas style={styles.container}>
-        <Path path={path} color={Colors.grey} style={"stroke"} strokeWidth={outerStrokeWidth}
-        strokeJoin='round'/>
+        <Path
+          path={path}
+          color={Colors.lightgray}
+          style={"stroke"}
+          strokeWidth={outerStrokeWidth}
+          strokeJoin="round"
+          strokeCap="round"
+          start={0}
+          end={1}
+        />
+        {/* <SkiaText text={targetText} color="black" /> */}
       </Canvas>
     </View>
   );
@@ -35,7 +51,7 @@ const DonutComponent = ({
 export default DonutComponent;
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1
-  }
-})
+  container: {
+    flex: 1,
+  },
+});

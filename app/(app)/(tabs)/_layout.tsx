@@ -28,6 +28,7 @@ export default function TabLayout() {
         <Drawer.Screen
           name="home/index"
           options={{
+            drawerItemStyle: { display: "none"},
             drawerLabel: "Home",
             title: "Home",
             // header: () => <Header/>,
@@ -50,7 +51,7 @@ export default function TabLayout() {
         <Drawer.Screen
           name="units/index"
           options={{
-            // drawerItemStyle: { display: "none"},
+            drawerItemStyle: { display: "none"},
             drawerLabel: "Unidades",
             title: "Unidades",
             drawerIcon: ({ size, color }) => (
@@ -61,7 +62,7 @@ export default function TabLayout() {
         <Drawer.Screen
           name="groups/index"
           options={{
-            // drawerItemStyle: { display: "none"},
+            drawerItemStyle: { display: "none"},
             drawerLabel: "Grupos",
             title: "Grupos",
             drawerIcon: ({ size, color }) => (

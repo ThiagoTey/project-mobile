@@ -23,7 +23,7 @@ const ConfigRoute = ({Icon, title, iconName, href}: Props) => {
     <TouchableOpacity style={styles.container} onPress={handlePress}>
       <View className='flex-row items-center gap-x-2'>
         <View className='w-10 h-10 items-center justify-center bg-slate-200 rounded-lg'>
-            <Icon name={iconName} size={24} color={Colors.grey}/>
+            <Icon name={iconName} size={24} color={Colors.gray}/>
         </View>
         <ThemedText className='font-imedium text-base'>{title}</ThemedText>
       </View>

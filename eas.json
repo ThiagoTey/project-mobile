@@ -16,7 +16,16 @@
       "preview4": {
         "distribution": "internal"
       },
-      "production": {}
+      "production": {
+        "env": {
+          "EXPO_PUBLIC_SECRET_KEY" : ""
+        }
+      },
+      "test":{
+        "env": {
+          "EXPO_PUBLIC_SECRET_KEY" : ""
+        }
+      }
     }
   }
   

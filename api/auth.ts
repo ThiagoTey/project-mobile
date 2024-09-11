@@ -1,22 +1,23 @@
 import CryptoJS from "crypto-js";
 import Base64 from "base-64";
+import axios from 'axios'
 
 // Função que pega os dados das empresas da API
 export const fetchCompanies = async (email: string) => {
   try {
-    const url = new URL(
-      "http://config.ability.app.br/api/v1/companies_by_email"
+    const response = await axios.get(
+      "http://config.ability.app.br/api/v1/companies_by_email",
+      {
+        params: { email }, 
+      }
     );
-    url.searchParams.append("email", email);
 
-    const response = await fetch(url.toString(), { method: "GET" });
-
-    if (!response.ok) {
+    if (!response.data) {
       throw new Error(
         `Failed to fetch companys by email: ${response.statusText}`
       );
     }
-    const data = await response.json();
+    const data = await response.data;
 
     return data;
   } catch (error) {
@@ -76,8 +77,6 @@ export const loginAuth = async (
   companyid: number,
   setError: (error: string) => void
 ) => {
-  const url = new URL("http://config.ability.app.br/api/v1/users");
-
   // Dados a serem transformados em JWT
   const payload = {
     email: email,
@@ -97,19 +96,20 @@ export const loginAuth = async (
   const jwt = createJWT(payload, secretKey);
   console.log("JWT:", jwt);
 
-  url.searchParams.append("token", jwt);
-
   try {
-    const response = await fetch(url.toString(), {
-      method: "GET",
-    });
-
-    if (!response.ok) {
+    const response = await axios.get(
+      "http://config.ability.app.br/api/v1/users",
+      {
+        params: {"token" : jwt }
+      }
+    );
+    
+    if (!response.data) {
       setError("Falha na autenticação, verifique suas credenciais.");
       return;
     }
 
-    const data = await response.json();
+    const data = await response.data;
 
     if(data?.authentication_token) {
       const decodedData = decodeJWT(data.authentication_token);
