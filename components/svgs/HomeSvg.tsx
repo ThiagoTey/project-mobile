@@ -6,10 +6,10 @@ const { width, height } = Dimensions.get("window");
 
 const HomeSvg = (props: SvgProps) => {
     return (
-      <Svg width={width} height={273} fill="none" {...props}>
+      <Svg width={width} height={273} fill="none" viewBox="0 0 390 273" {...props}>
         <Path
           fill="url(#a)"
-          d="M389 273c-37.693-69.104-50.994-164.622-113-209C216.902 21.703-1 126.5-1 80.5V0h390v273Z"
+          d="M389 273c-37.693-69.104-50.994-164.622-113-209C216.902 21.703-1 126.5-1 80.5V0h390v273Z"    
         />
         <Defs>
           <LinearGradient

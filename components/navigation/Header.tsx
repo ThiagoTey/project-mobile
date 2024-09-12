@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from "react-native";
+import { Keyboard, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import { SimpleLineIcons, Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
 import { router, useLocalSearchParams, useRootNavigationState } from "expo-router";
@@ -26,6 +26,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
     setIsSearchOpen((e) => !e);
     setSearch("");
     router.setParams({ query: "" });
+    Keyboard.dismiss();
   };
 
   const handleClean = () => {
@@ -37,6 +38,7 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
     if (!search) {
       setIsSearchOpen(false);
     }
+    Keyboard.dismiss();
   };
 
   const handleFilter = () => {

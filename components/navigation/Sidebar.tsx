@@ -8,18 +8,18 @@ import {
   StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
-import {
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
+import ThemedText from "../typography/ThemedText";
 
 const { width, height } = Dimensions.get("window");
-const DRAWER_WIDTH = 320;
+const DRAWER_WIDTH = width/1.2;
 
 const Sidebar = ({
   filterOpen,
@@ -108,7 +108,9 @@ const Sidebar = ({
           style={[styles.drawer, animatedStyles]}
         >
           {/* Qual coluna vai ser agrupada */}
-          <Text className="text-lg font-semibold">Pesquisar Por</Text>
+          <ThemedText className="text-lg font-semibold">
+            Pesquisar Por
+          </ThemedText>
           <View className="flex-row gap-4">
             <View className="flex-row">
               <Checkbox
@@ -122,22 +124,25 @@ const Sidebar = ({
                 color={Colors.blue}
                 value={localParams.sortBy === "description"}
               />
-              <Text className="pl-1">Descrição</Text>
+              <ThemedText className="pl-1">Descrição</ThemedText>
             </View>
             <View className="flex-row">
               <Checkbox
                 onValueChange={() =>
-                  handleCheckBoxChange({ type: "sortBy", value: "code_internal" })
+                  handleCheckBoxChange({
+                    type: "sortBy",
+                    value: "code_internal",
+                  })
                 }
                 className="rounded-full"
                 color={Colors.blue}
                 value={localParams.sortBy === "code_internal"}
               />
-              <Text className="pl-1">Código</Text>
+              <ThemedText className="pl-1">Código</ThemedText>
             </View>
           </View>
           {/* Decrecente ou crescente */}
-          <Text className="text-lg font-semibold">Ordem</Text>
+          <ThemedText className="ThemedText-lg font-semibold">Ordem</ThemedText>
           <View className="flex-row gap-4">
             <View className="flex-row">
               <Checkbox
@@ -148,8 +153,9 @@ const Sidebar = ({
                 color={Colors.blue}
                 value={localParams.sortOrder === "ASC"}
               />
-              <Text className="pl-1">Crescente</Text>
+              <ThemedText className="pl-1">Crescente</ThemedText>
             </View>
+
             <View className="flex-row">
               <Checkbox
                 onValueChange={() =>
@@ -159,7 +165,7 @@ const Sidebar = ({
                 color={Colors.blue}
                 value={localParams.sortOrder === "DESC"}
               />
-              <Text className="pl-1">Decrecente</Text>
+              <ThemedText className="pl-1">Decrecente</ThemedText>
             </View>
           </View>
         </Animated.View>
