@@ -1,7 +1,20 @@
-import { Keyboard, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
-import { SimpleLineIcons, Octicons, EvilIcons, AntDesign, Feather } from "@expo/vector-icons";
-import { router, useLocalSearchParams, useRootNavigationState } from "expo-router";
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  SimpleLineIcons,
+  Octicons,
+  EvilIcons,
+  AntDesign,
+  Feather,
+} from "@expo/vector-icons";
+import { router, useLocalSearchParams } from "expo-router";
 
 import colors from "@/constants/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -17,9 +30,15 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
   const [search, setSearch] = useState(params.query);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
+  const textInputRef = useRef<TextInput>(null);
 
   const handlePress = () => {
     setIsSearchOpen((e) => !e);
+    setTimeout(() => {
+      if (textInputRef.current) {
+        textInputRef.current.focus();
+      }
+    }, 100);
   };
 
   const handleExit = () => {
@@ -45,6 +64,10 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
     setFilterOpen((e) => !e);
   };
 
+  const handleTouchOutside = () => {
+    setFilterOpen(false);
+  };
+
   return (
     <>
       <View
@@ -56,13 +79,16 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           paddingHorizontal: 16,
           gap: 12,
           paddingBottom: 12,
-          backgroundColor: colors.blue
+          backgroundColor: colors.blue,
         }}
       >
         {/* Abrir Drawer */}
         <TouchableOpacity
           className="pb-1"
-          onPress={() => navigation.openDrawer()}
+          onPress={() => {
+            navigation.openDrawer();
+            handleEndEditing();
+          }}
         >
           <Octicons name="three-bars" size={20} color="white" />
         </TouchableOpacity>
@@ -90,13 +116,21 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
            ${!isSearchOpen && "hidden"}`}
             disabled={isSearchOpen}
           >
-            <EvilIcons name="search" style={{marginBottom: 4}} size={24} color="gray" />
+            <EvilIcons
+              name="search"
+              style={{ marginBottom: 4 }}
+              size={24}
+              color="gray"
+            />
           </TouchableOpacity>
           {/* Input de Pesquisa */}
           <TextInput
             value={search}
-            className={`h-full hidden ${isSearchOpen && "flex"}`}
-            style={{ flex: 1 }}
+            style={[
+              { flex: 1, height: "100%" },
+              !isSearchOpen && { display: "none" },
+            ]}
+            ref={textInputRef}
             onChangeText={(search) => {
               setSearch(search);
               router.setParams({ query: search });
@@ -106,19 +140,24 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           {/* Exit button */}
           {isSearchOpen && (
             <View className="flex-row gap-x-1">
-            <TouchableOpacity
-              className="items-center justify-center rounded-md w-fit h-fit"
-              onPress={handleClean}
-            >
-              <SimpleLineIcons name="trash" thickness size={18} color="gray" />
-            </TouchableOpacity>
+              <TouchableOpacity
+                className="items-center justify-center rounded-md w-fit h-fit"
+                onPress={handleClean}
+              >
+                <SimpleLineIcons
+                  name="trash"
+                  thickness
+                  size={18}
+                  color="gray"
+                />
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              className="items-center justify-center rounded-md w-fit h-fit"
-              onPress={handleExit}
-            >
-              <AntDesign name="close" size={20} color="gray" />
-            </TouchableOpacity>
+              <TouchableOpacity
+                className="items-center justify-center rounded-md w-fit h-fit"
+                onPress={handleExit}
+              >
+                <AntDesign name="close" size={20} color="gray" />
+              </TouchableOpacity>
             </View>
           )}
           {/* Icone Filtro e Lupa*/}
@@ -129,7 +168,12 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
                 disabled={isSearchOpen}
                 onPress={handlePress}
               >
-                <EvilIcons name="search" style={{marginBottom: 4}} size={24} color="black" />
+                <EvilIcons
+                  name="search"
+                  style={{ marginBottom: 4 }}
+                  size={24}
+                  color="black"
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={handleFilter}>
                 <Feather name="filter" size={24} color="white" />
@@ -138,9 +182,24 @@ const Header = ({ title, navigation }: { title: string; navigation: any }) => {
           )}
         </View>
       </View>
+      {filterOpen && (
+        <TouchableWithoutFeedback onPress={handleTouchOutside}>
+          <View style={styles.outsiteComponent} />
+        </TouchableWithoutFeedback>
+      )}
       <Sidebar filterOpen={filterOpen} setFilterOpen={setFilterOpen} />
     </>
   );
 };
 
 export default Header;
+
+const styles = StyleSheet.create({
+  outsiteComponent: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+});

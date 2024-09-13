@@ -1,14 +1,12 @@
 import Colors from "@/constants/Colors";
 import Checkbox from "expo-checkbox";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { Dispatch, useEffect, useState } from "react";
+import React, { Dispatch, RefObject, useEffect, useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
-  Pressable,
 } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, {
@@ -87,9 +85,11 @@ const Sidebar = ({
     setLocalParams((prev) => ({ ...prev, sortOrder: "ASC" }));
   }, []);
 
+  
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+          
+          <View style={{ flex: 1 }}  >
         {/* <GestureDetector gesture={handleGesture}> */}
         {/* Drawer aberto */}
         <TouchableWithoutFeedback
