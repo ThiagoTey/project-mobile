@@ -16,7 +16,7 @@ const UnitComponent = ({
   weigh,
 }: Props) => {
   return (
-    <View className="border-b-2 border-gray-200 items-center flex-row gap-2 px-4 pb-2 my-2 justify-between">
+    <View className="border-b-2 border-b-zinc-200 items-center flex-row gap-2 px-4 pb-2 my-2 justify-between">
       <View className="flex-row items-center">
         <ProductImage
           description={abbreviation}

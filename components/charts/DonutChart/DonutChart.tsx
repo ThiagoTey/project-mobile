@@ -5,6 +5,8 @@ import { useSharedValue, withTiming } from "react-native-reanimated";
 import ThemedText from "@/components/typography/ThemedText";
 import RenderItem from "./RenderItem";
 import DonutComponent from "./DonutComponent";
+import { useFont } from "@shopify/react-native-skia";
+import ChartTitle from "../ChartTitle";
 
 interface Data {
   value: number;
@@ -40,17 +42,30 @@ export function calculatePercentage(
 
   return percentageArray;
 }
-const RADIUS = 160;
+const RADIUS = 155;
 const STROKE_WIDTH = 30;
 const OUTER_STROKE_WIDTH = 46;
 const GAP = 0.04;
 
 const DonutChart = () => {
-  const n = 5;
+  const n = 8;
   const [data, setData] = useState<Data[]>([]);
   const totalValue = useSharedValue(0);
   const decimals = useSharedValue<number[]>([]);
-  const colors = ["#1FBCFF", "#00DAB7", "#FFC412"];
+  const colors = [
+    "#1FBCFF",
+    "#00DAB7",
+    "#FFC412",
+    "#0561F5",
+    "#BD2A2E",
+    "#C82EF2",
+    "#262626",
+    "#BF834E",
+  ];
+  const arrayColors = Array.from(
+    { length: n },
+    (_, index) => colors[index % colors.length]
+  );
 
   const generateData = () => {
     const generateNumbers = generateRandomNumbers(n);
@@ -65,7 +80,7 @@ const DonutChart = () => {
     const data = generateNumbers.map((value, index) => ({
       value,
       percentage: generatePercentages[index],
-      color: colors[index % colors.length],
+      color: arrayColors[index],
       seller: "Vendedor " + index,
     }));
 
@@ -74,21 +89,39 @@ const DonutChart = () => {
     setData(data);
   };
 
+  const font = useFont(require("@/assets/fonts/Inter-Bold.ttf"), 50);
+  const smallFont = useFont(require("@/assets/fonts/Inter-Light.ttf"), 25);
+
+  if (!font || !smallFont) {
+    return <View />;
+  }
+
   return (
-    <View>
-      <ThemedText>PieChart2</ThemedText>
-      <Button title="generate" handlePress={generateData} />
-      <View style={styles.chartContainer}>
-        <DonutComponent
-          radius={RADIUS}
-          strokeWidth={STROKE_WIDTH}
-          outerStrokeWidth={OUTER_STROKE_WIDTH}
-          totalValue={totalValue}
-        />
+    <View style={{paddingTop: 12, paddingHorizontal: 12}}>
+      <ChartTitle title="Vendas Por Vendedor" iconName="user" />
+      <View className="items-center pb-3">
+        <View style={styles.chartContainer}>
+          <DonutComponent
+            radius={RADIUS}
+            strokeWidth={STROKE_WIDTH}
+            outerStrokeWidth={OUTER_STROKE_WIDTH}
+            font={font}
+            smallFont={smallFont}
+            totalValue={totalValue}
+            n={n}
+            gap={GAP}
+            decimals={decimals}
+            colors={arrayColors}
+          />
+        </View>
       </View>
       {data.map((item, index) => {
         return <RenderItem item={item} index={index} key={index} />;
       })}
+      <View className="justify-center items-center pt-10">
+        <Button title="generate" handlePress={generateData} />
+      </View>
+
     </View>
   );
 };

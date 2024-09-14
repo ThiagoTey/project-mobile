@@ -78,6 +78,7 @@ const PieChartCustom = () => {
         </View>
         <ThemedText className="font-isemibold text-base">Vendas Por Vendedor</ThemedText>
       </View>
+      
       <View className="flex-row pt-4 gap-2">
         <PieChart
           onPress={(extraRadiusForFocused: PieDataProps) => {
