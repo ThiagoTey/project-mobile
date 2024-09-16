@@ -1,8 +1,7 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/components/form/Button";
 import { useSharedValue, withTiming } from "react-native-reanimated";
-import ThemedText from "@/components/typography/ThemedText";
 import RenderItem from "./RenderItem";
 import DonutComponent from "./DonutComponent";
 import { useFont } from "@shopify/react-native-skia";
@@ -42,13 +41,13 @@ export function calculatePercentage(
 
   return percentageArray;
 }
-const RADIUS = 155;
-const STROKE_WIDTH = 30;
-const OUTER_STROKE_WIDTH = 46;
+const RADIUS = 140;
+const STROKE_WIDTH = 24;
+const OUTER_STROKE_WIDTH = 32;
 const GAP = 0.04;
 
 const DonutChart = () => {
-  const n = 8;
+  const n = 7;
   const [data, setData] = useState<Data[]>([]);
   const totalValue = useSharedValue(0);
   const decimals = useSharedValue<number[]>([]);
@@ -89,15 +88,19 @@ const DonutChart = () => {
     setData(data);
   };
 
-  const font = useFont(require("@/assets/fonts/Inter-Bold.ttf"), 50);
-  const smallFont = useFont(require("@/assets/fonts/Inter-Light.ttf"), 25);
+  useEffect(() => {
+    generateData();
+  }, []);
+
+  const font = useFont(require("@/assets/fonts/Inter-Bold.ttf"), 36);
+  const smallFont = useFont(require("@/assets/fonts/Inter-Light.ttf"), 24);
 
   if (!font || !smallFont) {
     return <View />;
   }
 
   return (
-    <View style={{paddingTop: 12, paddingHorizontal: 12}}>
+    <View style={{}}>
       <ChartTitle title="Vendas Por Vendedor" iconName="user" />
       <View className="items-center pb-3">
         <View style={styles.chartContainer}>
@@ -121,7 +124,6 @@ const DonutChart = () => {
       <View className="justify-center items-center pt-10">
         <Button title="generate" handlePress={generateData} />
       </View>
-
     </View>
   );
 };

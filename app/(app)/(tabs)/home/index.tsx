@@ -2,7 +2,6 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
 import PieChartCustom from "@/components/charts/PieChart";
 import LineChartCustom from "@/components/charts/LineChartCustom";
 import BarHorizontarCustom from "@/components/charts/BarHorizontarCustom";
@@ -13,11 +12,11 @@ import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import DashboardSummary from "@/components/dashboard/DashboardSummary";
 import DonutChart from "@/components/charts/DonutChart/DonutChart";
 
-const Container = (props:ViewProps) => {
+const Container = (props: ViewProps) => {
   return (
     <View
-      style={{ overflow: "hidden" }}
-      className="border-gray-300 border p-2 rounded-lg"
+      style={{ overflow: "hidden", paddingTop: 12, paddingHorizontal: 12, paddingBottom: 12 }}
+      className="border-gray-300 border rounded-lg"
       {...props}
     >
       {props.children}
@@ -26,11 +25,10 @@ const Container = (props:ViewProps) => {
 };
 
 const Home = () => {
-
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{ rowGap: 32 }} className="p-4 pt-0 mt-0">
+        <View style={{ rowGap: 36 }} className="p-4 pt-0 mt-0">
           {/* Filtro e Inicio */}
           <Container className="items-center py-0 border-0">
             <DashboardStart />
@@ -40,9 +38,9 @@ const Home = () => {
             <DashboardSummary />
           </Container>
           {/* Vendas Por Vendedor */}
-          <Container>
+          {/* <Container>
             <PieChartCustom />
-          </Container>
+          </Container> */}
           <Container>
             <DonutChart />
           </Container>
@@ -51,9 +49,9 @@ const Home = () => {
             <LineChartCustom />
           </Container>
           {/* Saldo das contas */}
-          <Container>
+          {/* <Container>
             <BarHorizontarCustom />
-          </Container>
+          </Container> */}
           {/* Fluxo de caixa */}
           <Container>
             <BarChartCustom />
@@ -62,8 +60,6 @@ const Home = () => {
           <Container>
             <DRE />
           </Container>
-
-          
         </View>
       </ScrollView>
     </SafeAreaView>

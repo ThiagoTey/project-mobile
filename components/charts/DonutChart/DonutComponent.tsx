@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { GestureResponderEvent, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
 import { SharedValue, useDerivedValue } from "react-native-reanimated";
 import {
   Canvas,
@@ -9,7 +9,6 @@ import {
   Text as SkiaText,
 } from "@shopify/react-native-skia";
 import Colors from "@/constants/Colors";
-import ThemedText from "@/components/typography/ThemedText";
 import DonutPath from "./DonutPath";
 
 type Props = {
@@ -40,14 +39,13 @@ const DonutComponent = ({
   const array = Array.from({ length: n });
   const innerRadius = radius - outerStrokeWidth / 2;
   const path = Skia.Path.Make();
+  const [selectedPath, setSelectedPath] = useState<number | null>(null)
   path.addCircle(radius, radius, innerRadius);
 
   const targetText = useDerivedValue(
     () => `R$${Math.round(totalValue.value)}`,
     []
   );
-
-  console.log("tagert text :" + targetText.value);
 
   const fontSize = font.measureText("R$00");
   const smallfontSize = smallFont.measureText("Total");
@@ -57,9 +55,59 @@ const DonutComponent = ({
     return radius - _fontSize.width / 2;
   });
 
+  const touchHandler = (e: GestureResponderEvent) => {
+    const touchX = e.nativeEvent.locationX;
+    const touchY = e.nativeEvent.locationY;
+
+    const centerX = radius;
+    const centerY = radius;
+
+    // Cálculo da distância entre o toque e o centro do círculo
+    const distanceFromCenter = Math.sqrt(
+      Math.pow(touchX - centerX, 2) + Math.pow(touchY - centerY, 2)
+    );
+
+    // Verifica se o toque está dentro do círculo (entre o raio interno e externo)
+    const innerRadius = radius - outerStrokeWidth / 2;
+    const outerRadius = radius;
+
+    if (
+      distanceFromCenter >= innerRadius - 20 &&
+      distanceFromCenter <= outerRadius + 20
+    ) {
+      // Cálculo do ângulo do toque em relação ao centro do círculo
+      const angle =
+        Math.atan2(touchY - centerY, touchX - centerX) * (180 / Math.PI);
+      const normalizedAngle = angle < 0 ? angle + 360 : angle; // Normaliza para valores positivos
+
+      // Aqui você pode verificar qual setor do gráfico foi clicado
+      let currentAngle = 0;
+      for (let i = 0; i < n; i++) {
+        const startAngle = currentAngle;
+        const endAngle = startAngle + decimals.value[i] * 360;
+
+        if (normalizedAngle >= startAngle && normalizedAngle <= endAngle) {
+          console.log("Você clicou no DonutPath", i);
+          if(selectedPath === i) {
+            setSelectedPath(null)
+          } else {
+            setSelectedPath(i)
+          }
+          break;
+        }
+
+        currentAngle = endAngle + gap;
+      }
+    } else {
+      console.log("Fora do donut");
+    }
+
+    console.log("TouchX: " + touchX + " TouchY: " + touchY);
+  };
+
   return (
     <View style={{ flex: 1 }}>
-      <Canvas style={styles.container}>
+      <Canvas onTouchEnd={touchHandler} style={styles.container}>
         <Path
           path={path}
           color={Colors.lightgray}
@@ -81,6 +129,7 @@ const DonutComponent = ({
               decimals={decimals}
               index={index}
               gap={gap}
+              selectedPath={selectedPath}
             />
           );
         })}

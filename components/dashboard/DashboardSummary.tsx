@@ -6,7 +6,7 @@ import Colors from "@/constants/Colors";
 
 const DashboardSummary = () => {
   return (
-    <View className="gap-y-4">
+    <View className="gap-y-4 px-3">
       {/* Receber */}
       <View className="flex-row w-full justify-between">
         <View className="flex-row gap-2">

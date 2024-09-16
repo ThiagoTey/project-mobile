@@ -2,6 +2,7 @@ import colors from "@/constants/Colors";
 import { View, Text } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
 import { BarChart } from "react-native-gifted-charts";
+import ChartTitle from "./ChartTitle";
 
 const LineChartCustom = () => {
   const data = [
@@ -38,9 +39,9 @@ const LineChartCustom = () => {
     { value: 10, label: "31", dataPointText: "10" },
   ];
   return (
-    <View>
-      <View>
-        <Text>Vendas Por Mês</Text>
+    <View >
+      <View  style={{paddingTop: 12}}>
+        <ChartTitle iconName="linechart" title="Fluxo De Caixa" />
       </View>
 
       <View className="mt-4">
