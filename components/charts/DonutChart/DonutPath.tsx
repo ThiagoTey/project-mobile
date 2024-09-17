@@ -5,7 +5,7 @@ import {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Path, Skia } from "@shopify/react-native-skia";
+import { Group, Path, Skia } from "@shopify/react-native-skia";
 
 type Props = {
   radius: number;

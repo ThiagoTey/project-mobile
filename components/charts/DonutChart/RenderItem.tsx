@@ -11,7 +11,6 @@ interface Data {
 
 const RenderItem = ({ item, index }: { item: Data; index: number }) => {
 
-  console.log("persentage " + item.percentage)
   return (
     <Animated.View
       entering={FadeInDown.delay(index * 150)}

@@ -1,6 +1,11 @@
 import { GestureResponderEvent, StyleSheet, View } from "react-native";
-import React, { useState } from "react";
-import { SharedValue, useDerivedValue } from "react-native-reanimated";
+import React, { useEffect, useState } from "react";
+import {
+  SharedValue,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import {
   Canvas,
   Path,
@@ -10,6 +15,17 @@ import {
 } from "@shopify/react-native-skia";
 import Colors from "@/constants/Colors";
 import DonutPath from "./DonutPath";
+
+type DonutData = {
+  originalIndex: number; // Armazena o índice original
+};
+
+interface Data {
+  value: number;
+  percentage: number;
+  color: string;
+  seller: string;
+}
 
 type Props = {
   radius: number;
@@ -22,6 +38,7 @@ type Props = {
   gap: number;
   decimals: SharedValue<number[]>;
   colors: string[];
+  data: Data[];
 };
 
 const DonutComponent = ({
@@ -35,16 +52,46 @@ const DonutComponent = ({
   gap,
   decimals,
   colors,
+  data,
 }: Props) => {
-  const array = Array.from({ length: n });
+  // Crie uma estrutura que armazene o índice original
+  const array: DonutData[] = Array.from({ length: n }, (_, i) => ({
+    originalIndex: i,
+  }));
+
+  const [selectedPath, setSelectedPath] = useState<number | null>(null);
+
   const innerRadius = radius - outerStrokeWidth / 2;
   const path = Skia.Path.Make();
-  const [selectedPath, setSelectedPath] = useState<number | null>(null)
   path.addCircle(radius, radius, innerRadius);
 
+  const targetTextValue = useSharedValue(
+    selectedPath !== null ? data[selectedPath].value : totalValue.value
+  );
+
+  const seller = useSharedValue(
+    selectedPath !== null ? data[selectedPath].seller : "Total"
+  )
+
+  useEffect(() => {
+    targetTextValue.value = withTiming(
+      selectedPath !== null ? data[selectedPath].value : totalValue.value,
+      { duration: 300 }
+    );
+
+    seller.value =  selectedPath !== null ? data[selectedPath].seller : "Total"
+    console.log("seller lenght : " , seller.value.length / 2.5)
+
+  }, [selectedPath, totalValue.value]);
+
   const targetText = useDerivedValue(
-    () => `R$${Math.round(totalValue.value)}`,
-    []
+    () => `R$${Math.round(targetTextValue.value)}`,
+    [targetTextValue.value, totalValue.value]
+  );
+
+  const sellerText = useDerivedValue(
+    () => seller.value,
+    [seller.value]
   );
 
   const fontSize = font.measureText("R$00");
@@ -53,6 +100,12 @@ const DonutComponent = ({
   const textX = useDerivedValue(() => {
     const _fontSize = font.measureText(targetText.value);
     return radius - _fontSize.width / 2;
+  });
+
+  const textXSeller = useDerivedValue(() => {
+    const _fontSize = smallFont.measureText(sellerText.value);
+    console.log("_fontSize width : ", _fontSize.width / 2)
+    return radius - _fontSize.width / 2;;
   });
 
   const touchHandler = (e: GestureResponderEvent) => {
@@ -72,15 +125,15 @@ const DonutComponent = ({
     const outerRadius = radius;
 
     if (
-      distanceFromCenter >= innerRadius - 20 &&
-      distanceFromCenter <= outerRadius + 20
+      distanceFromCenter >= innerRadius - 10 &&
+      distanceFromCenter <= outerRadius + 10
     ) {
       // Cálculo do ângulo do toque em relação ao centro do círculo
       const angle =
         Math.atan2(touchY - centerY, touchX - centerX) * (180 / Math.PI);
       const normalizedAngle = angle < 0 ? angle + 360 : angle; // Normaliza para valores positivos
 
-      // Aqui você pode verificar qual setor do gráfico foi clicado
+      // Verificar qual setor foi clicado
       let currentAngle = 0;
       for (let i = 0; i < n; i++) {
         const startAngle = currentAngle;
@@ -88,10 +141,10 @@ const DonutComponent = ({
 
         if (normalizedAngle >= startAngle && normalizedAngle <= endAngle) {
           console.log("Você clicou no DonutPath", i);
-          if(selectedPath === i) {
-            setSelectedPath(null)
+          if (selectedPath === i) {
+            setSelectedPath(null);
           } else {
-            setSelectedPath(i)
+            setSelectedPath(i);
           }
           break;
         }
@@ -101,7 +154,6 @@ const DonutComponent = ({
     } else {
       console.log("Fora do donut");
     }
-
     console.log("TouchX: " + touchX + " TouchY: " + touchY);
   };
 
@@ -118,26 +170,47 @@ const DonutComponent = ({
           start={0}
           end={1}
         />
-        {array.map((_, index) => {
-          return (
-            <DonutPath
-              key={index}
-              radius={radius}
-              strokeWidth={strokeWidth}
-              outerStrokeWidth={outerStrokeWidth}
-              color={colors[index]}
-              decimals={decimals}
-              index={index}
-              gap={gap}
-              selectedPath={selectedPath}
-            />
-          );
+
+        {/* Renderiza todos os paths, exceto o selecionado */}
+        {array.map((item, index) => {
+          if (index !== selectedPath) {
+            return (
+              <DonutPath
+                key={index}
+                radius={radius}
+                strokeWidth={strokeWidth}
+                outerStrokeWidth={outerStrokeWidth}
+                color={colors[index]} // Use a cor correspondente ao índice original
+                decimals={decimals}
+                index={index} // Use o índice original para cálculos
+                gap={gap}
+                selectedPath={selectedPath}
+              />
+            );
+          }
+          return null; // Ignora o path selecionado aqui
         })}
+        {/* Renderiza o path selecionado por último */}
+        {selectedPath !== null && (
+          <DonutPath
+            key={selectedPath}
+            radius={radius}
+            strokeWidth={strokeWidth}
+            outerStrokeWidth={outerStrokeWidth}
+            color={colors[selectedPath]} // Use a cor correspondente ao índice original
+            decimals={decimals}
+            index={selectedPath} // Use o índice original para cálculos
+            gap={gap}
+            selectedPath={selectedPath}
+          />
+        )}
+
         <SkiaText
           y={radius + smallfontSize.height / 2 - fontSize.height / 1.1}
-          x={radius - smallfontSize.width / 2}
+          // x={radius - smallfontSize.width / (seller.value.length / 2.5)}
+          x={textXSeller}
           font={smallFont}
-          text={"Total"}
+          text={sellerText}
           color="black"
         />
         <SkiaText

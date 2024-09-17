@@ -115,6 +115,7 @@ const DonutChart = () => {
             gap={GAP}
             decimals={decimals}
             colors={arrayColors}
+            data={data}
           />
         </View>
       </View>
