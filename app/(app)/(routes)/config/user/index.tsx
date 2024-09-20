@@ -4,11 +4,12 @@ import { useAuth } from "@/context/AuthContext";
 import ThemedText from "@/components/typography/ThemedText";
 import { useDbOperations } from "@/database/dbOperations";
 import { useRefresh } from "@/context/RefreshContext";
+import { useConfigDatabase } from "@/database/useConfigDatabase";
 
 type Props = {};
 
 const User = (props: Props) => {
-  const dbOperation = useDbOperations();
+  const { getLastSycndate } = useConfigDatabase();
   const { allCompanies, userCompany } = useAuth();
   const [companyName, setCompanyName] = useState("");
   const [lastAsyncDate, setlastAsyncDate] = useState("");
@@ -29,7 +30,7 @@ const User = (props: Props) => {
   useEffect(() => {
     const getLastAsyncDate = async () => {
       try {
-        const response = await dbOperation.getLastSycndate();
+        const response = await getLastSycndate();
         if (response) {
           const date = new Date(response.last_sync);
           const formattedDate = date.toLocaleDateString("en-GB", {

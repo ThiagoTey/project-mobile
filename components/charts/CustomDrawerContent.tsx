@@ -20,6 +20,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 import { useAuth } from "@/context/AuthContext";
 import LoadingModal from "@/components/feedback/LoadingModal";
+import { useConfigDatabase } from "@/database/useConfigDatabase";
 
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
@@ -33,18 +34,20 @@ const CustomDrawerContent = (props: any) => {
   const productDb = useProductDatabase();
   const unitDb = useUnitDatabase();
   const groupDb = useGroupDatabase();
-  const dbOperation = useDbOperations();
+  const { getLastSycndate, updateLastSyncDate } = useConfigDatabase();
   const { triggerRefresh, refresh } = useRefresh();
-  const [companyName, setCompanyName] = useState("")
-  
+  const [companyName, setCompanyName] = useState("");
+
   useEffect(() => {
-    if(allCompanies && userCompany){
-      const companyName = allCompanies.find(company => company.id === Number(userCompany))?.name;
-      if(companyName){
-        setCompanyName(companyName)
+    if (allCompanies && userCompany) {
+      const companyName = allCompanies.find(
+        (company) => company.id === Number(userCompany)
+      )?.name;
+      if (companyName) {
+        setCompanyName(companyName);
       }
     }
-  },[userCompany])
+  }, [userCompany]);
 
   const onLogout = async () => {
     logout();
@@ -53,7 +56,7 @@ const CustomDrawerContent = (props: any) => {
   useEffect(() => {
     const getLastAsyncDate = async () => {
       try {
-        const response = await dbOperation.getLastSycndate();
+        const response = await getLastSycndate();
         if (response) {
           const date = new Date(response.last_sync);
           const formattedDate = date.toLocaleDateString("en-GB", {
@@ -79,7 +82,7 @@ const CustomDrawerContent = (props: any) => {
   const wppUrl = `whatsapp://send?phone=+553732321127`;
 
   const openWhatsApp = () => {
-    Linking.openURL(wppUrl)
+    Linking.openURL(wppUrl);
   };
 
   // Função sincronizar
@@ -90,7 +93,7 @@ const CustomDrawerContent = (props: any) => {
       await productDb.synchronizeAllProducts();
       await unitDb.synchronizeAllUnits();
       await groupDb.synchronizeAllGroups();
-      await dbOperation.updateLastSyncDate();
+      await updateLastSyncDate();
       ToastAndroid.show("Sincronizado com sucesso!", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error);
@@ -113,9 +116,7 @@ const CustomDrawerContent = (props: any) => {
             source={images.logo}
             resizeMode="contain"
           />
-          <Text className="py-4 text-base">
-          {companyName}
-          </Text>
+          <Text className="py-4 text-base">{companyName}</Text>
         </View>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>

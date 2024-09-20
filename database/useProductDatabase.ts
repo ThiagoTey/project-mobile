@@ -3,6 +3,8 @@ import { useSQLiteContext } from "expo-sqlite";
 import { ProductInterface, ProductSizeInterface } from "@/types";
 import { fetchAllData } from "@/api/fetchData";
 import * as SecureStore from "expo-secure-store";
+import { useConfigDatabase } from "./useConfigDatabase";
+
 
 export const useProductDatabase = () => {
   const db = useSQLiteContext();
@@ -209,9 +211,12 @@ export const useProductDatabase = () => {
     }
   };
 
+  // const { getLastSycndate } = useConfigDatabase();
+
   const synchronizeAllProducts = async () => {
     const subdomain = await SecureStore.getItemAsync("subdomain");
-    const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`
+    const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`    
+    // const lastSyncdate = await getLastSycndate();
 
     const jsonData = await fetchAllData(prodUrl);
     for (let i = 0; i < jsonData.length; i++) {
@@ -224,6 +229,7 @@ export const useProductDatabase = () => {
         const newUpdateDate = new Date(product.updated_at);
 
         if (updateDate < newUpdateDate) {
+          console.log("updateee")
           updateProduct(product);
         }
       } else {
