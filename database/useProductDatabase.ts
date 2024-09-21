@@ -5,7 +5,6 @@ import { fetchAllData } from "@/api/fetchData";
 import * as SecureStore from "expo-secure-store";
 import { useConfigDatabase } from "./useConfigDatabase";
 
-
 export const useProductDatabase = () => {
   const db = useSQLiteContext();
 
@@ -215,46 +214,83 @@ export const useProductDatabase = () => {
 
   const synchronizeAllProducts = async () => {
     const subdomain = await SecureStore.getItemAsync("subdomain");
-    const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`    
     // const lastSyncdate = await getLastSycndate();
+    const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`;
 
     const jsonData = await fetchAllData(prodUrl);
-    for (let i = 0; i < jsonData.length; i++) {
-      const product = jsonData[i];
 
-      // Verifica se o produto existe, e se sim atualiza
-      const existingProduct = await verifyProductExists(product.id);
-      if (existingProduct) {
-        const updateDate = new Date(existingProduct.updated_at);
-        const newUpdateDate = new Date(product.updated_at);
+    await Promise.all(
+      jsonData.map(async (product: ProductInterface) => {
+        const existingProduct = await verifyProductExists(product.id);
 
-        if (updateDate < newUpdateDate) {
-          console.log("updateee")
-          updateProduct(product);
-        }
-      } else {
-        // Inserir Produto no banco
-        await insertProduct(product);
-      }
+        if (existingProduct) {
+          const updateDate = new Date(existingProduct.updated_at);
+          const newUpdateDate = new Date(product.updated_at);
 
-      // Insere a grade se tiver
-      if (product.product_sizes.length > 0) {
-        const existingGrid = await verifyGridExists(product.product_sizes.id);
-        // Verifica se a grid existe
-        if (existingGrid) {
-          const updateGridDate = new Date(existingGrid.updated_at);
-          const newUpdateGridDate = new Date(
-            product.product_sizes.id.updated_at
-          );
-
-          if (updateGridDate < newUpdateGridDate) {
-            await updateGrid(product.product_sizes);
+          if (updateDate < newUpdateDate) {
+            await updateProduct(product);
           }
         } else {
-          await insertGrid(product.product_sizes);
+          await insertProduct(product);
         }
-      }
-    }
+
+        // Insere a grade
+        if (product.product_sizes.length > 0) {
+          const gridPromises = product.product_sizes.map(async (size) => {
+            const existingGrid = await verifyGridExists(size.id);
+
+            if (existingGrid) {
+              const updateGridDate = new Date(existingGrid.updated_at);
+              const newUpdateGridDate = new Date(size.updated_at);
+
+              if (updateGridDate < newUpdateGridDate) {
+                await updateGrid(size);
+              }
+            } else {
+              await insertGrid(size);
+            }
+          });
+          await Promise.all(gridPromises);
+        }
+      })
+    );
+
+    // for (let i = 0; i < jsonData.length; i++) {
+    //   const product = jsonData[i];
+
+    //   // Verifica se o produto existe, e se sim atualiza
+    //   const existingProduct = await verifyProductExists(product.id);
+    //   if (existingProduct) {
+    //     const updateDate = new Date(existingProduct.updated_at);
+    //     const newUpdateDate = new Date(product.updated_at);
+
+    //     if (updateDate < newUpdateDate) {
+    //       console.log("updateee")
+    //       updateProduct(product);
+    //     }
+    //   } else {
+    //     // Inserir Produto no banco
+    //     await insertProduct(product);
+    //   }
+
+    //   // Insere a grade se tiver
+    //   if (product.product_sizes.length > 0) {
+    //     const existingGrid = await verifyGridExists(product.product_sizes.id);
+    //     // Verifica se a grid existe
+    //     if (existingGrid) {
+    //       const updateGridDate = new Date(existingGrid.updated_at);
+    //       const newUpdateGridDate = new Date(
+    //         product.product_sizes.id.updated_at
+    //       );
+
+    //       if (updateGridDate < newUpdateGridDate) {
+    //         await updateGrid(product.product_sizes);
+    //       }
+    //     } else {
+    //       await insertGrid(product.product_sizes);
+    //     }
+    //   }
+    // }
   };
 
   const searchByQuery = async (
