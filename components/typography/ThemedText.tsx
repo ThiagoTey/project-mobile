@@ -1,9 +1,13 @@
 import { Text, StyleSheet } from "react-native";
-import { TextInputProps } from "react-native";
+import { TextProps } from "react-native";
 import React from "react";
 
-const ThemedText = ({ ...props }: TextInputProps) => {
-  return <Text style={[styles.themedText, props.style]}>{props.children}</Text>;
+const ThemedText = ({ ...props }: TextProps) => {
+  return (
+    <Text {...props} style={[styles.themedText, props.style]}>
+      {props.children}
+    </Text>
+  );
 };
 
 export default ThemedText;

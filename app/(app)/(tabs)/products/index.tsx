@@ -19,6 +19,7 @@ const Products = () => {
   const params = useLocalSearchParams<{
     query?: string;
     queryId?: string;
+    reference?: string;
     sortBy?: string;
     sortOrder: string;
   }>();
@@ -45,6 +46,7 @@ const Products = () => {
       const data = await useProductDb.searchByQuery(
         params.query,
         Number(params.queryId),
+        params.reference,
         params.sortOrder,
         params.sortBy,
         limit
@@ -62,6 +64,7 @@ const Products = () => {
     const data = await useProductDb.searchByQuery(
       params.query,
       Number(params.queryId),
+      params.reference,
       params.sortOrder,
       params.sortBy,
       newLimit

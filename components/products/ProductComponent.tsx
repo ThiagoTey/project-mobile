@@ -38,7 +38,7 @@ const ProductComponent = ({
         index % 2 != 0 && `bg-gray-200/60`
       }`}
     >
-      <View className="flex-row gap-x-2">
+      <View className="flex-row gap-x-2 items-center w-[70%]">
         <ProductImage
           description={description}
           url=""
@@ -50,13 +50,23 @@ const ProductComponent = ({
           <ThemedText className="mt-1 font-isemibold">{description}</ThemedText>
         </View>
       </View>
-      <View className="min-w-[80px]">
+      <View className="w-[20%]">
         <View className="flex-row">
-          <ThemedText className="text-gray-500">Qtde: </ThemedText>
-          <ThemedText>{qtde ? qtde : 0}</ThemedText>
+          <ThemedText className="text-gray-500 font-ilight">Qtd: </ThemedText>
+          <ThemedText
+            className="max-w-[50px]"
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {qtde ? qtde : 0}
+          </ThemedText>
         </View>
 
-        <ThemedText className="mt-1 text-emerald-600">
+        <ThemedText
+          className="mt-1 text-emerald-600 max-w-[100px]"
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
           {formattedPrice}
         </ThemedText>
       </View>

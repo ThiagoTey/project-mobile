@@ -31,6 +31,7 @@ const Sidebar = ({
   const params = useLocalSearchParams<{
     query?: string;
     queryId?: string;
+    reference:string;
     sortBy?: string;
     sortOrder: string;
   }>();
@@ -41,7 +42,7 @@ const Sidebar = ({
     value,
   }: {
     type: "sortBy" | "sortOrder";
-    value: "description" | "code_internal" | "ASC" | "DESC";
+    value: "description" | "code_internal" | "reference" | "ASC" | "DESC";
   }) => {
     router.setParams({ [type]: value });
     setLocalParams((prev) => ({ ...prev, [type]: value }));
@@ -111,7 +112,8 @@ const Sidebar = ({
           <ThemedText className="text-lg font-semibold">
             Pesquisar Por
           </ThemedText>
-          <View className="flex-row gap-4">
+          <View className="flex-row gap-4 flex-wrap">
+            {/* Pesquisa Por Descrição */}
             <View className="flex-row">
               <Checkbox
                 onValueChange={() =>
@@ -126,6 +128,7 @@ const Sidebar = ({
               />
               <ThemedText className="pl-1">Descrição</ThemedText>
             </View>
+            {/* Pesquisa por código */}
             <View className="flex-row">
               <Checkbox
                 onValueChange={() =>
@@ -140,6 +143,22 @@ const Sidebar = ({
               />
               <ThemedText className="pl-1">Código</ThemedText>
             </View>
+            {/* Pesquisa por Referência */}
+            <View className="flex-row">
+              <Checkbox
+                onValueChange={() =>
+                  handleCheckBoxChange({
+                    type: "sortBy",
+                    value: "reference",
+                  })
+                }
+                className="rounded-full"
+                color={Colors.blue}
+                value={localParams.sortBy === "reference"}
+              />
+              <ThemedText className="pl-1">Referência</ThemedText>
+            </View>
+
           </View>
           {/* Decrecente ou crescente */}
           <ThemedText className="ThemedText-lg font-semibold">Ordem</ThemedText>

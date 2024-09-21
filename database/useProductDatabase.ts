@@ -296,16 +296,17 @@ export const useProductDatabase = () => {
   const searchByQuery = async (
     description: string = "",
     id?: number,
+    reference: string = "",
     sortOrder: string = "ASC",
     sortBy: string = "description",
     limit: number = 50
   ) => {
     try {
-      const searchValue = `%${id || description}%`;
+      const searchValue = `%${id || description || reference}%`;
       const query = `
                     SELECT id, description, price_cash, quantity, code_internal 
                     FROM products 
-                    WHERE ${sortBy} LIKE $searchValue 
+                    WHERE coalesce(${sortBy},'') LIKE $searchValue 
                     ORDER BY ${sortBy} ${sortOrder} 
                     LIMIT $limit
                 `;
