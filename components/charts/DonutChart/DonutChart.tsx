@@ -122,9 +122,6 @@ const DonutChart = () => {
       {data.map((item, index) => {
         return <RenderItem item={item} index={index} key={index} />;
       })}
-      <View className="justify-center items-center pt-10">
-        <Button title="generate" handlePress={generateData} />
-      </View>
     </View>
   );
 };

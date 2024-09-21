@@ -45,7 +45,7 @@ const ProductComponent = ({
           customStyles="w-[45px] h-[45px] bg-slate-200 rounded-sm"
         />
 
-        <View className="min-w-[210px]">
+        <View className="min-w-[215px] max-w-[64%]">
           <ThemedText>{codeInternal}</ThemedText>
           <ThemedText className="mt-1 font-isemibold">{description}</ThemedText>
         </View>

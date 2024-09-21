@@ -67,7 +67,7 @@ const DonutPath = ({
 
   useEffect(() => {
     if (selectedPath === index) {
-      pathStrokeWidth.value = withTiming(pathStrokeWidth.value + 10, {
+      pathStrokeWidth.value = withTiming(pathStrokeWidth.value + 5, {
         duration: 200, 
       });
     } else {

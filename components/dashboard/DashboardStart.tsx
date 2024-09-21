@@ -45,27 +45,32 @@ const DashboardStart = () => {
             backgroundColor: "rgba(0,0,0,0.5)",
           }}
         >
-          <View style={{ backgroundColor: "white", padding: 20 }}>
-            <View style={{flexDirection: "row"}}>
-              <ThemedText>Selecionar Mês</ThemedText>
-              <Picker
-                selectedValue={month}
-                onValueChange={(itemValue, index) => setMonth(itemValue)}
-              >
-                {meses.map((m, index) => (
-                  <Picker.Item key={index} label={m.toString()} value={m} />
-                ))}
-              </Picker>
-
-              <ThemedText>Selecionar Ano</ThemedText>
-              <Picker
-                selectedValue={year}
-                onValueChange={(itemValue) => setYear(itemValue)}
-              >
-                {years.map((y) => (
-                  <Picker.Item key={y} label={y.toString()} value={y} />
-                ))}
-              </Picker>
+          <View style={{ backgroundColor: "white", minWidth: 300, padding: 20 }}>
+            <View >
+              <View>
+                <ThemedText>Selecionar Mês</ThemedText>
+                <Picker
+                  selectedValue={meses[month]}
+                  onValueChange={(_, index) => setMonth(index)}
+                  className="w-80"
+                  
+                >
+                  {meses.map((m, index) => (
+                    <Picker.Item key={index} label={m.toString()} value={m} />
+                  ))}
+                </Picker>
+              </View>
+              <View>
+                <ThemedText>Selecionar Ano</ThemedText>
+                <Picker
+                  selectedValue={year}
+                  onValueChange={(itemValue) => setYear(itemValue)}
+                >
+                  {years.map((y) => (
+                    <Picker.Item key={y} label={y.toString()} value={y} />
+                  ))}
+                </Picker>
+              </View>
             </View>
             <Button title="Confirmar" onPress={() => setShowPicker(false)} />
           </View>
