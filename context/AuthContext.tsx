@@ -9,6 +9,7 @@ import React, {
 import * as SecureStore from "expo-secure-store";
 import { loginAuth } from "@/api/auth";
 import { router } from "expo-router";
+import { differenceInHours } from 'date-fns';
 
 type AllCompaniesProps = {
   id: number;
@@ -51,6 +52,22 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   );
   const [subdomain, setSubdomain] = useState<string | null>(null);
 
+  const checkLoginStatus = async () => {
+    const loginTimestamp = await SecureStore.getItemAsync("loginTimestamp");
+    const rememberMe = await SecureStore.getItemAsync("rememberMe");
+
+    if(loginTimestamp && rememberMe === "false" ) {
+      const loginTime = new Date(loginTimestamp)
+      const currentTime = new Date();
+
+      const hoursPassed = differenceInHours(currentTime, loginTime);
+
+      if(hoursPassed >= 1) {
+        await logout();
+      }
+    }
+  }
+
   useEffect(() => {
     const loadUser = async () => {
       try {
@@ -90,24 +107,33 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       setError(null);
       const token = await loginAuth(email, password, selectCompany, setError);
       if (token?.authentication_token) {
-        await SecureStore.setItemAsync("userToken", token.authentication_token);
-        await SecureStore.setItemAsync("subdomain", token.subdomain);
-        await SecureStore.setItemAsync("userEmail", email);
-        await SecureStore.setItemAsync("userCompany", selectCompany.toString());
-        await SecureStore.setItemAsync(
-          "userCompanies",
-          JSON.stringify(allCompanies)
-        );
+        const loginTimestamp = new Date().toISOString();
+        await Promise.all([
+          SecureStore.setItemAsync(
+            "userToken",
+            token.authentication_token
+          ),
+          SecureStore.setItemAsync("subdomain", token.subdomain),
+          SecureStore.setItemAsync("userEmail", email),
+          SecureStore.setItemAsync(
+            "userCompany",
+            selectCompany.toString()
+          ),
+          SecureStore.setItemAsync(
+            "userCompanies",
+            JSON.stringify(allCompanies)
+          ),
+          SecureStore.setItemAsync("loginTimestamp", loginTimestamp),
+        ]);
         setUserToken(token);
         setSubdomain(token.subdomain);
         setUserEmail(email);
         setUserCompany(selectCompany.toString());
         setIsLoggedIn(true);
-        router.replace('/');
+        router.replace("/");
+
         if (!rememberMe) {
-          setTimeout(async () => {
-            await logout();
-          }, 10800000); // 3 horas
+          SecureStore.setItemAsync("rememberMe", "false");
         }
       }
     } catch (error) {
@@ -120,11 +146,14 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const logout = async () => {
     try {
       setIsLoading(true);
-      await SecureStore.deleteItemAsync("userToken");
-      await SecureStore.deleteItemAsync("userEmail");
-      await SecureStore.deleteItemAsync("subdomain");
-      await SecureStore.deleteItemAsync("userCompany");
-      await SecureStore.deleteItemAsync("userCompanies");
+      Promise.all([
+        await SecureStore.deleteItemAsync("userToken"),
+        await SecureStore.deleteItemAsync("userEmail"),
+        await SecureStore.deleteItemAsync("subdomain"),
+        await SecureStore.deleteItemAsync("userCompany"),
+        await SecureStore.deleteItemAsync("userCompanies"),
+      ]);
+
       setUserToken(null);
       setSubdomain(null);
       setUserEmail(null);

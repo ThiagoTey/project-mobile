@@ -25,6 +25,7 @@
     "axios": "^1.7.7",
     "base-64": "^1.0.0",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "expo": "^51.0.31",
     "expo-build-properties": "~0.12.5",
     "expo-checkbox": "~3.0.0",
