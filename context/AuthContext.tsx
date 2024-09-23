@@ -70,6 +70,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   useEffect(() => {
     const loadUser = async () => {
+      await checkLoginStatus();
       try {
         setIsLoading(true);
         setError(null);
