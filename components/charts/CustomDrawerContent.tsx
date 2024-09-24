@@ -163,10 +163,10 @@ const CustomDrawerContent = (props: any) => {
               </View>
               <View>
                 <View className="justify-center">
-                  <Text className="text-xs text-gray-500">
+                  <Text className="text-xs text-gray/50">
                     {lastAsyncDate ? lastAsyncDate : "Não sincr."}
                   </Text>
-                  <Text className="text-xs self-center text-gray-500">
+                  <Text className="text-xs self-center text-gray/50">
                     {lastAsyncTime ? lastAsyncTime : ""}
                   </Text>
                 </View>

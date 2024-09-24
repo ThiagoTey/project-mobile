@@ -27,7 +27,7 @@ const DashboardStart = () => {
   ];
 
   return (
-    <View className="pt-4">
+    <View className="pt-4 items-center">
       <View className="flex-row justify-center items-center gap-1">
         {/* <ThemedText className='text-gray-500'>Agosto 2024</ThemedText> */}
         <ThemedText className="text-gray-500">{`${meses[month]}/${year}`}</ThemedText>
@@ -36,6 +36,7 @@ const DashboardStart = () => {
         </TouchableOpacity>
       </View>
       <ThemedText className="font-ibold text-[40px]">R$1,812.15</ThemedText>
+      <ThemedText className="">Total de vendas</ThemedText>
       <Modal visible={showPicker} transparent={true} animationType="fade">
         <View
           style={{

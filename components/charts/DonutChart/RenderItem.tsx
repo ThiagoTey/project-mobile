@@ -15,23 +15,29 @@ const RenderItem = ({ item, index }: { item: Data; index: number }) => {
     <Animated.View
       entering={FadeInDown.delay(index * 150)}
       exiting={FadeInDown}
-      className={"pt-3"}
+      className={"pt-3 "}
     >
       <View className="flex-row justify-between px-4 py-1">
         <View className="flex-row items-center gap-2">
-          <View
+          {/* <View
             className="rounded-full w-2 h-2"
             style={{ backgroundColor: item.color }}
-          />
-          <ThemedText className="text-base">{item.seller}</ThemedText>
+          /> */}
+          <ThemedText className="text-sm">{item.seller}</ThemedText>
         </View>
-        <ThemedText className="font-ilight">R${item.value}</ThemedText>
-        <ThemedText className="font-imedium">{item.percentage}%</ThemedText>
+        <View className="flex-row gap-x-4">
+          <ThemedText className="font-ilight">R${item.value}</ThemedText>
+          <View className="rounded-md px-2"
+            style={{ backgroundColor: item.color }}>
+            <ThemedText className="font-imedium text-white">{item.percentage}%</ThemedText>  
+          </View>
+
+        </View>
       </View>
       {/* Percentage view */}
-      <View className="bg-slate-200 rounded-md">
-        <View style={{height: 10, backgroundColor: item.color, borderRadius: 6, width: `${item.percentage}%` }}/>
-      </View>
+      {/* <View className="bg-slate-200 rounded-md">
+        <View style={{height: 8, backgroundColor: item.color, borderRadius: 6, width: `${item.percentage}%` }}/>
+      </View> */}
     </Animated.View>
   );
 };

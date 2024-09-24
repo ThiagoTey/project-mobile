@@ -135,6 +135,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
         if (!rememberMe) {
           SecureStore.setItemAsync("rememberMe", "false");
+        } else {
+          SecureStore.setItemAsync("rememberMe", "true");
         }
       }
     } catch (error) {

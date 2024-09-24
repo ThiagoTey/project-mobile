@@ -15,8 +15,8 @@ import DonutChart from "@/components/charts/DonutChart/DonutChart";
 const Container = (props: ViewProps) => {
   return (
     <View
-      style={{ overflow: "hidden", paddingTop: 12, paddingHorizontal: 12, paddingBottom: 12 }}
-      className="border-gray-300 border rounded-lg"
+      style={{ overflow: "hidden", paddingVertical: 20, paddingHorizontal: 16}}
+      className="border-gray/25 border rounded-lg"
       {...props}
     >
       {props.children}
@@ -28,9 +28,9 @@ const Home = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{ rowGap: 36 }} className="p-4 pt-0 mt-0">
+        <View style={{ rowGap: 40 }} className="p-4 pt-0 mt-0">
           {/* Filtro e Inicio */}
-          <Container className="items-center py-0 border-0">
+          <Container className="items-center py-0 border-0 mt-2">
             <DashboardStart />
           </Container>
           {/* Resumo financeiro */}

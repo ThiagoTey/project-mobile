@@ -5,7 +5,7 @@ import {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Group, Path, Skia } from "@shopify/react-native-skia";
+import { Path, Skia } from "@shopify/react-native-skia";
 
 type Props = {
   radius: number;
@@ -83,8 +83,8 @@ const DonutPath = ({
         color={color}
         style="stroke"
         strokeWidth={pathStrokeWidth}
-        strokeJoin="round"
-        strokeCap="round"
+        strokeJoin="miter"
+        strokeCap="butt"
         start={start}
         end={end}
       />

@@ -7,6 +7,8 @@ import DonutComponent from "./DonutComponent";
 import { useFont } from "@shopify/react-native-skia";
 import ChartTitle from "../ChartTitle";
 
+import { useIsFocused } from '@react-navigation/native';
+
 interface Data {
   value: number;
   percentage: number;
@@ -44,9 +46,10 @@ export function calculatePercentage(
 const RADIUS = 140;
 const STROKE_WIDTH = 24;
 const OUTER_STROKE_WIDTH = 32;
-const GAP = 0.04;
+const GAP = 0.00;
 
 const DonutChart = () => {
+  const isFocused = useIsFocused();
   const n = 7;
   const [data, setData] = useState<Data[]>([]);
   const totalValue = useSharedValue(0);
@@ -89,8 +92,12 @@ const DonutChart = () => {
   };
 
   useEffect(() => {
-    generateData();
-  }, []);
+    if(isFocused) {
+      setTimeout(() => {
+        generateData()
+      }, 1000)
+    }
+  }, [isFocused]);
 
   const font = useFont(require("@/assets/fonts/Inter-Bold.ttf"), 36);
   const smallFont = useFont(require("@/assets/fonts/Inter-Light.ttf"), 24);

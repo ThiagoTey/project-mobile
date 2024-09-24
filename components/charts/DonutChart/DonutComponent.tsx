@@ -108,6 +108,8 @@ const DonutComponent = ({
     return radius - _fontSize.width / 2;;
   });
 
+
+  // Caluculo de qual path foi clicado
   const touchHandler = (e: GestureResponderEvent) => {
     const touchX = e.nativeEvent.locationX;
     const touchY = e.nativeEvent.locationY;
@@ -207,7 +209,6 @@ const DonutComponent = ({
 
         <SkiaText
           y={radius + smallfontSize.height / 2 - fontSize.height / 1.1}
-          // x={radius - smallfontSize.width / (seller.value.length / 2.5)}
           x={textXSeller}
           font={smallFont}
           text={sellerText}
