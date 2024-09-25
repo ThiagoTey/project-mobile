@@ -33,7 +33,7 @@ type Props = {
   outerStrokeWidth: number;
   font: SkFont;
   smallFont: SkFont;
-  totalValue: SharedValue<number>;
+  totalValue: number;
   n: number;
   gap: number;
   decimals: SharedValue<number[]>;
@@ -66,7 +66,7 @@ const DonutComponent = ({
   path.addCircle(radius, radius, innerRadius);
 
   const targetTextValue = useSharedValue(
-    selectedPath !== null ? data[selectedPath].value : totalValue.value
+    selectedPath !== null ? data[selectedPath].value : totalValue
   );
 
   const seller = useSharedValue(
@@ -75,18 +75,16 @@ const DonutComponent = ({
 
   useEffect(() => {
     targetTextValue.value = withTiming(
-      selectedPath !== null ? data[selectedPath].value : totalValue.value,
+      selectedPath !== null ? data[selectedPath].value : totalValue,
       { duration: 300 }
     );
 
     seller.value =  selectedPath !== null ? data[selectedPath].seller : "Total"
-    console.log("seller lenght : " , seller.value.length / 2.5)
-
-  }, [selectedPath, totalValue.value]);
+  }, [selectedPath, totalValue]);
 
   const targetText = useDerivedValue(
     () => `R$${Math.round(targetTextValue.value)}`,
-    [targetTextValue.value, totalValue.value]
+    [targetTextValue.value, totalValue]
   );
 
   const sellerText = useDerivedValue(
@@ -104,7 +102,6 @@ const DonutComponent = ({
 
   const textXSeller = useDerivedValue(() => {
     const _fontSize = smallFont.measureText(sellerText.value);
-    console.log("_fontSize width : ", _fontSize.width / 2)
     return radius - _fontSize.width / 2;;
   });
 
@@ -142,7 +139,6 @@ const DonutComponent = ({
         const endAngle = startAngle + decimals.value[i] * 360;
 
         if (normalizedAngle >= startAngle && normalizedAngle <= endAngle) {
-          console.log("Você clicou no DonutPath", i);
           if (selectedPath === i) {
             setSelectedPath(null);
           } else {
@@ -156,7 +152,6 @@ const DonutComponent = ({
     } else {
       console.log("Fora do donut");
     }
-    console.log("TouchX: " + touchX + " TouchY: " + touchY);
   };
 
   return (

@@ -81,6 +81,7 @@ const Products = () => {
       ) : (
         <FlatList
           data={productData}
+          
           keyExtractor={(item) => item.id.toString()}
           ListFooterComponent={() => (
             <View className="mt-6 pb-6 justify-center items-center">

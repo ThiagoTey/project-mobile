@@ -52,7 +52,7 @@ const DonutChart = () => {
   const isFocused = useIsFocused();
   const n = 7;
   const [data, setData] = useState<Data[]>([]);
-  const totalValue = useSharedValue(0);
+  const [totalValue, setTotalValue] = useState(0);
   const decimals = useSharedValue<number[]>([]);
   const colors = [
     "#1FBCFF",
@@ -86,7 +86,7 @@ const DonutChart = () => {
       seller: "Vendedor " + index,
     }));
 
-    totalValue.value = withTiming(total, { duration: 1000 });
+    setTotalValue(total)
     decimals.value = [...generateDecimals];
     setData(data);
   };
