@@ -3,6 +3,7 @@ import React from "react";
 import { BarChart } from "react-native-gifted-charts";
 import Colors from "@/constants/Colors";
 import ChartTitle from "./ChartTitle";
+import ThemedText from "../typography/ThemedText";
 
 const renderTitle = () => {
   return (
@@ -317,7 +318,7 @@ const BarChartCustom = () => {
 
   return (
     <View >
-      <View  style={{paddingTop: 12}}>
+      <View >
         <ChartTitle iconName="barchart" title="Fluxo De Caixa" />
       </View>
       {renderTitle()}
@@ -329,8 +330,8 @@ const BarChartCustom = () => {
         initialSpacing={22}
         roundedTop
         hideRules
-        xAxisThickness={0}
-        yAxisThickness={0}
+        xAxisColor={Colors.lightgray}
+        yAxisColor={Colors.lightgray}
         yAxisTextStyle={{ color: "gray" }}
         noOfSections={3}
         renderTooltip={(item: any, index: number) => {
@@ -347,7 +348,7 @@ const BarChartCustom = () => {
                 borderRadius: 4,
               }}
             >
-              <Text>{item.value}</Text>
+              <ThemedText>{item.value}</ThemedText>
             </View>
           );
         }}

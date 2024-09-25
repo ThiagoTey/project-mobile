@@ -15,7 +15,7 @@ import DonutChart from "@/components/charts/DonutChart/DonutChart";
 const Container = (props: ViewProps) => {
   return (
     <View
-      style={{ overflow: "hidden", paddingVertical: 20, paddingHorizontal: 16}}
+      style={{ overflow: "hidden", paddingVertical: 20, paddingHorizontal: 16 }}
       className="border-gray/25 border rounded-lg"
       {...props}
     >
@@ -48,13 +48,13 @@ const Home = () => {
           <Container>
             <LineChartCustom />
           </Container>
-          {/* Saldo das contas */}
-          {/* <Container>
-            <BarHorizontarCustom />
-          </Container> */}
           {/* Fluxo de caixa */}
           <Container>
             <BarChartCustom />
+          </Container>
+          {/* Saldo das contas */}
+          <Container>
+            <BarHorizontarCustom />
           </Container>
           {/* DRE */}
           <Container>

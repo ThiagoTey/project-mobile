@@ -94,6 +94,7 @@ const LineChartCustom = () => {
 
   const data = dataValues.map((item, index) => ({
     id: index,
+    label: (index + 1).toString(),
     value: item.value,
     dataPointLabelShiftX: calculateLabelShiftX(item.value),
     dataPointLabelComponent: () => {
@@ -125,7 +126,7 @@ const LineChartCustom = () => {
 
   return (
     <View>
-      <View style={{ paddingTop: 12 }}>
+      <View>
         <ChartTitle iconName="linechart" title="Vendas no mês" />
       </View>
 
@@ -133,13 +134,17 @@ const LineChartCustom = () => {
         <LineChart
           color={Colors.blue}
           dataPointsColor={"black"}
-          dataPointsRadius={6}
-          dataPointsRadius1={7}
+          dataPointsRadius={7}
           focusedDataPointColor={Colors.blue}
           dataPointsColor1={Colors.blue}
           data={data}
           initialSpacing={25}
           overflowTop={20}
+          yAxisTextStyle={{ color: "gray" }}
+          xAxisLabelTextStyle={{ color: "gray" }}
+          xAxisThickness={1}
+          xAxisColor={Colors.lightgray}
+          yAxisColor={Colors.lightgray}
           // customDataPoint={(props, index) => {
           //   return customDataPoint({ ...props, index });
           // }}
@@ -147,6 +152,12 @@ const LineChartCustom = () => {
           onPress={(props: any) => {
             handlePress(props);
           }}
+
+          areaChart
+          startFillColor="rgb(5, 129, 181)"
+          startOpacity={0.5}
+          endFillColor1="rgb(31, 188, 255)"
+          endOpacity={0.1}
         />
       </View>
     </View>
