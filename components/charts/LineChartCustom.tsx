@@ -87,10 +87,15 @@ const LineChartCustom = () => {
     { value: 10 },
   ];
 
+  const calculateLabelShiftX = (value:number) => {
+    const numberOfDigits = value.toString().length;
+    return 9 - (numberOfDigits - 1) * 2;
+  };
+
   const data = dataValues.map((item, index) => ({
     id: index,
     value: item.value,
-    dataPointLabelShiftX: 3,
+    dataPointLabelShiftX: calculateLabelShiftX(item.value),
     dataPointLabelComponent: () => {
       return (
         <DataPointLabelComponent
@@ -109,10 +114,13 @@ const LineChartCustom = () => {
       setSelectedDataPoint(props.id);
     }
 
-    setTimeout(() => {
-      setSelectedDataPoint(null);
-    }, 8000);
-    clearTimeout;
+    // const timeout = setTimeout(() => {
+    //   setSelectedDataPoint(null);
+    // }, 8000);
+
+    // return () => {
+    //   clearTimeout(timeout);
+    // }
   };
 
   return (
@@ -126,6 +134,7 @@ const LineChartCustom = () => {
           color={Colors.blue}
           dataPointsColor={"black"}
           dataPointsRadius={6}
+          dataPointsRadius1={7}
           focusedDataPointColor={Colors.blue}
           dataPointsColor1={Colors.blue}
           data={data}
@@ -134,7 +143,7 @@ const LineChartCustom = () => {
           // customDataPoint={(props, index) => {
           //   return customDataPoint({ ...props, index });
           // }}
-
+          overflowBottom={0}
           onPress={(props: any) => {
             handlePress(props);
           }}
