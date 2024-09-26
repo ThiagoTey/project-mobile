@@ -319,7 +319,7 @@ const BarChartCustom = () => {
   return (
     <View >
       <View >
-        <ChartTitle iconName="barchart" title="Fluxo De Caixa" />
+        <ChartTitle iconName="barchart" title="Fluxo de Caixa" />
       </View>
       {renderTitle()}
       <BarChart

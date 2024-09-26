@@ -29,7 +29,7 @@ const BarHorizontarCustom = () => {
   return (
     <View>
       <View>
-        <ChartTitle iconName="barchart" title="Fluxo De Caixa" />
+        <ChartTitle iconName="bank" title="Saldo das Contas" />
       </View>
       <View style={{ marginTop: 16 }}>
         <BarChart

@@ -6,7 +6,7 @@ import {
   FontAwesome6,
   AntDesign,
 } from "@expo/vector-icons";
-import CustomDrawerContent from "@/components/charts/CustomDrawerContent";
+import CustomDrawerContent from "@/components/navigation/CustomDrawerContent";
 import Header from "@/components/navigation/Header";
 
 export default function TabLayout() {
