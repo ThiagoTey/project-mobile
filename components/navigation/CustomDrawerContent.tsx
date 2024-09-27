@@ -1,4 +1,4 @@
-import { images } from "@/constants";
+import { fonts, images } from "@/constants";
 import { useRefresh } from "@/context/RefreshContext";
 import { useGroupDatabase } from "@/database/useGroupDatabse";
 import { useProductDatabase } from "@/database/useProductDatabase";
@@ -23,12 +23,13 @@ import LoadingModal from "@/components/feedback/LoadingModal";
 import { useConfigDatabase } from "@/database/useConfigDatabase";
 import ThemedText from "../typography/ThemedText";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import CompanyPicker from "../form/CompanyPicker";
+import UserPicker from "../form/UserPicker";
 
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
   const { bottom } = useSafeAreaInsets();
 
-  const { allCompanies, userCompany } = useAuth();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastAsyncDate, setlastAsyncDate] = useState("");
@@ -38,18 +39,7 @@ const CustomDrawerContent = (props: any) => {
   const groupDb = useGroupDatabase();
   const { getLastSyncDate, updateLastSyncDate } = useConfigDatabase();
   const { triggerRefresh, refresh } = useRefresh();
-  const [companyName, setCompanyName] = useState("");
-   
-  useEffect(() => {
-    if (allCompanies && userCompany) {
-      const companyName = allCompanies.find(
-        (company) => company.id === Number(userCompany)
-      )?.name;
-      if (companyName) {
-        setCompanyName(companyName);
-      }
-    }
-  }, [userCompany]);
+
 
   const onLogout = async () => {
     logout();
@@ -112,15 +102,9 @@ const CustomDrawerContent = (props: any) => {
       <LoadingModal description="Sincronizando..." isLoading={isSyncing} />
       {/* Custom Drawer */}
       <DrawerContentScrollView {...props}>
-        <View className="border-b-slate-100 border-b-2">
-          <TouchableOpacity className="flex-row rounded-full border-b-slate-200 py-4 gap-x-1 items-center">
-            <Image
-              source={images.logo}
-              style={{width: 24}}
-              resizeMode="contain"
-            />
-            <ThemedText className="font-isemibold text-base">{companyName}</ThemedText>
-          </TouchableOpacity>
+        <View className="border-b-slate-100 border-b-2 p-2">
+          <CompanyPicker />
+          <UserPicker />
         </View>
         <DrawerItemList {...props}/>
       </DrawerContentScrollView>

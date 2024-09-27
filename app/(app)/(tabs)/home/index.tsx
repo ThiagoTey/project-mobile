@@ -1,7 +1,6 @@
-import { Image, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
-import { Picker } from "@react-native-picker/picker";
 
 import LineChartCustom from "@/components/charts/LineChartCustom";
 import BarHorizontarCustom from "@/components/charts/BarHorizontarCustom";
@@ -10,10 +9,7 @@ import DRE from "@/components/dashboard/DRE";
 import DashboardStart from "@/components/dashboard/DashboardStart";
 import DashboardSummary from "@/components/dashboard/DashboardSummary";
 import DonutChart from "@/components/charts/DonutChart/DonutChart";
-import ThemedText from "@/components/typography/ThemedText";
-import { fonts, images } from "@/constants";
-import { useRef, useState } from "react";
-import CustomPicker from "@/components/form/CustomPicker";
+import { useState } from "react";
 
 const Container = (props: ViewProps) => {
   return (
@@ -66,10 +62,6 @@ const Home = () => {
             <DRE />
           </Container>
 
-          <Container>
-            <ThemedText style={{fontFamily: fonts.interLight, fontSize: 12}}>Empresa</ThemedText>
-            <CustomPicker />
-          </Container>
         </View>
       </ScrollView>
     </SafeAreaView>

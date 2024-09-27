@@ -1,4 +1,5 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import ThemedText from '../typography/ThemedText';
 
 type Props = {
     description: string;
@@ -13,7 +14,7 @@ const ProductImage = ({description, url, customStyles,textStyles}:Props) => {
 
   return (
     <View className={`justify-center items-center ${customStyles}`}>
-      <Text className={textStyles}>{firstTwoLetters}</Text>
+      <ThemedText className={textStyles}>{firstTwoLetters}</ThemedText>
     </View>
   )
 }
