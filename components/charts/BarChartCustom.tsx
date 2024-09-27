@@ -333,13 +333,13 @@ const BarChartCustom = () => {
         xAxisColor={Colors.lightgray}
         yAxisColor={Colors.lightgray}
         yAxisTextStyle={{ color: "gray" }}
+        autoCenterTooltip
         noOfSections={3}
         renderTooltip={(item: any, index: number) => {
           return (
             <View
               style={{
                 marginBottom: 2,
-                marginLeft: -8,
                 backgroundColor: "white",
                 borderColor: "#d3d3d3",
                 borderWidth: 1,
@@ -348,7 +348,7 @@ const BarChartCustom = () => {
                 borderRadius: 4,
               }}
             >
-              <ThemedText>{item.value}</ThemedText>
+              <ThemedText>R${item.value}</ThemedText>
             </View>
           );
         }}

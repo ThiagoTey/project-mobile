@@ -1,16 +1,19 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import PieChartCustom from "@/components/charts/PieChart";
+import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import { Picker } from "@react-native-picker/picker";
+
 import LineChartCustom from "@/components/charts/LineChartCustom";
 import BarHorizontarCustom from "@/components/charts/BarHorizontarCustom";
 import BarChartCustom from "@/components/charts/BarChartCustom";
 import DRE from "@/components/dashboard/DRE";
 import DashboardStart from "@/components/dashboard/DashboardStart";
-import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import DashboardSummary from "@/components/dashboard/DashboardSummary";
 import DonutChart from "@/components/charts/DonutChart/DonutChart";
+import ThemedText from "@/components/typography/ThemedText";
+import { fonts, images } from "@/constants";
+import { useRef, useState } from "react";
+import CustomPicker from "@/components/form/CustomPicker";
 
 const Container = (props: ViewProps) => {
   return (
@@ -25,6 +28,8 @@ const Container = (props: ViewProps) => {
 };
 
 const Home = () => {
+  const [selectedCompany, setSelectedCompany] = useState("Teste Nome");
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -59,6 +64,11 @@ const Home = () => {
           {/* DRE */}
           <Container>
             <DRE />
+          </Container>
+
+          <Container>
+            <ThemedText style={{fontFamily: fonts.interLight, fontSize: 12}}>Empresa</ThemedText>
+            <CustomPicker />
           </Container>
         </View>
       </ScrollView>

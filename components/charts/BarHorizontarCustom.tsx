@@ -64,7 +64,7 @@ const BarHorizontarCustom = () => {
                   borderRadius: 4,
                 }}
               >
-                <ThemedText>{item.value}</ThemedText>
+                <ThemedText>R${item.value}</ThemedText>
               </View>
             );
           }}

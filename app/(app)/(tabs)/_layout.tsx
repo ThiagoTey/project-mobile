@@ -8,6 +8,7 @@ import {
 } from "@expo/vector-icons";
 import CustomDrawerContent from "@/components/navigation/CustomDrawerContent";
 import Header from "@/components/navigation/Header";
+import { fonts } from "@/constants";
 
 export default function TabLayout() {
 
@@ -20,6 +21,7 @@ export default function TabLayout() {
           headerStyle: {backgroundColor: colors.blue},
           headerTitleStyle: {
             color: "white",
+            fontFamily: fonts.interRegular
           },
           headerTintColor: "white",
           drawerLabelStyle: { marginLeft: -20 },

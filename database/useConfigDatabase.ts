@@ -21,7 +21,7 @@ export const useConfigDatabase = () => {
     }
   };
 
-  const getLastSycndate = async () => {
+  const getLastSyncDate = async () => {
     const query = "SELECT last_sync FROM config";
     try {
       const response: { last_sync: Date } | null = await db.getFirstAsync(
@@ -34,5 +34,5 @@ export const useConfigDatabase = () => {
     }
   };
 
-  return { updateLastSyncDate, getLastSycndate };
+  return { updateLastSyncDate, getLastSyncDate };
 };

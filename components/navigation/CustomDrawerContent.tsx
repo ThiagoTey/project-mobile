@@ -21,6 +21,8 @@ import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 import { useAuth } from "@/context/AuthContext";
 import LoadingModal from "@/components/feedback/LoadingModal";
 import { useConfigDatabase } from "@/database/useConfigDatabase";
+import ThemedText from "../typography/ThemedText";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CustomDrawerContent = (props: any) => {
   const { logout } = useAuth();
@@ -34,10 +36,10 @@ const CustomDrawerContent = (props: any) => {
   const productDb = useProductDatabase();
   const unitDb = useUnitDatabase();
   const groupDb = useGroupDatabase();
-  const { getLastSycndate, updateLastSyncDate } = useConfigDatabase();
+  const { getLastSyncDate, updateLastSyncDate } = useConfigDatabase();
   const { triggerRefresh, refresh } = useRefresh();
   const [companyName, setCompanyName] = useState("");
-
+   
   useEffect(() => {
     if (allCompanies && userCompany) {
       const companyName = allCompanies.find(
@@ -56,7 +58,7 @@ const CustomDrawerContent = (props: any) => {
   useEffect(() => {
     const getLastAsyncDate = async () => {
       try {
-        const response = await getLastSycndate();
+        const response = await getLastSyncDate();
         if (response) {
           const date = new Date(response.last_sync);
           const formattedDate = date.toLocaleDateString("en-GB", {
@@ -110,15 +112,17 @@ const CustomDrawerContent = (props: any) => {
       <LoadingModal description="Sincronizando..." isLoading={isSyncing} />
       {/* Custom Drawer */}
       <DrawerContentScrollView {...props}>
-        <View className="border-b-slate-100 pl-4 pt-6 border-b-2 w-fit">
-          <Image
-            className="w-[60px] self-center"
-            source={images.logo}
-            resizeMode="contain"
-          />
-          <Text className="py-4 text-base">{companyName}</Text>
+        <View className="border-b-slate-100 border-b-2">
+          <TouchableOpacity className="flex-row rounded-full border-b-slate-200 py-4 gap-x-1 items-center">
+            <Image
+              source={images.logo}
+              style={{width: 24}}
+              resizeMode="contain"
+            />
+            <ThemedText className="font-isemibold text-base">{companyName}</ThemedText>
+          </TouchableOpacity>
         </View>
-        <DrawerItemList {...props} />
+        <DrawerItemList {...props}/>
       </DrawerContentScrollView>
 
       <View
@@ -158,17 +162,17 @@ const CustomDrawerContent = (props: any) => {
           label={() => (
             <View className="-ml-5 flex-row justify-between items-center">
               <View>
-                <Text>Sincronizar</Text>
-                <Text className="text-xs">Última Sincronização : </Text>
+                <ThemedText>Sincronizar</ThemedText>
+                <ThemedText className="text-xs">Última Sincronização : </ThemedText>
               </View>
               <View>
                 <View className="justify-center">
-                  <Text className="text-xs text-gray/50">
+                  <ThemedText className="text-xs text-gray/50">
                     {lastAsyncDate ? lastAsyncDate : "Não sincr."}
-                  </Text>
-                  <Text className="text-xs self-center text-gray/50">
+                  </ThemedText>
+                  <ThemedText className="text-xs self-center text-gray/50">
                     {lastAsyncTime ? lastAsyncTime : ""}
-                  </Text>
+                  </ThemedText>
                 </View>
               </View>
             </View>

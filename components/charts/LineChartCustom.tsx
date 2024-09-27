@@ -43,7 +43,7 @@ const DataPointLabelComponent = ({
         display: selectedDataPoint === id ? "flex" : "none",
       }}
     >
-      <ThemedText >{value}</ThemedText>
+      <ThemedText>R${value}</ThemedText>
     </View>
   );
 };
@@ -89,7 +89,7 @@ const LineChartCustom = () => {
 
   const calculateLabelShiftX = (value:number) => {
     const numberOfDigits = value.toString().length;
-    return 9 - (numberOfDigits - 1) * 2;
+    return 9 - (numberOfDigits + 3) * 2;
   };
 
   const data = dataValues.map((item, index) => ({

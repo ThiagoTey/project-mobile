@@ -42,7 +42,7 @@ const ProductComponent = ({
         <ProductImage
           description={description}
           url=""
-          customStyles="w-[45px] h-[45px] bg-slate-200 rounded-sm"
+          customStyles="w-[45px] h-[45px] bg-slate-200 rounded"
         />
 
         <View className="min-w-[215px] max-w-[64%]">

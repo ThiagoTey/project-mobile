@@ -210,11 +210,11 @@ export const useProductDatabase = () => {
     }
   };
 
-  // const { getLastSycndate } = useConfigDatabase();
+  // const { getLastSyncDate } = useConfigDatabase();
 
   const synchronizeAllProducts = async () => {
     const subdomain = await SecureStore.getItemAsync("subdomain");
-    // const lastSyncdate = await getLastSycndate();
+    // const lastSyncdate = await getLastSyncDate();
     const prodUrl = `http://${subdomain}.ability.app.br/api/v1/products`;
 
     const jsonData = await fetchAllData(prodUrl);

@@ -9,7 +9,7 @@ import { useConfigDatabase } from "@/database/useConfigDatabase";
 type Props = {};
 
 const User = (props: Props) => {
-  const { getLastSycndate } = useConfigDatabase();
+  const { getLastSyncDate } = useConfigDatabase();
   const { allCompanies, userCompany } = useAuth();
   const [companyName, setCompanyName] = useState("");
   const [lastAsyncDate, setlastAsyncDate] = useState("");
@@ -30,7 +30,7 @@ const User = (props: Props) => {
   useEffect(() => {
     const getLastAsyncDate = async () => {
       try {
-        const response = await getLastSycndate();
+        const response = await getLastSyncDate();
         if (response) {
           const date = new Date(response.last_sync);
           const formattedDate = date.toLocaleDateString("en-GB", {
