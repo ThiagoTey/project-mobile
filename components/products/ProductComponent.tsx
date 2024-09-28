@@ -89,6 +89,7 @@ export default React.memo(ProductComponent, (prevProps, nextProps) => {
   return (
     prevProps.id === nextProps.id &&
     prevProps.price === nextProps.price &&
-    prevProps.qtde === nextProps.qtde
+    prevProps.qtde === nextProps.qtde &&
+    prevProps.sortBy === nextProps.qtde
   );
 });
