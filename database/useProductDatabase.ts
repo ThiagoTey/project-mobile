@@ -304,7 +304,7 @@ export const useProductDatabase = () => {
     try {
       const searchValue = `%${id || description || reference}%`;
       const query = `
-                    SELECT id, description, price_cash, quantity, code_internal 
+                    SELECT id, description, price_cash, quantity, code_internal, reference
                     FROM products 
                     WHERE coalesce(${sortBy},'') LIKE $searchValue 
                     ORDER BY ${sortBy} ${sortOrder} 

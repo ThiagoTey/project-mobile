@@ -36,8 +36,8 @@ const BarHorizontarCustom = () => {
           data={barData}
           yAxisTextStyle={{ color: "gray" }}
           xAxisLabelTextStyle={{ color: "gray" }}
-          xAxisColor={Colors.lightgray}
-          yAxisColor={Colors.lightgray}
+          xAxisColor={Colors.lightGray}
+          yAxisColor={Colors.lightGray}
           autoShiftLabels
           barWidth={24}
           roundedTop

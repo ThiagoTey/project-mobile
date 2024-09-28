@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -57,7 +57,7 @@ const Products = () => {
     loadProducts();
   }, [params.query, params.queryId, params.sortOrder, params.sortBy, refresh]);
 
-  const handleShowMore = async () => {
+  const handleShowMore = useCallback(async () => {
     setIsloading(true)
     const newLimit = limit + 50;
     setLimit(newLimit);
@@ -71,30 +71,33 @@ const Products = () => {
     );
     setProductData(data);
     setIsloading(false)
-  };
+  }, [params.query, params.queryId, params.sortOrder, params.sortBy, limit]);
   
+  const renderFooter = useMemo( () => (
+    <View className="mt-6 pb-6 justify-center items-center">
+    {
+      isLoading && (
+        <ActivityIndicator size="large" color={Colors.blue} />
+      )
+    }
+    {productData.length >= limit && (
+      <Button title="Mostrar mais" handlePress={handleShowMore} />
+    )}
+  </View>
+  ), [isLoading, productData.length, limit, handleShowMore])
 
   return (
     <SafeAreaView>
       {isLoading && !productData.length ? (
         <ActivityIndicator size="large" color={Colors.blue} />
+        
       ) : (
         <FlatList
           data={productData}
-          
+          initialNumToRender={limit}
+          windowSize={5}
           keyExtractor={(item) => item.id.toString()}
-          ListFooterComponent={() => (
-            <View className="mt-6 pb-6 justify-center items-center">
-              {
-                isLoading && (
-                  <ActivityIndicator size="large" color={Colors.blue} />
-                )
-              }
-              {productData.length >= limit && (
-                <Button title="Mostrar mais" handlePress={handleShowMore} />
-              )}
-            </View>
-          )}
+          ListFooterComponent={renderFooter}
           renderItem={({ item, index }) => (
             <ProductComponent
               description={item.description}
@@ -102,6 +105,8 @@ const Products = () => {
               id={item.id}
               price={item.price_cash}
               qtde={item.quantity}
+              reference={item.reference}
+              sortBy = {params.sortBy}
               index={index}
             />
           )}

@@ -159,7 +159,7 @@ const DonutComponent = ({
       <Canvas onTouchEnd={touchHandler} style={styles.container}>
         <Path
           path={path}
-          color={Colors.lightgray}
+          color={Colors.lightGray}
           style={"stroke"}
           strokeWidth={outerStrokeWidth}
           strokeJoin="round"

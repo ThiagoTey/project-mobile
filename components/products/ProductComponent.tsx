@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import ProductImage from "./ProductImage";
 import ThemedText from "@/components/typography/ThemedText";
-import React from "react";
+import React, { memo } from "react";
 
 interface Props {
   id: number;
@@ -11,6 +11,8 @@ interface Props {
   qtde: string;
   price: string;
   index: number;
+  reference: string | null;
+  sortBy: string | undefined;
 }
 
 const ProductComponent = ({
@@ -20,6 +22,8 @@ const ProductComponent = ({
   price,
   codeInternal,
   index,
+  reference,
+  sortBy
 }: Props) => {
   const onPress = () => {
     router.navigate({ pathname: "/product/[id]", params: { id: id } });
@@ -42,11 +46,18 @@ const ProductComponent = ({
         <ProductImage
           description={description}
           url=""
-          customStyles="w-[45px] h-[45px] bg-slate-200 rounded"
+          customStyles="w-[45px] h-[45px] rounded"
         />
 
         <View className="min-w-[215px] max-w-[64%]">
-          <ThemedText>{codeInternal}</ThemedText>
+          <View className="flex-row">
+            <ThemedText>{codeInternal}</ThemedText>
+            {
+              sortBy === 'reference' && (
+                <ThemedText className="font-iextralight"> - Ref: {reference}</ThemedText>
+              )
+            }
+          </View>
           <ThemedText className="mt-1 font-isemibold">{description}</ThemedText>
         </View>
       </View>

@@ -52,7 +52,7 @@ const CompanyPicker = ({}: Props) => {
   return (
     <View>
       <TouchableOpacity
-        style={[styles.logoContainer, isOpen && { backgroundColor: "#e5e5e5" }]}
+        style={[styles.logoContainer, isOpen && { backgroundColor: colors.neutral }]}
         ref={pickerRef}
         onPress={toggleDropDown}
       >
@@ -106,13 +106,11 @@ const CompanyPicker = ({}: Props) => {
                   }}
                   style={[
                     styles.itemList,
-                    index === 0 && {
-                      borderTopRightRadius: 99,
-                      borderTopLeftRadius: 99,
-                    },
-                    index + 1 === allCompanies.length && {
-                      borderBottomRightRadius: 99,
-                      borderBottomLeftRadius: 99,
+                    index === 0 && styles.itemListInitialBorder,
+                    ,
+                    index + 1 === allCompanies.length && styles.itemListFinalBorder,
+                    item.name === selectedValue && {
+                      backgroundColor: colors.lightBlue,
                     },
                   ]}
                   key={index}
@@ -140,7 +138,20 @@ const styles = StyleSheet.create({
   itemList: {
     padding: 8,
     backgroundColor: "white",
-    borderColor: colors.neutral,
-    borderWidth: 1,
+    borderColor: "#e5e5e5",
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  itemListInitialBorder: {
+    borderTopWidth: 1,
+    borderTopRightRadius: 16,
+    borderTopLeftRadius: 16,
+  },
+  itemListFinalBorder: {
+    borderBottomWidth: 1,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
   },
 });

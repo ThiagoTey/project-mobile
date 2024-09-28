@@ -1,4 +1,4 @@
-import { View, StyleSheet, Modal, Dimensions, Image } from "react-native";
+import { View, StyleSheet, Modal, Dimensions, Image, Pressable } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import ThemedText from "../typography/ThemedText";
@@ -17,7 +17,7 @@ const UserPicker = ({}: Props) => {
     width: 0,
   });
   const pickerRef = useRef<TouchableOpacity | null>(null);
-  const users = [{ name: "Admin" }];
+  const users = [{ name: "Admin" }, { name: "Trocar Usuário" }];
   const [selectedValue, setSelectedValue] = useState(users[0].name);
 
   const firstTwoLetters = selectedValue.substring(0, 2);
@@ -43,13 +43,18 @@ const UserPicker = ({}: Props) => {
   return (
     <View>
       <TouchableOpacity
-        style={[styles.PictureContainer, isOpen && { backgroundColor: "#e5e5e5" }]}
+        style={[
+          styles.PictureContainer,
+          isOpen && { backgroundColor: colors.neutral },
+        ]}
         ref={pickerRef}
         onPress={toggleDropDown}
       >
         {/* Foto perfil usuário */}
         <View style={styles.profilePicture}>
-          <ThemedText style={{fontFamily: fonts.interMedium}}>{firstTwoLetters}</ThemedText>
+          <ThemedText style={{ fontFamily: fonts.interMedium }}>
+            {firstTwoLetters}
+          </ThemedText>
         </View>
 
         <ThemedText style={{ fontFamily: fonts.interSemibold }}>
@@ -88,29 +93,16 @@ const UserPicker = ({}: Props) => {
               width: dropDownPosition.width,
             }}
           >
-            {users &&
-              users.map((item, index) => (
-                <TouchableOpacity
+                <Pressable
                   onPress={() => {
-                    setSelectedValue(item.name);
                     setIsOpen(false);
                   }}
                   style={[
-                    styles.itemList,
-                    index === 0 && {
-                      borderTopRightRadius: 99,
-                      borderTopLeftRadius: 99,
-                    },
-                    index + 1 === users.length && {
-                      borderBottomRightRadius: 99,
-                      borderBottomLeftRadius: 99,
-                    },
+                    styles.itemList
                   ]}
-                  key={index}
                 >
-                  <ThemedText>{item.name}</ThemedText>
-                </TouchableOpacity>
-              ))}
+                  <ThemedText>Trocar Usuário</ThemedText>
+                </Pressable>
           </View>
         </View>
       </Modal>
@@ -128,7 +120,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     backgroundColor: colors.neutral,
-    marginLeft: 4
+    marginLeft: 4,
   },
   PictureContainer: {
     borderRadius: 999,
@@ -141,6 +133,7 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "white",
     borderColor: "#e5e5e5",
-    borderWidth: 1,
+    borderWidth:1,
+    borderRadius: 16
   },
 });

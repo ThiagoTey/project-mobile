@@ -143,8 +143,8 @@ const LineChartCustom = () => {
           yAxisTextStyle={{ color: "gray" }}
           xAxisLabelTextStyle={{ color: "gray" }}
           xAxisThickness={1}
-          xAxisColor={Colors.lightgray}
-          yAxisColor={Colors.lightgray}
+          xAxisColor={Colors.lightGray}
+          yAxisColor={Colors.lightGray}
           // customDataPoint={(props, index) => {
           //   return customDataPoint({ ...props, index });
           // }}

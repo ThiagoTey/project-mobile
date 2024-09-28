@@ -330,8 +330,8 @@ const BarChartCustom = () => {
         initialSpacing={22}
         roundedTop
         hideRules
-        xAxisColor={Colors.lightgray}
-        yAxisColor={Colors.lightgray}
+        xAxisColor={Colors.lightGray}
+        yAxisColor={Colors.lightGray}
         yAxisTextStyle={{ color: "gray" }}
         autoCenterTooltip
         noOfSections={3}
