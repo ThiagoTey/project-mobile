@@ -27,7 +27,7 @@ export default function TabLayout() {
           drawerLabelStyle: { marginLeft: -20 },
         }}
       >
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="home/index"
           options={{
             drawerLabel: "Home",
@@ -37,7 +37,7 @@ export default function TabLayout() {
               <AntDesign name="home" size={size} color={color} />
             ),
           }}
-        />
+        /> */}
         <Drawer.Screen
           name="products/index"
           options={{

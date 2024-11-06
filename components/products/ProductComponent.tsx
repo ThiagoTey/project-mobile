@@ -36,45 +36,38 @@ const ProductComponent = ({
   const formattedPrice = formatter.format(Number(price));
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      className={`items-center justify-between flex-row gap-x-2 px-6 pb-2 py-2 ${
-        index % 2 != 0 && `bg-gray-200/60`
-      }`}
-    >
-      <View className="flex-row gap-x-2 items-center w-[70%]">
-        <ProductImage
-          description={description}
-          url=""
-          customStyles="w-[45px] h-[45px] rounded"
-        />
-
-        <View className="min-w-[215px] max-w-[64%]">
+    <TouchableOpacity onPress={onPress}
+      style={styles.container}
+      className={`${index % 2 != 0 && `bg-neutral-100`} border-b-[1px] border-neutral-200`}>
+      <ProductImage
+        description={description}
+        url=""
+        customStyles="w-[45px] h-[45px] rounded"
+      />
+      <View className="flex-1">
+        <View className="flex-row justify-between">
+          <ThemedText>{codeInternal}</ThemedText>
           <View className="flex-row">
-            <ThemedText>{codeInternal}</ThemedText>
-            {
-              sortBy === 'reference' && (
-                <ThemedText className="font-iextralight"> - Ref: {reference}</ThemedText>
-              )
-            }
+            <ThemedText className="text-gray-500 font-ilight">Qtd: </ThemedText>
+            <ThemedText
+              className="max-w-[50px]"
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {qtde ? qtde : 0}
+            </ThemedText>
           </View>
-          <ThemedText className="mt-1 font-isemibold">{description}</ThemedText>
         </View>
-      </View>
-      <View className="w-[20%]">
-        <View className="flex-row">
-          <ThemedText className="text-gray-500 font-ilight">Qtd: </ThemedText>
-          <ThemedText
-            className="max-w-[50px]"
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {qtde ? qtde : 0}
-          </ThemedText>
-        </View>
+
+        {
+          sortBy === 'reference' && (
+            <ThemedText className="font-ilight">Ref: {reference}</ThemedText>
+          )
+        }
+        <ThemedText className="font-isemibold">{description}</ThemedText>
 
         <ThemedText
-          className="mt-1 text-emerald-600 max-w-[100px]"
+          className="text-emerald-600"
           numberOfLines={1}
           ellipsizeMode="tail"
         >
@@ -84,6 +77,17 @@ const ProductComponent = ({
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 8,
+    rowGap: 24,
+    paddingBottom: 8,
+    paddingHorizontal: 22
+  }
+})
 
 export default React.memo(ProductComponent, (prevProps, nextProps) => {
   return (

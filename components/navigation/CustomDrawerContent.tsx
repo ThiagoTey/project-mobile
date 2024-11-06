@@ -17,12 +17,10 @@ import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { synchronizeAll, useDbOperations } from "@/database/dbOperations";
 import { useAuth } from "@/context/AuthContext";
 import LoadingModal from "@/components/feedback/LoadingModal";
 import { useConfigDatabase } from "@/database/useConfigDatabase";
 import ThemedText from "../typography/ThemedText";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import CompanyPicker from "../form/CompanyPicker";
 import UserPicker from "../form/UserPicker";
 
@@ -104,7 +102,7 @@ const CustomDrawerContent = (props: any) => {
       <DrawerContentScrollView {...props}>
         <View className="border-b-slate-100 border-b-2 p-2">
           <CompanyPicker />
-          <UserPicker />
+          {/* <UserPicker /> */}
         </View>
         <DrawerItemList {...props}/>
       </DrawerContentScrollView>
