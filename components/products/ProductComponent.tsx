@@ -60,7 +60,7 @@ const ProductComponent = ({
         </View>
 
         {
-          sortBy === 'reference' && (
+          reference && (
             <ThemedText className="font-ilight">Ref: {reference}</ThemedText>
           )
         }

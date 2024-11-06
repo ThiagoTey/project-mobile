@@ -137,13 +137,13 @@ const Product = () => {
                   />
                 </View>
 
-                <View style={styles.formContainer}>
+                {/* <View style={styles.formContainer}>
                   <CustomText>Preço de custo</CustomText>
                   <CustomForm
                     editable={false}
                     value={`R$ ${productData.price_cost ? productData.price_cost : "Não informado"}`}
                   />
-                </View>
+                </View> */}
 
                 <View style={styles.formContainer}>
                   <CustomText>Preço de venda</CustomText>
