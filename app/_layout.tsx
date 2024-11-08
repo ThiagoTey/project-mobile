@@ -1,5 +1,6 @@
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { RefreshProvider } from "@/context/RefreshContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { useFonts } from "expo-font";
 import {
   SplashScreen,
@@ -9,56 +10,6 @@ import { useEffect } from "react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-
-// function AppContent() {
-//   const { isLoggedIn, userEmail, userCompany, isLoading = true } = useAuth();
-
-//   const navigationState = useRootNavigationState();
-//   const [isReady, setIsReady] = useState(false);
-
-//   useEffect(() => {
-//     if ((navigationState?.key, !isLoading)) {
-//       setIsReady(true);
-//     }
-//   }, [navigationState?.key, isLoading]);
-
-//   if (!isReady) {
-//     return null;
-//   }
-//   const initialRouteName = isLoggedIn ? "(tabs)" : "index";
-//   console.log("Está logado?" + isLoggedIn);
-//   console.log("initialRouteName" + initialRouteName);
-
-//   return (
-//     <SQLiteProvider
-//       databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
-//       onInit={isLoggedIn ? initializedatabase : undefined}
-//     >
-//       <AuthStack isLoggedIn={isLoggedIn} />
-//     </SQLiteProvider>
-//   );
-// }
-
-// function AuthStack({ isLoggedIn } : { isLoggedIn : boolean}) {
-//   return (
-    // <Stack
-    //   screenOptions={{
-    //     headerShown: false,
-    //     statusBarColor: Colors.blue,
-    //   }}
-    // >
-    //   {isLoggedIn ? (
-    //     <Stack.Screen name="(tabs)" />
-    //   ) : (
-    //     <Stack.Screen name="index" />
-    //   )}
-    //   {/* Adicione outras telas após a condicional */}
-    //   <Stack.Screen name="(auth)" />
-    //   <Stack.Screen name="(routes)" />
-    //   <Stack.Screen name="+not-found" />
-    // </Stack>
-//   );
-// }
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
@@ -85,7 +36,9 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <RefreshProvider>
-        <Slot />
+        <ThemeProvider>
+          <Slot />
+        </ThemeProvider>
       </RefreshProvider>
     </AuthProvider>
   );

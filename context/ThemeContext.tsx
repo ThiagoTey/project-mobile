@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext } from "react";
-import { themes } from "@/theme";
+import { themes } from "@/theme/theme";
+import { Theme } from "@/theme/themeTypes";
 
 interface ThemeContextType {
-    theme : any
+    theme : Theme;
     toggleTheme?: () => void;
 }
 

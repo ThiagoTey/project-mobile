@@ -20,8 +20,6 @@ import { fetchCompanies } from "@/api/auth";
 import LoadingModal from "@/components/feedback/LoadingModal";
 import { useAuth } from "@/context/AuthContext";
 
-const { width } = Dimensions.get("window");
-
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);

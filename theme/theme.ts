@@ -1,4 +1,6 @@
-export const themes = {
+import { themeType } from "./themeTypes";
+
+export const themes: themeType = {
     light:{
         colors: {
             primary: "#000000",

@@ -1,6 +1,7 @@
 import ThemedText from "@/components/typography/ThemedText";
 import Colors from "@/constants/Colors";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import { initializedatabase } from "@/database/InitializeDatabase";;
 import {
   Stack,
@@ -20,6 +21,8 @@ export default function AppLayout() {
     return <Redirect href="/(auth)/home" />;
   }
 
+  const {theme} = useTheme()
+
   return (
     <SQLiteProvider
       databaseName={isLoggedIn ? `${userEmail}${userCompany}` : "ability"}
@@ -28,7 +31,7 @@ export default function AppLayout() {
       <Stack
         screenOptions={{
           headerShown: false,
-          statusBarColor: Colors.blue,
+          statusBarColor: theme.colors.blue,
         }}
       />
     </SQLiteProvider>

@@ -4,15 +4,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import colors from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 
-// const GradientHeader = () => (
-//   <LinearGradient
-//     colors={[colors.blue, colors.green, colors.yellow]}
-//     start={{ x: 0, y: 0 }}
-//     end={{ x: 1, y: 1 }}
-//     style={StyleSheet.absoluteFill}
-//   />
-// );
-
 const AuthLayout = () => {
   return (
     <>
