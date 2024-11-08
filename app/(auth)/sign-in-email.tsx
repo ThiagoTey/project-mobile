@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   Linking,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import { Link, router } from "expo-router";
@@ -19,11 +20,13 @@ import { fetchCompanies } from "@/api/auth";
 import LoadingModal from "@/components/feedback/LoadingModal";
 import { useAuth } from "@/context/AuthContext";
 
+const { width } = Dimensions.get("window");
+
 const SignInEmail = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const {setAllCompanies} = useAuth()
+  const { setAllCompanies } = useAuth()
 
   const singUp = () => {
     const getCompanys = async () => {
@@ -62,7 +65,11 @@ const SignInEmail = () => {
           description="Processando dados..."
           isLoading={isLoading}
         />
-        <HomeSvg className="absolute" />
+        <View style={{
+          height: 273, position: "absolute", top: 0, justifyContent: "center",
+        }}>
+          <HomeSvg />
+        </View>
         <TouchableOpacity
           onPress={() => router.back()}
           style={style.gobackContainer}

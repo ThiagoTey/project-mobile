@@ -112,7 +112,7 @@ const Sidebar = ({
           <ThemedText className="text-lg font-semibold">
             Pesquisar Por
           </ThemedText>
-          <View className="flex-row gap-4 flex-wrap">
+          <View className="flex-row gap-4 flex-wrap w-4/5">
             {/* Pesquisa Por Descrição */}
             <View className="flex-row">
               <Checkbox

@@ -22,7 +22,7 @@ import LoadingModal from "@/components/feedback/LoadingModal";
 
 const SignInPassword = () => {
 
-  const [selectCompany, setSelectCompany] = useState<number| null>(null);
+  const [selectCompany, setSelectCompany] = useState<number | null>(null);
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -33,7 +33,7 @@ const SignInPassword = () => {
   }>();
 
   useEffect(() => {
-    if(allCompanies && allCompanies.length > 0){
+    if (allCompanies && allCompanies.length > 0) {
       setSelectCompany(allCompanies[0].id);
     }
   }, []);
@@ -52,8 +52,12 @@ const SignInPassword = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-      <LoadingModal description="Processando dados..." isLoading={isLoading} />
-        <HomeSvg className="absolute" />
+        <LoadingModal description="Processando dados..." isLoading={isLoading} />
+        <View style={{
+          height: 273, position: "absolute", top: 0, justifyContent: "center",
+        }}>
+          <HomeSvg />
+        </View>
         <TouchableOpacity
           onPress={() => router.back()}
           style={style.gobackContainer}

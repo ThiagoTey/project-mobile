@@ -18,12 +18,12 @@
       },
       "production": {
         "env": {
-          "EXPO_PUBLIC_SECRET_KEY" : ""
+          "EXPO_PUBLIC_SECRET_KEY" : "piriquito"
         }
       },
       "test":{
         "env": {
-          "EXPO_PUBLIC_SECRET_KEY" : ""
+          "EXPO_PUBLIC_SECRET_KEY" : "piriquito"
         }
       }
     }
